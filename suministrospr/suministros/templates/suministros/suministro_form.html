@@ -3,9 +3,10 @@
 {% load static %}
 
 {% block content %}
-<form>
+<form action="{% url 'suministro-add' %}" method="post">
+  {% csrf_token %}
   {{ form.media }}
   {{ form.as_p }}
-  <input type="submit"/>
+  <input type="submit" value="Submit">
 </form>
 {% endblock %}

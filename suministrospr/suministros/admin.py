@@ -4,4 +4,4 @@ from .models import Suministro
 
 @admin.register(Suministro)
 class SuministroAdmin(admin.ModelAdmin):
-    pass
+    list_display = ['title', 'municipality']
