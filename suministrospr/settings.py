@@ -41,6 +41,7 @@ class Common(Configuration):
         # 'trix',
 
         'suministrospr.users',
+        'suministrospr.suministros',
     ]
 
     MIDDLEWARE = [
