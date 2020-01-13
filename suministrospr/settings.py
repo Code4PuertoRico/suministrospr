@@ -37,9 +37,6 @@ class Common(Configuration):
         'django_extensions',
         'debug_toolbar',
 
-        # App for WYSIWYG forms
-        # 'trix',
-
         'suministrospr.users',
         'suministrospr.suministros',
     ]
