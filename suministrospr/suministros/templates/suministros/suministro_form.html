@@ -3,7 +3,7 @@
 {% load static %}
 
 {% block content %}
-<form action="{% url 'suministro-add' %}" method="post">
+<form action="" method="post">
   {% csrf_token %}
   {{ form.media }}
   {{ form.as_p }}

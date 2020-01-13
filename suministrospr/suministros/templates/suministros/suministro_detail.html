@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block content %}
+  <a href="{% url 'suministro-edit' object.pk %}">Edit</a>
+  <p>{{ object.title }}</p>
+  <p>{{ object.get_municipality_display }}</p>
+  <div>{{ object.content|safe }}</div>
+{% endblock %}

@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block content %}
+  <a href="{% url 'suministro-add' %}">Add</a>
+  {% for suministro in object_list %}
+    <p>
+      <a href="{% url 'suministro-detail' suministro.pk %}">
+        {{ suministro.title }} / {{ suministro.get_municipality_display }}
+      </a>
+    </p>
+  {% endfor %}
+{% endblock %}
