@@ -3,8 +3,7 @@ from django.contrib import admin
 from django.urls import include, path
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    # path('trix/', include('trix.urls')),
+    path('admin/', admin.site.urls)
 ]
 
 if settings.DEBUG:
