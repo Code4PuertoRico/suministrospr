@@ -36,6 +36,7 @@ class Common(Configuration):
 
         'django_extensions',
         'debug_toolbar',
+        'ckeditor',
 
         'suministrospr.users',
         'suministrospr.suministros',
@@ -113,6 +114,9 @@ class Common(Configuration):
     # https://docs.djangoproject.com/en/3.0/howto/static-files/
     STATIC_URL = '/static/'
     STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+    STATICFILES_DIRS = (
+        os.path.join(BASE_DIR, 'static'),
+    )
     STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
     AUTH_USER_MODEL = 'users.User'
@@ -133,6 +137,8 @@ class Development(Common):
     MIDDLEWARE = Common.MIDDLEWARE + [
         'debug_toolbar.middleware.DebugToolbarMiddleware'
     ]
+
+    # CKEDITOR_BASEPATH = os.path.join(BASE_DIR, 'static'),
 
 
 class Staging(Common):

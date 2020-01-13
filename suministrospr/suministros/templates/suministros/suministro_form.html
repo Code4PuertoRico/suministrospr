@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block content %}
+<form>
+  {{ form.media }}
+  {{ form.as_p }}
+  <input type="submit"/>
+</form>
+{% endblock %}
