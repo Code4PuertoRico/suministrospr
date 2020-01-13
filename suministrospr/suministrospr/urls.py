@@ -4,6 +4,7 @@ from django.urls import include, path
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('trix/'. include('trix.urls')),
 ]
 
 if settings.DEBUG:
