@@ -1,4 +1,4 @@
-from django.urls import reverse_lazy
+from django.urls import reverse
 from django.views.generic.edit import CreateView, UpdateView
 
 from .models import Suministro
@@ -7,7 +7,9 @@ from .models import Suministro
 class SuministroCreate(CreateView):
     model = Suministro
     fields = ["title", "municipality", "content"]
-    success_url = reverse_lazy('suministro-add')
+
+    def get_success_url(self):
+        return reverse('suministro-update', args=[self.object.id])
 
 
 class SuministroUpdate(UpdateView):
