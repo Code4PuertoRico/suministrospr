@@ -26,83 +26,73 @@ class Common(Configuration):
 
     # Application definition
     INSTALLED_APPS = [
-        'django.contrib.admin',
-        'django.contrib.auth',
-        'django.contrib.contenttypes',
-        'django.contrib.sessions',
-        'django.contrib.messages',
-        'whitenoise.runserver_nostatic',
-        'django.contrib.staticfiles',
-
-        'django_extensions',
-        'debug_toolbar',
-        'ckeditor',
-
-        'suministrospr.users',
-        'suministrospr.suministros',
+        "django.contrib.admin",
+        "django.contrib.auth",
+        "django.contrib.contenttypes",
+        "django.contrib.sessions",
+        "django.contrib.messages",
+        "whitenoise.runserver_nostatic",
+        "django.contrib.staticfiles",
+        "django_extensions",
+        "debug_toolbar",
+        "ckeditor",
+        "suministrospr.users",
+        "suministrospr.suministros",
     ]
 
     MIDDLEWARE = [
-        'django.middleware.security.SecurityMiddleware',
-        'whitenoise.middleware.WhiteNoiseMiddleware',
-        'django.contrib.sessions.middleware.SessionMiddleware',
-        'django.middleware.common.CommonMiddleware',
-        'django.middleware.csrf.CsrfViewMiddleware',
-        'django.contrib.auth.middleware.AuthenticationMiddleware',
-        'django.contrib.messages.middleware.MessageMiddleware',
-        'django.middleware.clickjacking.XFrameOptionsMiddleware',
+        "django.middleware.security.SecurityMiddleware",
+        "whitenoise.middleware.WhiteNoiseMiddleware",
+        "django.contrib.sessions.middleware.SessionMiddleware",
+        "django.middleware.common.CommonMiddleware",
+        "django.middleware.csrf.CsrfViewMiddleware",
+        "django.contrib.auth.middleware.AuthenticationMiddleware",
+        "django.contrib.messages.middleware.MessageMiddleware",
+        "django.middleware.clickjacking.XFrameOptionsMiddleware",
     ]
 
-    ROOT_URLCONF = 'suministrospr.urls'
+    ROOT_URLCONF = "suministrospr.urls"
 
     TEMPLATES = [
         {
-            'BACKEND': 'django.template.backends.django.DjangoTemplates',
-            'DIRS': [
-                os.path.join(BASE_DIR, 'templates'),
-            ],
-            'APP_DIRS': True,
-            'OPTIONS': {
-                'context_processors': [
-                    'django.template.context_processors.debug',
-                    'django.template.context_processors.request',
-                    'django.contrib.auth.context_processors.auth',
-                    'django.contrib.messages.context_processors.messages',
+            "BACKEND": "django.template.backends.django.DjangoTemplates",
+            "DIRS": [os.path.join(BASE_DIR, "templates"),],
+            "APP_DIRS": True,
+            "OPTIONS": {
+                "context_processors": [
+                    "django.template.context_processors.debug",
+                    "django.template.context_processors.request",
+                    "django.contrib.auth.context_processors.auth",
+                    "django.contrib.messages.context_processors.messages",
                 ],
             },
         },
     ]
 
-    WSGI_APPLICATION = 'suministrospr.wsgi.application'
+    WSGI_APPLICATION = "suministrospr.wsgi.application"
 
     # Database
     # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
     DATABASES = values.DatabaseURLValue(
-        'sqlite:///{}'.format(os.path.join(BASE_DIR, 'db.sqlite3'))
+        "sqlite:///{}".format(os.path.join(BASE_DIR, "db.sqlite3"))
     )
 
     # Password validation
     # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators
     AUTH_PASSWORD_VALIDATORS = [
         {
-            'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
+            "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator",
         },
-        {
-            'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
-        },
-        {
-            'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
-        },
-        {
-            'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
-        },
+        {"NAME": "django.contrib.auth.password_validation.MinimumLengthValidator",},
+        {"NAME": "django.contrib.auth.password_validation.CommonPasswordValidator",},
+        {"NAME": "django.contrib.auth.password_validation.NumericPasswordValidator",},
     ]
 
     # Internationalization
     # https://docs.djangoproject.com/en/3.0/topics/i18n/
-    LANGUAGE_CODE = 'en-us'
+    LANGUAGE_CODE = "en-us"
 
-    TIME_ZONE = 'UTC'
+    TIME_ZONE = "UTC"
 
     USE_I18N = True
 
@@ -112,19 +102,31 @@ class Common(Configuration):
 
     # Static files (CSS, JavaScript, Images)
     # https://docs.djangoproject.com/en/3.0/howto/static-files/
-    STATIC_URL = '/static/'
-    STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-    STATICFILES_DIRS = (
-        os.path.join(BASE_DIR, 'static'),
-    )
-    STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+    STATIC_URL = "/static/"
+    STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
+    STATICFILES_DIRS = (os.path.join(BASE_DIR, "static"),)
+    STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
-    AUTH_USER_MODEL = 'users.User'
+    AUTH_USER_MODEL = "users.User"
 
     CKEDITOR_CONFIGS = {
-        'default': {
-            'removeButtons': 'Cut,Copy,Paste,Undo,Redo,Anchor,Source',
-            'removePlugins': 'image,flash,elementspath'
+        "default": {
+            "removeDialogTabs": "link:advanced;link:target",
+            "removePlugins": "elementspath,magicline",
+            "toolbar": "Custom",
+            "toolbar_Custom": [
+                [
+                    "Format",
+                    "Bold",
+                    "Italic",
+                    "Underline",
+                    "Strike",
+                    "-",
+                    "RemoveFormat",
+                ],
+                ["NumberedList", "BulletedList", "Outdent", "Indent", "-"],
+                ["Link", "Unlink", "-", "HorizontalRule"],
+            ],
         },
     }
 
@@ -133,25 +135,21 @@ class Development(Common):
     """
     The in-development settings and the default configuration.
     """
+
     DEBUG = True
 
     ALLOWED_HOSTS = []
 
-    INTERNAL_IPS = [
-        '127.0.0.1'
-    ]
+    INTERNAL_IPS = ["127.0.0.1"]
 
-    MIDDLEWARE = Common.MIDDLEWARE + [
-        'debug_toolbar.middleware.DebugToolbarMiddleware'
-    ]
-
-    # CKEDITOR_BASEPATH = os.path.join(BASE_DIR, 'static'),
+    MIDDLEWARE = Common.MIDDLEWARE + ["debug_toolbar.middleware.DebugToolbarMiddleware"]
 
 
-class Staging(Common):
+class Production(Common):
     """
-    The in-staging settings.
+    The in-production settings.
     """
+
     # Security
     SESSION_COOKIE_SECURE = values.BooleanValue(True)
     SECURE_BROWSER_XSS_FILTER = values.BooleanValue(True)
@@ -161,13 +159,5 @@ class Staging(Common):
     SECURE_REDIRECT_EXEMPT = values.ListValue([])
     SECURE_SSL_HOST = values.Value(None)
     SECURE_SSL_REDIRECT = values.BooleanValue(True)
-    SECURE_PROXY_SSL_HEADER = values.TupleValue(
-        ('HTTP_X_FORWARDED_PROTO', 'https')
-    )
+    SECURE_PROXY_SSL_HEADER = values.TupleValue(("HTTP_X_FORWARDED_PROTO", "https"))
 
-
-class Production(Staging):
-    """
-    The in-production settings.
-    """
-    pass
