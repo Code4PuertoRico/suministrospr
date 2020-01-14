@@ -5,10 +5,12 @@ from django.views.generic.edit import CreateView, UpdateView
 from .constants import MUNICIPALITIES
 from .models import Suministro
 from .forms import SuministroModelForm
+from ..utils.mixins import CacheMixin
 
 
-class SuministroList(ListView):
+class SuministroList(CacheMixin, ListView):
     model = Suministro
+    cache_key = "suministro-list"
 
     def get_queryset(self):
         return (
@@ -16,9 +18,13 @@ class SuministroList(ListView):
         )
 
 
-class SuministroByMunicipalityList(ListView):
+class SuministroByMunicipalityList(CacheMixin, ListView):
     model = Suministro
     template_name = "suministros/suministro_municipio_list.html"
+    cache_key = "suministro-municipio-list"
+
+    def get_cache_key(self):
+        return f"{self.cache_key}:{self.kwargs['municipality']}"
 
     def get_queryset(self):
         return (
@@ -33,8 +39,12 @@ class SuministroByMunicipalityList(ListView):
         return data
 
 
-class SuministroDetail(DetailView):
+class SuministroDetail(CacheMixin, DetailView):
     model = Suministro
+    cache_key = "suministro-detail"
+
+    def get_cache_key(self):
+        return f"{self.cache_key}:{self.kwargs['slug']}"
 
 
 class SuministroCreate(CreateView):

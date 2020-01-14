@@ -112,6 +112,10 @@ class Common(Configuration):
 
     AUTH_USER_MODEL = "users.User"
 
+    DEBUG_TOOLBAR_CONFIG = {
+        "SHOW_TOOLBAR_CALLBACK": "suministrospr.utils.debug_toolbar.show_toolbar"
+    }
+
     CKEDITOR_CONFIGS = {
         "default": {
             "removeDialogTabs": "link:advanced;link:target",
@@ -134,6 +138,27 @@ class Common(Configuration):
         },
     }
 
+    REDIS_URL = values.Value(environ_prefix=None)
+
+    CACHE_MIXIN_TIMEOUT = values.IntegerValue(300, environ_prefix=None)
+
+    @property
+    def CACHES(self):
+        if not self.REDIS_URL:
+            return {
+                "default": {
+                    "BACKEND": "django.core.cache.backends.locmem.LocMemCache"
+                }
+            }
+
+        return {
+            "default": {
+                "BACKEND": "django_redis.cache.RedisCache",
+                "LOCATION": f"{self.REDIS_URL}/1]0",
+                "OPTIONS": {"CLIENT_CLASS": "django_redis.client.DefaultClient"},
+            }
+        }
+
 
 class Development(Common):
     """
@@ -142,7 +167,7 @@ class Development(Common):
 
     DEBUG = True
 
-    ALLOWED_HOSTS = []
+    ALLOWED_HOSTS = ["*"]
 
     INTERNAL_IPS = ["127.0.0.1"]
 

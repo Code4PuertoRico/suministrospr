@@ -1,0 +1,44 @@
+#!/bin/bash
+
+set -e
+
+postgres_ready(){
+python manage.py shell << END
+import sys
+import psycopg2
+import dj_database_url
+try:
+    parsed = dj_database_url.parse("${DATABASE_URL}")
+    psycopg2.connect(
+        dbname=parsed["NAME"],
+        user=parsed["USER"],
+        password=parsed["PASSWORD"],
+        host=parsed["HOST"],
+        port=parsed["PORT"],
+    )
+except psycopg2.OperationalError:
+    sys.exit(-1)
+sys.exit(0)
+END
+}
+
+case "$1" in
+  "start-web-dev")
+    until postgres_ready; do
+      >&2 echo "==> Waiting for Postgres..."
+      sleep 1
+    done
+
+    echo "==> Running migrations..."
+    python manage.py collectstatic --noinput
+    python manage.py migrate
+
+    echo "==> Running dev server..."
+    python manage.py runserver_plus 0.0.0.0:8000
+    ;;
+
+  *)
+    exec "$@"
+    ;;
+esac
+
