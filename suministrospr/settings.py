@@ -37,6 +37,7 @@ class Common(Configuration):
         "django_extensions",
         "debug_toolbar",
         "ckeditor",
+        "reversion",
 
         "suministrospr.users",
         "suministrospr.suministros",
