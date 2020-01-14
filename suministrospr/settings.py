@@ -140,6 +140,8 @@ class Common(Configuration):
 
     REDIS_URL = values.Value(environ_prefix=None)
 
+    CACHE_MIXIN_TIMEOUT = values.IntegerValue(300, environ_prefix=None)
+
     @property
     def CACHES(self):
         if not self.REDIS_URL:

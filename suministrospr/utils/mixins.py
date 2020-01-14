@@ -1,8 +1,9 @@
 from django.core.cache import cache
+from django.conf import settings
 
 
 class CacheMixin:
-    cache_timeout = 60
+    cache_timeout = settings.CACHE_MIXIN_TIMEOUT
     cache_key = None
 
     def get_cache_key(self):
