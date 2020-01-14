@@ -7,7 +7,6 @@ from django.core.management.base import BaseCommand, CommandError
 
 from ...forms import SuministroModelForm
 from ...constants import MUNICIPALITIES
-from ...models import Suministro
 
 class Command(BaseCommand):
     def normalize(self, text):
