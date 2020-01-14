@@ -33,11 +33,14 @@ class Common(Configuration):
         "django.contrib.messages",
         "whitenoise.runserver_nostatic",
         "django.contrib.staticfiles",
+
         "django_extensions",
         "debug_toolbar",
         "ckeditor",
+
         "suministrospr.users",
         "suministrospr.suministros",
+        "suministrospr.utils",
     ]
 
     MIDDLEWARE = [
