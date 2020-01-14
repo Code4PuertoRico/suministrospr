@@ -121,6 +121,13 @@ class Common(Configuration):
 
     AUTH_USER_MODEL = 'users.User'
 
+    CKEDITOR_CONFIGS = {
+        'default': {
+            'removeButtons': 'Cut,Copy,Paste,Undo,Redo,Anchor,Source',
+            'removePlugins': 'image,flash,elementspath'
+        },
+    }
+
 
 class Development(Common):
     """
