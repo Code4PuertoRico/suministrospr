@@ -27,17 +27,18 @@ class Command(BaseCommand):
                 with open(file_path, 'r') as json_file:
                     data = json.load(json_file)
                     for item in data:
+                        municipality = self.normalize(item.get("municipio", ""))
                         import_data = {
                             "title": item.get("title", ""),
                             "content": item.get("content", ""),
-                            "municipality":self.normalize(item.get("municipio", ""))
+                            "municipality": municipality.lower()
                         }
                         suministro = SuministroModelForm(import_data)
 
                         if suministro.is_valid():
                             suministro.save()
                         else:
-                            self.stderr.write(f"There's an issue with the data for {import_data} from file {file_path}")
+                            self.stderr.write(f"There's an issue with the data from file {file_path} - {suministro.errors.as_json()}")
             except EnvironmentError:
                 self.stderr.write(f'There was an error reading file {file_path}')
 
