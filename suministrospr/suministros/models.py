@@ -8,7 +8,7 @@ from ..utils.models import BaseModel
 
 
 class Suministro(BaseModel):
-    MUNICIPALITY_CHOICES = [(value.lower(), value) for value in MUNICIPALITIES]
+    MUNICIPALITY_CHOICES = [(value, label) for value, label in MUNICIPALITIES.items()]
 
     title = models.CharField(max_length=255)
     slug = AutoSlugField(populate_from=["title", "municipality"])
