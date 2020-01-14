@@ -5,7 +5,7 @@ from os import path
 import unicodedata
 from django.core.management.base import BaseCommand, CommandError
 
-from ...models import Suministro
+from ...forms import SuministroModelForm
 from ...constants import MUNICIPALITIES
 
 class Command(BaseCommand):
@@ -27,18 +27,17 @@ class Command(BaseCommand):
                 with open(file_path, 'r') as json_file:
                     data = json.load(json_file)
                     for item in data:
-                        suministro = Suministro()
-                        suministro.content = item['content']
-                        suministro.title = item['title']
+                        import_data = {
+                            "title": item.get("title", ""),
+                            "content": item.get("content", ""),
+                            "municipality":self.normalize(item.get("municipio", ""))
+                        }
+                        suministro = SuministroModelForm(import_data)
 
-                        municipio = self.normalize(item.get('municipio', ''))
-                        
-                        if municipio in MUNICIPALITIES:
-                            suministro.municipality = municipio
+                        if suministro.is_valid():
                             suministro.save()
-                        else :
-                            self.stderr.write(f'Unrecognized municipality {municipio} in file {file_path}')
-                            suministro = None
+                        else:
+                            self.stderr.write(f"There's an issue with the data for {import_data} from file {file_path}")
             except EnvironmentError:
                 self.stderr.write(f'There was an error reading file {file_path}')
 
