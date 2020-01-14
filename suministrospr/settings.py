@@ -113,7 +113,7 @@ class Common(Configuration):
         "default": {
             "removeDialogTabs": "link:advanced;link:target",
             "removePlugins": "elementspath,magicline",
-            'width': 'auto'
+            "width": "auto",
             "toolbar": "Custom",
             "toolbar_Custom": [
                 [
@@ -161,4 +161,3 @@ class Production(Common):
     SECURE_SSL_HOST = values.Value(None)
     SECURE_SSL_REDIRECT = values.BooleanValue(True)
     SECURE_PROXY_SSL_HEADER = values.TupleValue(("HTTP_X_FORWARDED_PROTO", "https"))
-
