@@ -5,9 +5,9 @@ from os import path
 import unicodedata
 from django.core.management.base import BaseCommand, CommandError
 
-from ...models import Suministro
 from ...forms import SuministroModelForm
 from ...constants import MUNICIPALITIES
+from ...models import Suministro
 
 class Command(BaseCommand):
     def normalize(self, text):
