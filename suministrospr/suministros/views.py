@@ -3,6 +3,7 @@ from django.views.generic import ListView, DetailView
 from django.views.generic.edit import CreateView, UpdateView
 
 from .models import Suministro
+from .forms import SuministroModelForm
 
 
 class SuministroList(ListView):
@@ -15,7 +16,7 @@ class SuministroDetail(DetailView):
 
 class SuministroCreate(CreateView):
     model = Suministro
-    fields = ["title", "municipality", "content"]
+    form_class = SuministroModelForm
 
     def get_success_url(self):
         return reverse("suministro-edit", args=[self.object.slug])
@@ -23,7 +24,7 @@ class SuministroCreate(CreateView):
 
 class SuministroUpdate(UpdateView):
     model = Suministro
-    fields = ["title", "municipality", "content"]
+    form_class = SuministroModelForm
 
     def get_success_url(self):
         return reverse("suministro-detail", args=[self.object.slug])
