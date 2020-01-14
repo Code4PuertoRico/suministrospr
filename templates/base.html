@@ -12,7 +12,9 @@
   </head>
   <body>
     {% block body %}
+      {% include "common/header.html" %}
       {% block content %}{% endblock %}
+      {% include "common/footer.html" %}
     {% endblock %}
 
     {% block extra_body %}{% endblock %}
