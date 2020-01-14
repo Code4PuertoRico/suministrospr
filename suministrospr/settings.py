@@ -124,7 +124,8 @@ class Common(Configuration):
     CKEDITOR_CONFIGS = {
         'default': {
             'removeButtons': 'Cut,Copy,Paste,Undo,Redo,Anchor,Source',
-            'removePlugins': 'image,flash,elementspath'
+            'removePlugins': 'image,flash,elementspath',
+            'width': 'auto'
         },
     }
 
