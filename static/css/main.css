@@ -5,3 +5,103 @@ This project uses tailwind.css please ask before adding styles here
 .django-ckeditor-widget {
   width: 100%;
 }
+
+#generated-content ol,
+#generated-content ul {
+  list-style: disc;
+  margin-top: 0;
+  margin-bottom: 1rem;
+}
+
+#generated-content ol ol,
+#generated-content ul ul,
+#generated-content ol ul,
+#generated-content ul ol {
+  margin-bottom: 0;
+  padding-left: 40px;
+}
+
+#generated-content hr {
+  box-sizing: content-box;
+  height: 0;
+  overflow: visible;
+}
+
+#generated-content h1,
+#generated-content h2,
+#generated-content h3,
+#generated-content h4,
+#generated-content h5,
+#generated-content h6 {
+  margin-top: 0;
+  margin-bottom: 0.5rem;
+  font-weight: bold;
+}
+
+#generated-content h1 {
+  font-size: 32px;
+}
+
+#generated-content h2 {
+  font-size: 24px;
+}
+
+#generated-content h3 {
+  font-size: 18px;
+}
+
+#generated-content h4 {
+  font-size: 16px;
+}
+
+#generated-content h5 {
+  font-size: 13px;
+}
+
+#generated-content h6 {
+  font-size: 10px;
+}
+
+#generated-content p {
+  margin-top: 0;
+  margin-bottom: 1rem;
+}
+
+#generated-content a {
+  color: #007bff;
+  text-decoration: none;
+  background-color: transparent;
+}
+
+#generated-content a:hover {
+  color: #0056b3;
+  text-decoration: underline;
+}
+
+#generated-content a:not([href]) {
+  color: inherit;
+  text-decoration: none;
+}
+
+#generated-content a:not([href]):hover {
+  color: inherit;
+  text-decoration: none;
+}
+
+#generated-content address {
+  margin-bottom: 1rem;
+  font-style: normal;
+  line-height: inherit;
+}
+
+#generated-content pre {
+  font-family: SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono',
+    'Courier New', monospace;
+  font-size: 1em;
+}
+
+#generated-content pre {
+  margin-top: 0;
+  margin-bottom: 1rem;
+  overflow: auto;
+}
