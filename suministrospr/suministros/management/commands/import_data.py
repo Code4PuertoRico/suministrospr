@@ -4,8 +4,13 @@ from os import path
 import glob
 import json
 from ...constants import MUNICIPALITIES
+import unicodedata
 
 class Command(BaseCommand):
+    def normalize(self, text):
+        nfkd_form = unicodedata.normalize('NFKD', text)
+        return "".join([c for c in nfkd_form if not unicodedata.combining(c)])
+
     def add_arguments(self, parser):
         parser.add_argument('target_folder', type=str)
 
@@ -23,11 +28,14 @@ class Command(BaseCommand):
                         suministro = Suministro()
                         suministro.content = item['content']
                         suministro.title = item['title']
-                        if item.get('municipio', None) in MUNICIPALITIES:
+
+                        municipio = self.normalize(item.get('municipio', ''))
+                        
+                        if municipio in MUNICIPALITIES:
                             suministro.municipality = item['municipio']
                             suministro.save()
                         else :
-                            self.stderr.write(f'Unrecognized municipality {item["municipio"]} in file {file_path}')
+                            self.stderr.write(f'Unrecognized municipality {municipio} in file {file_path}')
                             suministro = None
             except EnvironmentError:
                 self.stderr.write(f'There was an error reading file {file_path}')
