@@ -15,7 +15,9 @@
   <body>
     {% block body %}
       {% include "common/header.html" %}
-      {% block content %}{% endblock %}
+      <div class = 'flex justify-center flex-col'>
+        {% block content %}{% endblock %}
+      </div>
       {% include "common/footer.html" %}
     {% endblock %}
 
