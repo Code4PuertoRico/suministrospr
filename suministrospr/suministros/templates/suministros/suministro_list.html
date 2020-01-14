@@ -19,7 +19,7 @@
 <div class = "flex flex-col mt-10">
   <div class = "flex justify-center">
     <a href="{% url 'suministro-add' %}" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded inline-flex items-center">
-      <svg class="fill-current w-4 h-4 mr-2" class="fill-current w-4 h-4 mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 21 21"><path class="heroicon-ui" d="M5 3h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5c0-1.1.9-2 2-2zm0 2v14h14V5H5zm8 6h2a1 1 0 0 1 0 2h-2v2a1 1 0 0 1-2 0v-2H9a1 1 0 0 1 0-2h2V9a1 1 0 0 1 2 0v2z"/></svg>
+      <svg class="fill-current w-4 h-4 mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 21 21"><path class="heroicon-ui" d="M5 3h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5c0-1.1.9-2 2-2zm0 2v14h14V5H5zm8 6h2a1 1 0 0 1 0 2h-2v2a1 1 0 0 1-2 0v-2H9a1 1 0 0 1 0-2h2V9a1 1 0 0 1 2 0v2z"/></svg>
       <span>Añadir sector o refugio</span>
     </a>
   </div>
@@ -33,7 +33,9 @@
             <div class="border-2 border-gray-200">
               <div class="border-b text-xl font-semibold p-2 mx-4">
                 <img class="inline align-middle mr-2" src="{% escudo_static suministros.grouper %}" alt="{{ suministros.grouper }}" style="max-height: 40px;">
-                <h3 class="inline align-middle">{{ suministros.grouper }}</h3>
+                <h3 class="inline align-middle">
+                  <a href="{% url 'suministro-municipio-list' suministros.grouper|slugify %}">{{ suministros.grouper }}</a>
+                </h3>
               </div>
 
               <ul class="p-4">
