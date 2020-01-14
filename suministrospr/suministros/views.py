@@ -18,7 +18,7 @@ class SuministroCreate(CreateView):
     fields = ["title", "municipality", "content"]
 
     def get_success_url(self):
-        return reverse("suministro-edit", args=[self.object.id])
+        return reverse("suministro-edit", args=[self.object.slug])
 
 
 class SuministroUpdate(UpdateView):
@@ -26,4 +26,4 @@ class SuministroUpdate(UpdateView):
     fields = ["title", "municipality", "content"]
 
     def get_success_url(self):
-        return reverse("suministro-detail", args=[self.object.id])
+        return reverse("suministro-detail", args=[self.object.slug])

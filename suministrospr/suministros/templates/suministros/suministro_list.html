@@ -14,7 +14,7 @@
         <ul>
           {% for suministro in suministros.list %}
           <li>
-            <a href="{% url 'suministro-detail' suministro.pk %}">
+            <a href="{% url 'suministro-detail' suministro.slug %}">
               {{ suministro.title }} / {{ suministro.get_municipality_display }}
             </a>
           </li>

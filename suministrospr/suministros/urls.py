@@ -5,9 +5,11 @@ from .views import SuministroCreate, SuministroDetail, SuministroUpdate, Suminis
 urlpatterns = [
     path("", SuministroList.as_view(), name="suministro-list"),
     path("suministros/add/", SuministroCreate.as_view(), name="suministro-add"),
-    path("suministros/<int:pk>/", SuministroDetail.as_view(), name="suministro-detail"),
     path(
-        "suministros/<int:pk>/edit",
+        "suministros/<slug:slug>/", SuministroDetail.as_view(), name="suministro-detail"
+    ),
+    path(
+        "suministros/<slug:slug>/edit",
         SuministroUpdate.as_view(),
         name="suministro-edit",
     ),
