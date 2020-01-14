@@ -142,6 +142,13 @@ class Common(Configuration):
 
     @property
     def CACHES(self):
+        if not self.REDIS_URL:
+            return {
+                "default": {
+                    "BACKEND": "django.core.cache.backends.locmem.LocMemCache"
+                }
+            }
+
         return {
             "default": {
                 "BACKEND": "django_redis.cache.RedisCache",
@@ -163,12 +170,6 @@ class Development(Common):
     INTERNAL_IPS = ["127.0.0.1"]
 
     MIDDLEWARE = Common.MIDDLEWARE + ["debug_toolbar.middleware.DebugToolbarMiddleware"]
-
-    CACHES = {
-        "default": {
-            "BACKEND": "django.core.cache.backends.locmem.LocMemCache"
-        }
-    }
 
 
 class Production(Common):
