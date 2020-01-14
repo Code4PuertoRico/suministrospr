@@ -12,4 +12,4 @@ class SuministroModelForm(forms.ModelForm):
 
     def clean_content(self):
         content = self.cleaned_data["content"]
-        return bleach.clean(content, tags=ALLOWED_TAGS, strip=True,)
+        return bleach.clean(content, tags=ALLOWED_TAGS, strip=True)
