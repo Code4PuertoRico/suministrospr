@@ -1,10 +1,12 @@
-from django.core.management.base import BaseCommand, CommandError
-from ...models import Suministro
-from os import path
 import glob
 import json
-from ...constants import MUNICIPALITIES
+from os import path
+
 import unicodedata
+from django.core.management.base import BaseCommand, CommandError
+
+from ...models import Suministro
+from ...constants import MUNICIPALITIES
 
 class Command(BaseCommand):
     def normalize(self, text):
