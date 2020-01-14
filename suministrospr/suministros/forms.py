@@ -2,31 +2,7 @@ import bleach
 from django import forms
 
 from .models import Suministro
-
-
-ALLOWED_TAGS = [
-    "div",
-    "address",
-    "a",
-    "ul",
-    "ol",
-    "li",
-    "h1",
-    "h2",
-    "h3",
-    "h3",
-    "h4",
-    "h5",
-    "h6",
-    "p",
-    "strong",
-    "em",
-    "u",
-    "s",
-    "br",
-    "hr",
-    "pre",
-]
+from .constants import ALLOWED_TAGS
 
 
 class SuministroModelForm(forms.ModelForm):
