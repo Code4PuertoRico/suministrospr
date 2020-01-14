@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 
 {% load static %}
+{% load suministro_extras %}
 
 {% block content %}
 <div class = "flex flex-col mt-8">
@@ -24,23 +25,33 @@
   </div>
   <div class = "flex justify-center">
     {% regroup object_list by get_municipality_display as suministros_by_municipality %}
-    {% for suministros in suministros_by_municipality %}
-      <ul>
-        <li>
-          {{suministros.grouper}}
 
-          <ul>
-            {% for suministro in suministros.list %}
-            <li>
-              <a href="{% url 'suministro-detail' suministro.slug %}">
-                {{ suministro.title }} / {{ suministro.get_municipality_display }}
-              </a>
-            </li>
-            {% endfor %}
-          </ul>
-        </li>
-      </ul>
-    {% endfor %}
+    <div class="container mx-auto mt-4 p-4">
+      <div class="flex flex-wrap  -mx-2">
+        {% for suministros in suministros_by_municipality %}
+          <div class="w-full md:w-1/3 sm:w-1/2 px-2 mb-2">
+            <div class="border-2 border-gray-200">
+              <div class="border-b text-xl font-semibold p-2 mx-4">
+                <img class="inline align-middle mr-2" src="{% escudo_static suministros.grouper %}" alt="{{ suministros.grouper }}" style="max-height: 40px;">
+                <h3 class="inline align-middle">{{ suministros.grouper }}</h3>
+              </div>
+
+              <ul class="p-4">
+                {% for suministro in suministros.list %}
+                  <li class="mb-2 truncate max-w-xs">
+                    <a class="text-blue-500" href="{% url 'suministro-detail' suministro.slug %}">
+                      {{ suministro.title }}
+                    </a>
+                  </li>
+                {% endfor %}
+              </ul>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+
+
   </div>
 </div>
 {% endblock %}
