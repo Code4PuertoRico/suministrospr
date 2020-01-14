@@ -24,7 +24,7 @@ class SuministroCreate(CreateView):
     form_class = SuministroModelForm
 
     def get_success_url(self):
-        return reverse("suministro-edit", args=[self.object.slug])
+        return reverse("suministro-detail", args=[self.object.slug])
 
 
 class SuministroUpdate(UpdateView):
