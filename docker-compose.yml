@@ -1,0 +1,47 @@
+version: '3'
+
+volumes:
+  database:
+    external: false
+
+  redis:
+    external: false
+
+services:
+  database:
+    image: postgres:9.6
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_DB=postgres
+      - POSTGRES_PASSWORD=password
+    volumes:
+      - database:/var/lib/postgresql/data
+      - ./docker/postgres:/docker-entrypoint-initdb.d
+
+  redis:
+    image: redis:3.2
+    command: ["redis-server", "--appendonly", "yes"]
+    volumes:
+      - redis:/data
+
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        PIPENV_ARGS: --dev
+    command: start-web-dev
+    entrypoint: /app/bin/docker-entrypoint
+    restart: on-failure
+    environment:
+      - PYTHONUNBUFFERED=1
+      - DJANGO_SECRET_KEY=dont-tell-eve
+      - DATABASE_URL=postgres://postgres:password@database/postgres
+      - REDIS_URL=redis://redis:6379
+    volumes:
+      - .:/app
+    ports:
+      - '8000:8000'
+    links:
+      - database:database
+      - redis:redis

@@ -87,5 +87,9 @@ local_settings.py
 
 .env
 db.sqlite3
+staticfiles
 
 .vscode/
+
+docker/postgres/backup.dump
+data/scraped/*.json
