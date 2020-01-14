@@ -9,6 +9,8 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 import os
 
+import sentry_sdk
+from sentry_sdk.integrations.django import DjangoIntegration
 from configurations import Configuration, values
 
 
@@ -141,6 +143,8 @@ class Common(Configuration):
 
     REDIS_URL = values.Value(environ_prefix=None)
 
+    SENTRY_DSN = values.Value(None, environ_prefix=None)
+
     CACHE_MIXIN_TIMEOUT = values.IntegerValue(300, environ_prefix=None)
 
     @property
@@ -159,6 +163,18 @@ class Common(Configuration):
                 "OPTIONS": {"CLIENT_CLASS": "django_redis.client.DefaultClient"},
             }
         }
+
+    @classmethod
+    def post_setup(cls):
+        super().post_setup()
+
+        print(cls.SENTRY_DSN)
+
+        if cls.SENTRY_DSN:
+            sentry_sdk.init(
+                dsn=cls.SENTRY_DSN,
+                integrations=[DjangoIntegration()]
+            )
 
 
 class Development(Common):
