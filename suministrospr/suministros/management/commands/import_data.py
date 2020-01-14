@@ -34,12 +34,11 @@ class Command(BaseCommand):
                         municipio = self.normalize(item.get('municipio', ''))
                         
                         if municipio in MUNICIPALITIES:
-                            suministro.municipality = item['municipio']
+                            suministro.municipality = municipio
                             suministro.save()
                         else :
                             self.stderr.write(f'Unrecognized municipality {municipio} in file {file_path}')
                             suministro = None
             except EnvironmentError:
                 self.stderr.write(f'There was an error reading file {file_path}')
-
 
