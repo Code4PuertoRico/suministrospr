@@ -1,3 +1,5 @@
+from collections import defaultdict
+
 from django.urls import reverse
 from django.views.generic import DetailView, ListView
 from django.views.generic.edit import CreateView, UpdateView
@@ -14,9 +16,34 @@ class SuministroList(CacheMixin, ListView):
     cache_key = "suministro-list"
 
     def get_queryset(self):
-        return (
-            Suministro.objects.all().defer("content").order_by("municipality", "title")
-        )
+        return Suministro.objects.all().defer("content").order_by("title")
+
+    def get_context_data(self):
+        data = super().get_context_data()
+        items_by_municipality = defaultdict(lambda: {"count": 0, "items": []})
+
+        # Group by `municipality`
+        for suministro in data["object_list"]:
+            key = suministro.get_municipality_display()
+            items_by_municipality[key]["count"] += 1
+            items_by_municipality[key]["items"].append(suministro)
+
+        results = []
+
+        # Convert to `dict` to `list` for sorting by count
+        for municipality, result in items_by_municipality.items():
+            results.append(
+                {
+                    "count": result["count"],
+                    "suministros": result["items"],
+                    "municipality": municipality,
+                }
+            )
+
+        # Sort by municipalities with most items first.
+        data["sorted_results"] = sorted(results, key=lambda k: k["count"], reverse=True)
+
+        return data
 
 
 class SuministroByMunicipalityList(CacheMixin, ListView):
