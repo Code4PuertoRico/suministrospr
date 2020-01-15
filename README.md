@@ -5,6 +5,15 @@ https://suministrospr.com
 ## Development
 
 ```bash
+# Install pipenv (https://pipenv.kennethreitz.org/en/latest/install/#installing-pipenv)
+$ pip install --user pipenv
+
+# Install project dependencies
+$ pipenv install --dev
+
+# Install pre-commit hooks
+$ pipenv run pre-commit install
+
 $ cp example.env .env
 $ pipenv install --dev
 $ pipenv run python manage.py migrate
