@@ -52,7 +52,7 @@
       </button>
     </div>
     <div class="flex justify-center items-center mt-4">
-      <a href="/" class="ml-2 text-red-500 hover:underline">Cancelar</a>
+      <a href="{% if object %}{% url 'suministro-detail' object.slug %}{% else %}{% url 'suministro-list' %}{% endif %}" class="ml-2 text-red-500 hover:underline">Cancelar</a>
     </div>
   </form>
 </div>
