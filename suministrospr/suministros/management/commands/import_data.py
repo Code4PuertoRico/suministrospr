@@ -20,16 +20,22 @@ class Command(BaseCommand):
     def get_suministro(self, slug):
         try:
             return Suministro.objects.get(slug=slug)
-        except:
+        except Suministro.DoesNotExist:
             return None
 
     def get_import_data(self, data):
         municipality = self.normalize(data.get("municipio", ""))
         title = data.get("title", "")
+        slug = (
+            data.get("url")
+            .replace("https://suministrospr.com/sectores", "")
+            .replace("/", "")
+        )
         return {
             "title": title,
             "content": data.get("content", ""),
             "municipality": municipality,
+            "slug": slug,
         }
 
     def get_form(self, import_data, suministro):
@@ -44,23 +50,35 @@ class Command(BaseCommand):
         file_paths = glob.glob(f"{target_folder}/*.json")
 
         for file_path in file_paths:
-            self.stdout.write(f"Importing file {file_path}")
+            self.stdout.write(f"=> Importing file {file_path}")
             try:
                 with open(file_path, "r") as json_file:
                     data = json.load(json_file)
                     for item in data:
                         import_data = self.get_import_data(item)
-                        slug = slugify(f"{import_data.get('title')} {import_data.get('municipality')}")
-                        suministro = self.get_suministro(slug)
+                        slug = import_data.get("slug")
+                        existing_suministro = self.get_suministro(slug)
 
-                        suministro_form = self.get_form(import_data, suministro)
+                        suministro_form = self.get_form(
+                            import_data, existing_suministro
+                        )
 
                         if suministro_form.is_valid():
-                            suministro_form.save()
+                            suministro = suministro_form.save(commit=False)
+                            suministro.slug = slug
+                            suministro.save()
+
+                            if existing_suministro:
+                                self.stdout.write(
+                                    f"==> Updating slug={existing_suministro.slug}"
+                                )
+                            else:
+                                self.stdout.write(
+                                    f"==> Creating slug={suministro.slug}"
+                                )
                         else:
                             self.stderr.write(
-                                f"There's an issue with the data from file {file_path} - {suministro.errors.as_json()}"
+                                f"==> There's an issue with the data from file {file_path} - {suministro_form.errors.as_json()}"
                             )
             except EnvironmentError:
-                self.stderr.write(f"There was an error reading file {file_path}")
-
+                self.stderr.write(f"=> There was an error reading file {file_path}")
