@@ -16,3 +16,19 @@ jobs:
       run: pip install pre-commit
     - name: Run pre-commit checks
       run: pre-commit run --all-files
+
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v1
+      - name: Set up Python 3.8
+        uses: actions/setup-python@v1
+        with:
+          python-version: 3.8
+      - name: Install Pipenv
+        run: pip install pipenv
+      - name: Install dependencies
+        run: pipenv install --dev
+      - name: Test with pytest
+        run: pipenv run pytest
