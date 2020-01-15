@@ -124,15 +124,7 @@ class Common(Configuration):
             "width": "auto",
             "toolbar": "Custom",
             "toolbar_Custom": [
-                [
-                    "Format",
-                    "Bold",
-                    "Italic",
-                    "Underline",
-                    "Strike",
-                    "-",
-                    "RemoveFormat",
-                ],
+                ["Bold", "Italic", "Underline", "Strike", "-", "RemoveFormat",],
                 ["NumberedList", "BulletedList", "Outdent", "Indent", "-"],
                 ["Link", "Unlink", "-", "HorizontalRule"],
             ],
