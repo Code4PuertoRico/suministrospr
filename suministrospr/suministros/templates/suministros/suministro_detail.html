@@ -29,7 +29,7 @@
       <div class="flex flex-row text-sm text-gray-600">
         <div>
           Actualizado:
-          {% language 'es' %}{{ object.modified_at|timezone:"America/Puerto_Rico"|date:"j \d\e F \d\e Y \a \l\a\s  P" }}{% endlanguage %}
+          {% language 'es' %}{{ object.modified_at|timezone:"America/Puerto_Rico"|date:"j \d\e F \d\e Y \a \l\a\s  P"|lower }}{% endlanguage %}
         </div>
       </div>
     </div>
