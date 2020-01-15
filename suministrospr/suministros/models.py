@@ -12,7 +12,7 @@ class Suministro(BaseModel):
 
     title = models.CharField(max_length=255)
     slug = AutoSlugField(
-        populate_from=["title", "municipality"], overwrite_on_add=False
+        populate_from=["title", "municipality"], overwrite_on_add=False, max_length=255
     )
     municipality = models.CharField(max_length=255, choices=MUNICIPALITY_CHOICES)
     content = RichTextField()
