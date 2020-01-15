@@ -1,11 +1,11 @@
 from django.urls import reverse
-from django.views.generic import ListView, DetailView
+from django.views.generic import DetailView, ListView
 from django.views.generic.edit import CreateView, UpdateView
 
-from .constants import MUNICIPALITIES
-from .models import Suministro
-from .forms import SuministroModelForm
 from ..utils.mixins import CacheMixin
+from .constants import MUNICIPALITIES
+from .forms import SuministroModelForm
+from .models import Suministro
 
 
 class SuministroList(CacheMixin, ListView):
