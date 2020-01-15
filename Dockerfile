@@ -1,8 +1,8 @@
-FROM python:3.7
+FROM python:3.8
 
 ARG PIPENV_ARGS
 
-ENV LANG en_US.utf8
+ENV LANG C.UTF-8
 ENV PYTHONUNBUFFERED 1
 
 # Add app user

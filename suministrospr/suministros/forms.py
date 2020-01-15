@@ -1,8 +1,8 @@
 import bleach
 from django import forms
 
-from .models import Suministro
 from .constants import ALLOWED_TAGS
+from .models import Suministro
 
 
 class SuministroModelForm(forms.ModelForm):

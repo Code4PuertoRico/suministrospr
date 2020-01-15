@@ -10,8 +10,8 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 import os
 
 import sentry_sdk
-from sentry_sdk.integrations.django import DjangoIntegration
 from configurations import Configuration, values
+from sentry_sdk.integrations.django import DjangoIntegration
 
 
 class Common(Configuration):
@@ -35,12 +35,10 @@ class Common(Configuration):
         "django.contrib.messages",
         "whitenoise.runserver_nostatic",
         "django.contrib.staticfiles",
-
         "django_extensions",
         "debug_toolbar",
         "ckeditor",
         "reversion",
-
         "suministrospr.users",
         "suministrospr.suministros",
         "suministrospr.utils",
@@ -151,9 +149,7 @@ class Common(Configuration):
     def CACHES(self):
         if not self.REDIS_URL:
             return {
-                "default": {
-                    "BACKEND": "django.core.cache.backends.locmem.LocMemCache"
-                }
+                "default": {"BACKEND": "django.core.cache.backends.locmem.LocMemCache"}
             }
 
         return {
@@ -169,10 +165,7 @@ class Common(Configuration):
         super().post_setup()
 
         if cls.SENTRY_DSN:
-            sentry_sdk.init(
-                dsn=cls.SENTRY_DSN,
-                integrations=[DjangoIntegration()]
-            )
+            sentry_sdk.init(dsn=cls.SENTRY_DSN, integrations=[DjangoIntegration()])
 
 
 class Development(Common):
