@@ -59,7 +59,7 @@ MUNICIPALITIES = {
     "ponce": "Ponce",
     "quebradillas": "Quebradillas",
     "rincon": "Rincón",
-    "rio-grande": "Rio Grande",
+    "rio-grande": "Río Grande",
     "sabana-grande": "Sabana Grande",
     "salinas": "Salinas",
     "san-german": "San Germán",
