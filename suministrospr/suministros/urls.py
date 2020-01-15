@@ -12,7 +12,7 @@ urlpatterns = [
     path("", SuministroList.as_view(), name="suministro-list"),
     path("suministros/add/", SuministroCreate.as_view(), name="suministro-add"),
     path(
-        "suministros/municipios/<slug:municipality>/",
+        "municipios/<slug:municipality>/",
         SuministroByMunicipalityList.as_view(),
         name="suministro-municipio-list",
     ),
