@@ -11,7 +11,9 @@ class Suministro(BaseModel):
     MUNICIPALITY_CHOICES = [(value, label) for value, label in MUNICIPALITIES.items()]
 
     title = models.CharField(max_length=255)
-    slug = AutoSlugField(populate_from=["title", "municipality"])
+    slug = AutoSlugField(
+        populate_from=["title", "municipality"], overwrite_on_add=False
+    )
     municipality = models.CharField(max_length=255, choices=MUNICIPALITY_CHOICES)
     content = RichTextField()
 
