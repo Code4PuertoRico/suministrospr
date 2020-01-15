@@ -28,7 +28,7 @@ body {
 }
 
 #generated-content ul {
-  list-style: disc;
+  list-style: disc inside;
   margin-top: 0;
   margin-bottom: 1rem;
 }
