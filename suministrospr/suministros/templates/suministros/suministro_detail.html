@@ -1,4 +1,12 @@
-{% extends "base.html" %} {% load static %} {% load tz %} {% block content %}
+{% extends "base.html" %}
+
+{% load static %}
+
+{% load i18n %}
+
+{% load tz %}
+
+{% block content %}
 <div class="flex justify-center mt-10">
   <div class="flex w-3/5">
     <p class="text-5xl font-bold text-blue-500 leading-tight">
@@ -24,7 +32,8 @@
       {{ object.content|safe }}
       <div class="flex flex-row text-sm text-gray-600">
         <div>
-            Actualizado: {% load i18n %}{% language 'es' %}{{ object.modified_at|timezone:"America/Puerto_Rico"|date:"l\, M d Y\, P" }}{% endlanguage %}
+          Actualizado:
+          {% language 'es' %}{{ object.modified_at|timezone:"America/Puerto_Rico"|date:"j \d\e F \d\e Y \a \l\a\s  P"|lower }}{% endlanguage %}
         </div>
       </div>
     </div>
@@ -32,21 +41,12 @@
 </div>
 
 <div class="flex justify-center mb-10">
-  <a
-    href="{% url 'suministro-edit' object.slug %}"
-    class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded inline-flex items-center"
-  >
-    <svg
-      class="fill-current w-4 h-4 mr-2"
-      xmlns="http://www.w3.org/2000/svg"
-      viewBox="0 0 24 24"
-      width="24"
-      height="24"
-    >
-      <path
-        class="heroicon-ui"
-        d="M6.3 12.3l10-10a1 1 0 0 1 1.4 0l4 4a1 1 0 0 1 0 1.4l-10 10a1 1 0 0 1-.7.3H7a1 1 0 0 1-1-1v-4a1 1 0 0 1 .3-.7zM8 16h2.59l9-9L17 4.41l-9 9V16zm10-2a1 1 0 0 1 2 0v6a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6c0-1.1.9-2 2-2h6a1 1 0 0 1 0 2H4v14h14v-6z"
-      />
+  <a href="{% url 'suministro-edit' object.slug %}"
+    class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded inline-flex items-center">
+    <svg class="fill-current w-4 h-4 mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24"
+      height="24">
+      <path class="heroicon-ui"
+        d="M6.3 12.3l10-10a1 1 0 0 1 1.4 0l4 4a1 1 0 0 1 0 1.4l-10 10a1 1 0 0 1-.7.3H7a1 1 0 0 1-1-1v-4a1 1 0 0 1 .3-.7zM8 16h2.59l9-9L17 4.41l-9 9V16zm10-2a1 1 0 0 1 2 0v6a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6c0-1.1.9-2 2-2h6a1 1 0 0 1 0 2H4v14h14v-6z" />
     </svg>
     <span>Editar texto</span>
   </a>
