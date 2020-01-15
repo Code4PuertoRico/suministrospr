@@ -1,7 +1,6 @@
 from ckeditor.fields import RichTextField
 from django.core.cache import cache
 from django.db import models
-from django.utils import timezone
 from django_extensions.db.fields import AutoSlugField
 
 from ..utils.models import BaseModel
@@ -17,8 +16,6 @@ class Suministro(BaseModel):
     )
     municipality = models.CharField(max_length=255, choices=MUNICIPALITY_CHOICES)
     content = RichTextField()
-    created_date = models.DateTimeField(default=timezone.now, blank=True)
-    modified_date = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return self.title
