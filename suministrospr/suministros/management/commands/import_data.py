@@ -6,6 +6,7 @@ from django.core.management.base import BaseCommand
 from django.utils.text import slugify
 
 from ...forms import SuministroModelForm
+from ...models import Suministro
 
 
 class Command(BaseCommand):
@@ -15,6 +16,27 @@ class Command(BaseCommand):
 
     def add_arguments(self, parser):
         parser.add_argument("target_folder", type=str)
+
+    def get_suministro(self, slug):
+        try:
+            return Suministro.objects.get(slug=slug)
+        except:
+            return None
+
+    def get_import_data(self, data):
+        municipality = self.normalize(data.get("municipio", ""))
+        title = data.get("title", "")
+        return {
+            "title": title,
+            "content": data.get("content", ""),
+            "municipality": municipality,
+        }
+
+    def get_form(self, import_data, suministro):
+        if suministro:
+            return SuministroModelForm(import_data, instance=suministro)
+        else:
+            return SuministroModelForm(import_data)
 
     def handle(self, *args, **options):
         target_folder = options["target_folder"]
@@ -27,16 +49,14 @@ class Command(BaseCommand):
                 with open(file_path, "r") as json_file:
                     data = json.load(json_file)
                     for item in data:
-                        municipality = self.normalize(item.get("municipio", ""))
-                        import_data = {
-                            "title": item.get("title", ""),
-                            "content": item.get("content", ""),
-                            "municipality": municipality,
-                        }
-                        suministro = SuministroModelForm(import_data)
+                        import_data = self.get_import_data(item)
+                        slug = slugify(f"{import_data.get('title')} {import_data.get('municipality')}")
+                        suministro = self.get_suministro(slug)
 
-                        if suministro.is_valid():
-                            suministro.save()
+                        suministro_form = self.get_form(import_data, suministro)
+
+                        if suministro_form.is_valid():
+                            suministro_form.save()
                         else:
                             self.stderr.write(
                                 f"There's an issue with the data from file {file_path} - {suministro.errors.as_json()}"
