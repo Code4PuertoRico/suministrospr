@@ -168,8 +168,6 @@ class Common(Configuration):
     def post_setup(cls):
         super().post_setup()
 
-        print(cls.SENTRY_DSN)
-
         if cls.SENTRY_DSN:
             sentry_sdk.init(
                 dsn=cls.SENTRY_DSN,
