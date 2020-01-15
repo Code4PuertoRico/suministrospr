@@ -3,6 +3,7 @@ import json
 import unicodedata
 
 from django.core.management.base import BaseCommand
+from django.utils.html import strip_tags
 from django.utils.text import slugify
 
 from ...forms import SuministroModelForm
@@ -24,8 +25,21 @@ class Command(BaseCommand):
             return None
 
     def get_import_data(self, data):
-        municipality = self.normalize(data.get("municipio", ""))
+        content = data.get("content", "")
         title = data.get("title", "")
+        municipality = self.normalize(data.get("municipio", ""))
+
+        if municipality == "las-maria":
+            municipality = "las-marias"
+
+        if title == "EMPTY_TITLE":
+            striped_title = strip_tags(content).strip()[:20]
+
+            if striped_title:
+                title = f"{striped_title}..."
+            else:
+                title = "N/A"
+
         slug = (
             data.get("url")
             .replace("https://suministrospr.com/sectores", "")
@@ -33,7 +47,7 @@ class Command(BaseCommand):
         )
         return {
             "title": title,
-            "content": data.get("content", ""),
+            "content": content,
             "municipality": municipality,
             "slug": slug,
         }
