@@ -4,27 +4,26 @@
 
 {% block content %}
   <div class="flex justify-center mt-10">
-    <div class="flex w-3/5">
+    <div class="w-4/5 md:w-auto">
      <p class="text-5xl font-bold text-blue-500 leading-tight">{{ object.title }}</p>
     </div>
   </div>
   <div class="flex justify-center">
     <div class="flex flex-row text-sm text-gray-600">
-      <div>></div>
       <div class="ml-2">{{ object.get_municipality_display }}</div>
       <div class="ml-2">></div>
       <div class="ml-2">{{ object.title }}</div>
     </div>
   </div>
   <div class="flex justify-center mt-10">
-    <div class="flex  w-3/5">
+    <div class="w-4/5 md:w-auto">
       <div id="generated-content">
         {{ object.content|safe }}
       </div>
     </div>
   </div>
   <div class="flex justify-center mb-10">
-    <a href="{% url 'suministro-edit' object.slug %}" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded inline-flex items-center">
+    <a href="{% url 'suministro-edit' object.slug %}" class="w-4/5 md:w-auto bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded inline-flex items-center">
       <svg class="fill-current w-4 h-4 mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path class="heroicon-ui" d="M6.3 12.3l10-10a1 1 0 0 1 1.4 0l4 4a1 1 0 0 1 0 1.4l-10 10a1 1 0 0 1-.7.3H7a1 1 0 0 1-1-1v-4a1 1 0 0 1 .3-.7zM8 16h2.59l9-9L17 4.41l-9 9V16zm10-2a1 1 0 0 1 2 0v6a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6c0-1.1.9-2 2-2h6a1 1 0 0 1 0 2H4v14h14v-6z"/></svg>
       <span>Editar texto</span>
     </a>
