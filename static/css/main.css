@@ -6,7 +6,12 @@ This project uses tailwind.css please ask before adding styles here
   width: 100%;
 }
 
-#generated-content ol,
+#generated-content ol {
+  list-style: decimal;
+  margin-top: 0;
+  margin-bottom: 1rem;
+}
+
 #generated-content ul {
   list-style: disc;
   margin-top: 0;
