@@ -1,6 +1,7 @@
 from django.urls import reverse
 from django.views.generic import DetailView, ListView
 from django.views.generic.edit import CreateView, UpdateView
+from reversion.views import RevisionMixin
 
 from ..utils.mixins import CacheMixin
 from .constants import MUNICIPALITIES
@@ -47,7 +48,7 @@ class SuministroDetail(CacheMixin, DetailView):
         return f"{self.cache_key}:{self.kwargs['slug']}"
 
 
-class SuministroCreate(CreateView):
+class SuministroCreate(RevisionMixin, CreateView):
     model = Suministro
     form_class = SuministroModelForm
 
@@ -55,7 +56,7 @@ class SuministroCreate(CreateView):
         return reverse("suministro-detail", args=[self.object.slug])
 
 
-class SuministroUpdate(UpdateView):
+class SuministroUpdate(RevisionMixin, UpdateView):
     model = Suministro
     form_class = SuministroModelForm
 
