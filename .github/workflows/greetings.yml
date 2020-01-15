@@ -8,6 +8,6 @@ jobs:
     steps:
     - uses: actions/first-interaction@v1
       with:
-        repo-token: ${{ secrets.GITHUB_TOKEN }}
+        repo-token: ${{ secrets.ADMIN_TOKEN }}
         issue-message: 'Gracias por por tu aportación! El equipo le dara un vistazo pronto.'
         pr-message: 'Gracias por por tu aportación! El equipo le dara un vistazo pronto.'
