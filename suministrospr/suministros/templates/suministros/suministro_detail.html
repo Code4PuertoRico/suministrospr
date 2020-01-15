@@ -20,7 +20,7 @@
       {{ object.content|safe }}
       <div class="flex flex-row text-sm text-gray-600">
         <div>
-            Actualizado: {{ object.modified_at|timezone:"America/Puerto_Rico"|date:"l\, M d Y\, P" }}
+            Actualizado: {% load i18n %}{% language 'es' %}{{ object.modified_at|timezone:"America/Puerto_Rico"|date:"l\, M d Y\, P" }}{% endlanguage %}
         </div>
       </div>
     </div>
