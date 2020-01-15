@@ -8,10 +8,14 @@
 </div>
 <div class="flex justify-center">
   <div class="flex flex-row text-sm text-gray-600">
-    <div>></div>
-    <div class="ml-2">{{ object.get_municipality_display }}</div>
+    <div class="ml-2">
+      <a href="{% url 'suministro-municipio-list' object.municipality|slugify %}">{{ object.get_municipality_display }}</a>
+    </div>
     <div class="ml-2">></div>
-    <div class="ml-2">{{ object.title }}</div>
+    <div class="ml-2">
+      <a href="{% url 'suministro-detail' object.slug %}">{{ object.title }}</a>
+    </div>
+   </div>
   </div>
 </div>
 <div class="flex justify-center mt-10">
