@@ -1,11 +1,11 @@
 from django.urls import path
 
 from .views import (
+    SuministroByMunicipalityList,
     SuministroCreate,
     SuministroDetail,
-    SuministroUpdate,
     SuministroList,
-    SuministroByMunicipalityList,
+    SuministroUpdate,
 )
 
 urlpatterns = [

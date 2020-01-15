@@ -1,11 +1,10 @@
-from django.db import models
-from django.core.cache import cache
-
 from ckeditor.fields import RichTextField
+from django.core.cache import cache
+from django.db import models
 from django_extensions.db.fields import AutoSlugField
 
-from .constants import MUNICIPALITIES
 from ..utils.models import BaseModel
+from .constants import MUNICIPALITIES
 
 
 class Suministro(BaseModel):
@@ -24,8 +23,10 @@ class Suministro(BaseModel):
         self.invalidate_cache()
 
     def invalidate_cache(self):
-        cache.delete_many([
-            "suministro-list",
-            f"suministro-municipio-list:{self.municipality}",
-            f"suministro-detail:{self.slug}"
-        ])
+        cache.delete_many(
+            [
+                "suministro-list",
+                f"suministro-municipio-list:{self.municipality}",
+                f"suministro-detail:{self.slug}",
+            ]
+        )
