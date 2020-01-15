@@ -24,6 +24,20 @@
     <meta name="twitter:image" content="{% absolute_static 'img/meta/social_banner.png' %}" />
     <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
     <link href="{% static 'css/main.css' %}" rel="stylesheet">
+    <style>
+     body {
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+      -webkit-font-kerning: normal;
+      -moz-font-kerning: normal;
+      -ms-font-kerning: normal;
+      -o-font-kerning: normal;
+      font-kerning: normal;
+
+      -webkit-text-size-adjust: 100%;
+      -ms-text-size-adjust: 100%;
+     }
+    </style>
     {% block extra_head %}{% endblock %}
   </head>
   <body>
