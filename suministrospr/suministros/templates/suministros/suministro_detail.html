@@ -1,4 +1,4 @@
-{% extends "base.html" %} {% load static %} {% block content %}
+{% extends "base.html" %} {% load static %} {% load tz %} {% block content %}
 <div class="flex justify-center mt-10">
   <div class="flex w-3/5">
     <p class="text-5xl font-bold text-blue-500 leading-tight">
@@ -19,7 +19,9 @@
     <div id="generated-content">
       {{ object.content|safe }}
       <div class="flex flex-row text-sm text-gray-600">
-        <div>Actualizado {{ object.modified_date }}</div>
+        <div>
+            Actualizado: {{ object.modified_at|timezone:"America/Puerto_Rico"|date:"l\, M d Y\, P" }}
+        </div>
       </div>
     </div>
   </div>
