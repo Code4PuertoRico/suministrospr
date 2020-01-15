@@ -16,12 +16,8 @@ urlpatterns = [
         SuministroByMunicipalityList.as_view(),
         name="suministro-municipio-list",
     ),
+    path("sectores/<slug:slug>/", SuministroDetail.as_view(), name="suministro-detail"),
     path(
-        "sectores/<slug:slug>/", SuministroDetail.as_view(), name="suministro-detail"
-    ),
-    path(
-        "sectores/<slug:slug>/edit",
-        SuministroUpdate.as_view(),
-        name="suministro-edit",
+        "sectores/<slug:slug>/edit", SuministroUpdate.as_view(), name="suministro-edit",
     ),
 ]
