@@ -2,29 +2,27 @@
 
 {% load static %}
 
+{% block head_title %}Sectores o refugios en {{ municipality }} - {% endblock %}
+
 {% block content %}
   <div class="flex justify-center mt-10">
     <p class="text-5xl font-bold text-blue-500">{{ municipality }}</p>
   </div>
   <div class="flex justify-center mt-10">
-    <div class="flex justify-center">
-      <a href="{% url 'suministro-add' %}" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded inline-flex items-center">
-        <svg class="fill-current w-4 h-4 mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 21 21"><path class="heroicon-ui" d="M5 3h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5c0-1.1.9-2 2-2zm0 2v14h14V5H5zm8 6h2a1 1 0 0 1 0 2h-2v2a1 1 0 0 1-2 0v-2H9a1 1 0 0 1 0-2h2V9a1 1 0 0 1 2 0v2z"/></svg>
-        <span>Añadir sector o refugio</span>
-      </a>
-    </div>
+    <a href="{% url 'suministro-add' %}" class="w-4/5 md:w-auto bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded inline-flex items-center">
+      <svg class="fill-current w-4 h-4 mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 21 21"><path class="heroicon-ui" d="M5 3h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5c0-1.1.9-2 2-2zm0 2v14h14V5H5zm8 6h2a1 1 0 0 1 0 2h-2v2a1 1 0 0 1-2 0v-2H9a1 1 0 0 1 0-2h2V9a1 1 0 0 1 2 0v2z"/></svg>
+      <span>Añadir sector o refugio</span>
+    </a>
   </div>
   <div class="flex justify-center mt-10">
-    <div class="flex w-3/5">
-      <ul class="p-4">
-        {% for suministro in object_list %}
-          <li class="mb-2 truncate">
-            <a class="text-blue-500" href="{% url 'suministro-detail' suministro.slug %}">
-              {{ suministro.title }}
-            </a>
-          </li>
-        {% endfor %}
-      </ul>
-    </div>
+    <ul class="w-4/5 md:w-auto">
+      {% for suministro in object_list %}
+        <li class="mb-4">
+          <a class="text-blue-500" href="{% url 'suministro-detail' suministro.slug %}">
+            {{ suministro.title }}
+          </a>
+        </li>
+      {% endfor %}
+    </ul>
   </div>
 {% endblock %}
