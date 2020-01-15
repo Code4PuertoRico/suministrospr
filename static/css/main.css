@@ -2,6 +2,21 @@
 This project uses tailwind.css please ask before adding styles here
 */
 
+body {
+  font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;
+
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  -webkit-font-kerning: normal;
+  -moz-font-kerning: normal;
+  -ms-font-kerning: normal;
+  -o-font-kerning: normal;
+  font-kerning: normal;
+  
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+}
+
 .django-ckeditor-widget {
   width: 100%;
 }
