@@ -2,8 +2,9 @@
 
 {% load static %}
 
-{% block content %}
+{% block head_title %}{{ object|yesno:'Editar,Añadir' }} sector o refugio - {% endblock %}
 
+{% block content %}
 <div class = 'flex justify-center my-5'>
   <form class="w-full max-w-lg px-5" method="POST">
     {% csrf_token %}
