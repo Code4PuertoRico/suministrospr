@@ -15,7 +15,7 @@ class SuministroList(CacheMixin, ListView):
     cache_key = "suministro-list"
 
     def get_queryset(self):
-        return Suministro.objects.all().defer("content")
+        return Suministro.objects.all().defer("content").order_by("title")
 
     def get_context_data(self):
         data = super().get_context_data()
@@ -52,9 +52,10 @@ class SuministroByMunicipalityList(CacheMixin, ListView):
 
     def get_queryset(self):
         return (
-            Suministro.objects.filter(municipality=self.kwargs["municipality"])
+            Suministro.objects.select_related("municipality")
+            .filter(municipality__slug=self.kwargs["municipality"])
             .defer("content")
-            .order_by("municipality", "title")
+            .order_by("-municipality__slug", "title")
         )
 
     def get_context_data(self):
