@@ -1,9 +1,8 @@
 from ckeditor.fields import RichTextField
-from taggit.managers import TaggableManager
-
 from django.core.cache import cache
 from django.db import models
 from django_extensions.db.fields import AutoSlugField
+from taggit.managers import TaggableManager
 
 from ..utils.models import BaseModel
 from .constants import MUNICIPALITIES
