@@ -1,7 +1,7 @@
 import pytest
 from django.urls import reverse
 
-from ..models import Suministro
+from ..models import Municipality, Suministro
 from ..views import SuministroList
 
 
@@ -15,44 +15,19 @@ class TestSuministroList:
         assert response.status_code == 200
 
     def test_order_by_count(self, rf):
+
+        guayanilla = Municipality.objects.create(name="Guayanilla")
+        ponce = Municipality.objects.create(name="Ponce")
+        guanica = Municipality.objects.create(name="Guánica")
+
         Suministro.objects.bulk_create(
             [
-                Suministro(
-                    title="test A",
-                    slug="test-a",
-                    municipality="guanica",
-                    content="test a",
-                ),
-                Suministro(
-                    title="test B",
-                    slug="test-b",
-                    municipality="guayanilla",
-                    content="test b",
-                ),
-                Suministro(
-                    title="test C",
-                    slug="test-c",
-                    municipality="ponce",
-                    content="test c",
-                ),
-                Suministro(
-                    title="test D",
-                    slug="test-d",
-                    municipality="guayanilla",
-                    content="test d",
-                ),
-                Suministro(
-                    title="test E",
-                    slug="test-e",
-                    municipality="guanica",
-                    content="test e",
-                ),
-                Suministro(
-                    title="test F",
-                    slug="test-F",
-                    municipality="guanica",
-                    content="test f",
-                ),
+                Suministro(title="test A", municipality=guanica, content="test a",),
+                Suministro(title="test B", municipality=guayanilla, content="test b",),
+                Suministro(title="test C", municipality=ponce, content="test c",),
+                Suministro(title="test D", municipality=guayanilla, content="test d",),
+                Suministro(title="test E", municipality=guanica, content="test e",),
+                Suministro(title="test F", municipality=guanica, content="test f",),
             ]
         )
         request = rf.get(self.url)
