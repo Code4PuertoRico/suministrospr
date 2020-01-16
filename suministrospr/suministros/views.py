@@ -1,5 +1,4 @@
-from collections import defaultdict
-
+from django.db.models import Count
 from django.urls import reverse
 from django.views.generic import DetailView, ListView
 from django.views.generic.edit import CreateView, UpdateView
@@ -8,7 +7,7 @@ from reversion.views import RevisionMixin
 from ..utils.mixins import CacheMixin
 from .constants import MUNICIPALITIES
 from .forms import SuministroModelForm
-from .models import Suministro
+from .models import Municipality, Suministro
 
 
 class SuministroList(CacheMixin, ListView):
@@ -16,32 +15,29 @@ class SuministroList(CacheMixin, ListView):
     cache_key = "suministro-list"
 
     def get_queryset(self):
-        return Suministro.objects.all().defer("content").order_by("title")
+        return Suministro.objects.all().defer("content")
 
     def get_context_data(self):
         data = super().get_context_data()
-        items_by_municipality = defaultdict(lambda: {"count": 0, "items": []})
 
-        # Group by `municipality`
-        for suministro in data["object_list"]:
-            key = suministro.get_municipality_display()
-            items_by_municipality[key]["count"] += 1
-            items_by_municipality[key]["items"].append(suministro)
+        municipalities_with_suministros = (
+            Municipality.objects.all()
+            .prefetch_related("suministros")
+            .annotate(suministro_count=Count("suministro"))
+            .filter(suministro_count__gt=0)
+            .order_by("-suministro_count")
+        )
 
-        results = []
-
-        # Convert from `dict` to `list` for sorting by count
-        for municipality, result in items_by_municipality.items():
-            results.append(
-                {
-                    "count": result["count"],
-                    "suministros": result["items"],
-                    "municipality": municipality,
-                }
-            )
-
-        # Sort by municipalities with most items first.
-        data["sorted_results"] = sorted(results, key=lambda k: k["count"], reverse=True)
+        data["sorted_results"] = [
+            {
+                "count": municipality.suministro_count,
+                "municipality": municipality.name,
+                "suministros": municipality.suministros.all()
+                .defer("content")
+                .order_by("title"),
+            }
+            for municipality in municipalities_with_suministros
+        ]
 
         return data
 
