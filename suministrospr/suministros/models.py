@@ -44,6 +44,7 @@ class Suministro(BaseModel):
     content = RichTextField()
 
     class Meta:
+        indexes = [models.Index(fields=["title"])]
         verbose_name = "suministro"
         verbose_name_plural = "suministros"
 
