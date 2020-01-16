@@ -55,7 +55,7 @@ class SuministroByMunicipalityList(CacheMixin, ListView):
             Suministro.objects.select_related("municipality")
             .filter(municipality__slug=self.kwargs["municipality"])
             .defer("content")
-            .order_by("-municipality__slug", "title")
+            .order_by("title")
         )
 
     def get_context_data(self):
