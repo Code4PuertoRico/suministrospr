@@ -25,6 +25,7 @@ class SuministroAdmin(VersionAdmin):
         "title",
         "slug",
         "municipality",
+        "tags",
         "created_at",
         "modified_at",
     ]

@@ -38,7 +38,9 @@ class Suministro(BaseModel):
         populate_from=["title", "municipality"], overwrite_on_add=False, max_length=255
     )
 
-    municipality_fk = models.ForeignKey(Municipality, null=True, default=None, on_delete=models.SET_NULL)
+    municipality = models.ForeignKey(
+        Municipality, null=True, default=None, on_delete=models.SET_NULL
+    )
 
     tags = models.ManyToManyField(Tag, blank=True)
 
