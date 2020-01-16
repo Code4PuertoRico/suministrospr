@@ -21,7 +21,6 @@ class Suministro(BaseModel):
 class Municipality(BaseModel):
     MUNICIPALITY_CHOICES = [(value, label) for value, label in MUNICIPALITIES.items()]
 
-    id = models.UUIDField(default=uuid.uuid4, primary_key=True, editable=False)
     name = models.CharField(max_length=255, choices=MUNICIPALITY_CHOICES)
     slug = AutoSlugField(populate_from=["name"], overwrite_on_add=False, max_length=255)
 
