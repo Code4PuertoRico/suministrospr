@@ -7,13 +7,20 @@ import django.db.models.deletion
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('suministros', '0008_auto_20200116_1857'),
+        ("suministros", "0008_auto_20200116_1857"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='suministro',
-            name='municipality_fk',
-            field=models.ForeignKey(default=None, null=True, on_delete=django.db.models.deletion.SET_NULL, to='suministros.Municipality'),
+            model_name="suministro",
+            name="municipality_fk",
+            field=models.ForeignKey(
+                default=None,
+                null=True,
+                on_delete=django.db.models.deletion.SET_NULL,
+                related_name="suministros",
+                related_query_name="suministro",
+                to="suministros.Municipality",
+            ),
         ),
     ]

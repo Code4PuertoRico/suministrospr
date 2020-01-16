@@ -39,7 +39,12 @@ class Suministro(BaseModel):
     )
 
     municipality = models.ForeignKey(
-        Municipality, null=True, default=None, on_delete=models.SET_NULL
+        Municipality,
+        null=True,
+        default=None,
+        on_delete=models.SET_NULL,
+        related_name="suministros",
+        related_query_name="suministro",
     )
 
     tags = models.ManyToManyField(Tag, blank=True)
