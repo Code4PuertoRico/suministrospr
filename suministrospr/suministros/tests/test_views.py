@@ -14,7 +14,7 @@ class TestSuministroList:
         response = SuministroList.as_view()(request)
         assert response.status_code == 200
 
-    def test_order_by_count(self, rf):
+    def test_order_by_count(self, rf, django_assert_num_queries):
 
         guayanilla = Municipality.objects.create(name="Guayanilla")
         ponce = Municipality.objects.create(name="Ponce")
@@ -30,8 +30,10 @@ class TestSuministroList:
                 Suministro(title="test F", municipality=guanica, content="test f",),
             ]
         )
-        request = rf.get(self.url)
-        response = SuministroList.as_view()(request)
+
+        with django_assert_num_queries(2):
+            request = rf.get(self.url)
+            response = SuministroList.as_view()(request)
 
         results = response.context_data["sorted_results"]
 
