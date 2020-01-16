@@ -1,3 +1,5 @@
+import uuid
+
 from ckeditor.fields import RichTextField
 from django.core.cache import cache
 from django.db import models
@@ -16,7 +18,22 @@ class Tag(BaseModel):
 
 
 class Suministro(BaseModel):
+class Municipality(BaseModel):
     MUNICIPALITY_CHOICES = [(value, label) for value, label in MUNICIPALITIES.items()]
+
+    id = models.UUIDField(default=uuid.uuid4, primary_key=True, editable=False)
+    name = models.CharField(max_length=255, choices=MUNICIPALITY_CHOICES)
+    slug = AutoSlugField(populate_from=["name"], overwrite_on_add=False, max_length=255)
+
+    class Meta:
+        verbose_name = "municipality"
+        verbose_name_plural = "municipalities"
+
+    def __str__(self):
+        return self.name
+
+
+class Suministro(BaseModel):
 
     title = models.CharField(max_length=255)
     slug = AutoSlugField(
@@ -25,6 +42,10 @@ class Suministro(BaseModel):
     municipality = models.CharField(max_length=255, choices=MUNICIPALITY_CHOICES)
     tags = models.ManyToManyField(Tag, blank=True)
     content = RichTextField()
+
+    class Meta:
+        verbose_name = "suministro"
+        verbose_name_plural = "suministros"
 
     def __str__(self):
         return self.title
