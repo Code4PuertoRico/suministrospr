@@ -34,6 +34,7 @@ class Municipality(BaseModel):
 
 
 class Suministro(BaseModel):
+    MUNICIPALITY_CHOICES = [(value, label) for value, label in MUNICIPALITIES.items()]
 
     title = models.CharField(max_length=255)
     slug = AutoSlugField(
