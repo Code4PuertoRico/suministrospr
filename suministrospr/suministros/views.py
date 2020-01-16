@@ -30,7 +30,7 @@ class SuministroList(CacheMixin, ListView):
 
         results = []
 
-        # Convert to `dict` to `list` for sorting by count
+        # Convert from `dict` to `list` for sorting by count
         for municipality, result in items_by_municipality.items():
             results.append(
                 {
