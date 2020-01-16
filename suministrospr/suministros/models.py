@@ -2,6 +2,7 @@ from ckeditor.fields import RichTextField
 from django.core.cache import cache
 from django.db import models
 from django_extensions.db.fields import AutoSlugField
+from taggit.managers import TaggableManager
 
 from ..utils.models import BaseModel
 from .constants import MUNICIPALITIES
@@ -15,6 +16,7 @@ class Suministro(BaseModel):
         populate_from=["title", "municipality"], overwrite_on_add=False, max_length=255
     )
     municipality = models.CharField(max_length=255, choices=MUNICIPALITY_CHOICES)
+    tags = TaggableManager()
     content = RichTextField()
 
     def __str__(self):

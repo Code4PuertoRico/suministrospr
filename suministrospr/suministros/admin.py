@@ -6,4 +6,11 @@ from .models import Suministro
 
 @admin.register(Suministro)
 class SuministroAdmin(VersionAdmin):
-    list_display = ["title", "slug", "municipality", "created_at", "modified_at"]
+    list_display = [
+        "title",
+        "slug",
+        "municipality",
+        "tags",
+        "created_at",
+        "modified_at",
+    ]

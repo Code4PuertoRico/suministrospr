@@ -39,6 +39,7 @@ class Common(Configuration):
         "debug_toolbar",
         "ckeditor",
         "reversion",
+        "taggit",
         "suministrospr.users",
         "suministrospr.suministros",
         "suministrospr.utils",
@@ -137,6 +138,8 @@ class Common(Configuration):
     SENTRY_DSN = values.Value(None, environ_prefix=None)
 
     CACHE_MIXIN_TIMEOUT = values.IntegerValue(300, environ_prefix=None)
+
+    TAGGIT_CASE_INSENSITIVE = True
 
     @property
     def CACHES(self):
