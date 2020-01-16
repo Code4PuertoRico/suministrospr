@@ -17,11 +17,10 @@ def copy_municipality_data_to_new_column(apps, schema_editor):
 
     with transaction.atomic():
         for suministro in suministros:
-            suministro.update(
-                municipality_fk=municipality_slug_to_instance_map[
-                    suministro.municipality
-                ]
-            )
+            suministro.municipality_fk = municipality_slug_to_instance_map[
+                suministro.municipality
+            ]
+            suministro.save()
 
 
 class Migration(migrations.Migration):
