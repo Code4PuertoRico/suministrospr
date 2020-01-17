@@ -25,6 +25,7 @@ class SuministroList(CacheMixin, ListView):
             .prefetch_related("suministros")
             .annotate(suministro_count=Count("suministro"))
             .filter(suministro_count__gt=0)
+            .defer("suministro__content")
             .order_by("-suministro_count")
         )
 
@@ -32,9 +33,7 @@ class SuministroList(CacheMixin, ListView):
             {
                 "count": municipality.suministro_count,
                 "municipality": municipality.name,
-                "suministros": municipality.suministros.all()
-                .defer("content")
-                .order_by("title"),
+                "suministros": municipality.suministros.all(),
             }
             for municipality in municipalities_with_suministros
         ]
