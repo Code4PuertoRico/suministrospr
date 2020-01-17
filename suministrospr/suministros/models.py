@@ -51,6 +51,7 @@ class Suministro(BaseModel):
 
     class Meta:
         indexes = [models.Index(fields=["title"])]
+        ordering = ["title"]
         verbose_name = "suministro"
         verbose_name_plural = "suministros"
 
