@@ -8,17 +8,20 @@ import suministrospr.utils.fields
 
 
 def migrate_taggit_items(apps, schema_editor):
-    Taggit = apps.get_model("taggit", "Tag")
-    TaggedItem = apps.get_model("taggit", "TaggedItem")
-    Tag = apps.get_model("suministros", "Tag")
-    Suministro = apps.get_model("suministros", "Suministro")
+    try:
+        Taggit = apps.get_model("taggit", "Tag")
+        TaggedItem = apps.get_model("taggit", "TaggedItem")
+        Tag = apps.get_model("suministros", "Tag")
+        Suministro = apps.get_model("suministros", "Suministro")
 
-    for tag in Taggit.objects.all():
-        created_tag = Tag.objects.create(name=tag.name)
+        for tag in Taggit.objects.all():
+            created_tag = Tag.objects.create(name=tag.name)
 
-        for item in TaggedItem.objects.filter(tag=tag):
-            suministro = Suministro.objects.get(pk=item.object_id)
-            suministro.tags.add(created_tag)
+            for item in TaggedItem.objects.filter(tag=tag):
+                suministro = Suministro.objects.get(pk=item.object_id)
+                suministro.tags.add(created_tag)
+    except Exception:
+        pass
 
 
 class Migration(migrations.Migration):
