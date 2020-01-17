@@ -1,7 +1,12 @@
 from django.contrib import admin
 from reversion.admin import VersionAdmin
 
-from .models import Suministro
+from .models import Suministro, Tag
+
+
+@admin.register(Tag)
+class TagAdmin(VersionAdmin):
+    list_display = ["name", "slug"]
 
 
 @admin.register(Suministro)
@@ -10,7 +15,6 @@ class SuministroAdmin(VersionAdmin):
         "title",
         "slug",
         "municipality",
-        "tags",
         "created_at",
         "modified_at",
     ]

@@ -4,11 +4,19 @@
 
 {% block head_title %}{{ object|yesno:'Editar,Añadir' }} sector o refugio - {% endblock %}
 
+{% block extra_head %}
+  {{ form.media.css }}
+  <style type="text/css">
+    select#id_tags {
+      width: 100%;
+    }
+  </style>
+{% endblock %}
+
 {% block content %}
 <div class = 'flex justify-center my-5'>
   <form class="w-full max-w-lg px-5" method="POST">
     {% csrf_token %}
-    {{ form.media }}
 
     {{ form.non_field_errors }}
 
@@ -21,6 +29,7 @@
         {% if form.title.errors %}<p class="text-red-500 text-xs italic">{{ form.title.errors.0 }}</p>{% endif %}
       </div>
     </div>
+
     <div class="flex flex-wrap -mx-3 mb-6">
       <div class="w-full px-3">
         <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-state">
@@ -37,6 +46,16 @@
           </div>
         </div>
         {% if form.municipality.errors %}<p class="text-red-500 text-xs italic">{{ form.municipality.errors.0 }}</p>{% endif %}
+      </div>
+    </div>
+
+    <div class="flex flex-wrap -mx-3 mb-6">
+      <div class="w-full px-3">
+        <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-first-name">
+          Categorías
+        </label>
+        {{form.tags}}
+        {% if form.tags.errors %}<p class="text-red-500 text-xs italic">{{ form.tags.errors.0 }}</p>{% endif %}
       </div>
     </div>
 
@@ -57,4 +76,9 @@
     </div>
   </form>
 </div>
+{% endblock %}
+
+{% block extra_body %}
+<script src="//code.jquery.com/jquery-2.1.4.min.js"></script>
+{{ form.media.js }}
 {% endblock %}
