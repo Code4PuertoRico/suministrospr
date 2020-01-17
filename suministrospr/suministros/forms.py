@@ -1,5 +1,6 @@
 import bleach
 from django import forms
+from django.utils.text import slugify
 from django_select2.conf import settings as select2_settings
 from django_select2.forms import ModelSelect2TagWidget
 
@@ -29,15 +30,24 @@ class TagsWidget(ModelSelect2TagWidget):
         Create objects for given non-pimary-key values. Return list of all primary keys.
         """
         values = set(super().value_from_datadict(data, files, name))
+
+        # Numeric values are probably existing ids
         numeric_values = [int(value) for value in values if value.isdigit()]
         pks = self.queryset.filter(**{"pk__in": numeric_values}).values_list(
             "pk", flat=True
         )
+
+        # Convert ids to strings for set operation
         pks = set(map(str, pks))
-        cleaned_values = list(numeric_values)
-        for val in values - pks:
-            cleaned_values.append(self.queryset.create(name=val).pk)
-        return cleaned_values
+        other_values = values - pks
+
+        tag_ids = list(pks)
+
+        for val in other_values:
+            tag, _ = self.queryset.get_or_create(name=slugify(val))
+            tag_ids.append(tag.pk)
+
+        return tag_ids
 
 
 class SuministroModelForm(forms.ModelForm):
