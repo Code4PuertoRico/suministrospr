@@ -1,4 +1,4 @@
-from django.db.models import Count
+from django.db.models import Count, Prefetch
 from django.urls import reverse
 from django.views.generic import DetailView, ListView
 from django.views.generic.edit import CreateView, UpdateView
@@ -22,10 +22,14 @@ class SuministroList(CacheMixin, ListView):
 
         municipalities_with_suministros = (
             Municipality.objects.all()
-            .prefetch_related("suministros")
+            .prefetch_related(
+                Prefetch(
+                    "suministros",
+                    queryset=Suministro.objects.defer("content").order_by("title"),
+                )
+            )
             .annotate(suministro_count=Count("suministro"))
             .filter(suministro_count__gt=0)
-            .defer("suministro__content")
             .order_by("-suministro_count")
         )
 
