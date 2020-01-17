@@ -9,7 +9,7 @@ volumes:
 
 services:
   database:
-    image: postgres:9.6
+    image: postgres:11.6
     environment:
       - POSTGRES_USER=postgres
       - POSTGRES_DB=postgres

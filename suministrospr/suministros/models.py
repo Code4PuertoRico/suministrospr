@@ -2,10 +2,17 @@ from ckeditor.fields import RichTextField
 from django.core.cache import cache
 from django.db import models
 from django_extensions.db.fields import AutoSlugField
-from taggit.managers import TaggableManager
 
 from ..utils.models import BaseModel
 from .constants import MUNICIPALITIES
+
+
+class Tag(BaseModel):
+    name = models.CharField(max_length=255)
+    slug = AutoSlugField(populate_from=["name"], overwrite_on_add=False, max_length=255)
+
+    def __str__(self):
+        return self.name
 
 
 class Suministro(BaseModel):
@@ -16,7 +23,7 @@ class Suministro(BaseModel):
         populate_from=["title", "municipality"], overwrite_on_add=False, max_length=255
     )
     municipality = models.CharField(max_length=255, choices=MUNICIPALITY_CHOICES)
-    tags = TaggableManager()
+    tags = models.ManyToManyField(Tag, blank=True)
     content = RichTextField()
 
     def __str__(self):

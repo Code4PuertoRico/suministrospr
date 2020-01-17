@@ -39,7 +39,7 @@ class Common(Configuration):
         "debug_toolbar",
         "ckeditor",
         "reversion",
-        "taggit",
+        "django_select2",
         "suministrospr.users",
         "suministrospr.suministros",
         "suministrospr.utils",
@@ -139,7 +139,7 @@ class Common(Configuration):
 
     CACHE_MIXIN_TIMEOUT = values.IntegerValue(300, environ_prefix=None)
 
-    TAGGIT_CASE_INSENSITIVE = True
+    SELECT2_CACHE_BACKEND = "default"
 
     @property
     def CACHES(self):
@@ -175,7 +175,12 @@ class Development(Common):
 
     INTERNAL_IPS = ["127.0.0.1"]
 
-    CACHES = {"default": {"BACKEND": "django.core.cache.backends.dummy.DummyCache"}}
+    CACHES = {
+        "default": {"BACKEND": "django.core.cache.backends.dummy.DummyCache"},
+        "select2": {"BACKEND": "django.core.cache.backends.locmem.LocMemCache"},
+    }
+
+    SELECT2_CACHE_BACKEND = "select2"
 
 
 class Production(Common):
