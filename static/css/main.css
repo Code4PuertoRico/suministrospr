@@ -2,6 +2,7 @@
 This project uses tailwind.css please ask before adding styles here
 */
 
+html,
 body {
   font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;
 
@@ -40,9 +41,9 @@ body {
 }
 
 .main__about p {
-  text-align: center;
-  margin-top: 2rem;
   width: 60%;
+  width: calc(100% - 2.5rem);
+  max-width: 768px;
 }
 
 .main__about p:nth-child(2) {
@@ -52,12 +53,38 @@ body {
 .main__about--paragraph {
   display: flex;
   justify-content: center;
+  margin-top: 2rem;
+}
+
+.main__about--card {
+  display: inline-block;
+  padding: 1.25rem;
+  list-style-type: decimal;
+  list-style-position: inside;
+  border: 1px solid #4299e1;
+  border-radius: .5rem;
+  margin: 0 .5rem;
+}
+
+.main__about--card li {
+  margin-bottom: .5rem;
 }
 
 .main__about--button {
   display: grid;
   justify-content: center;
-  margin: 2.5rem;
+  width: fit-content;
+  margin: 2rem auto;
+  border-radius: .25rem;
+  background-color: #f56565;
+  padding: .75rem .5rem;
+}
+
+.main__about--button svg {
+  width: 1rem;
+  fill: currentColor;
+  margin-right: .5rem;
+  height: 1rem;
 }
 
 .main__about--button a {
@@ -66,15 +93,78 @@ body {
   align-items: center;
   display: inline-flex;
   width: fit-content;
-  border-radius: .25rem;
-  background-color: #f56565;
-  padding: 1rem .5rem;
+}
+
+.main__munilist {
+  width: 100%;
+  margin: 0 auto;
+  max-width: 1280px;
+}
+
+.main__munilist--container {
+  padding: 1rem;
+  margin: 1rem auto 0;
+}
+
+.grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.grid__column {
+  padding: 0 .5rem;
+  margin: 0 0 .5rem 0;
+  width: 100%;
+}
+
+.grid__column--cell {
+  border: 2px solid #edf2f7;
+}
+
+.grid__column--cell ul {
+  padding: 1rem;
+}
+
+.grid__column--cell li {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 20rem;
+  margin-bottom: .5rem;
+}
+
+.grid__column--cell li a {
+  color: #4299e1;
+}
+
+.grid__column--header {
+  font-size: 1.25rem;
+  padding: .5rem;
+  margin: 0 1rem;
+  font-weight: 600;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.grid__column--header img {
+  display: inline;
+  max-height: 40px;
+  vertical-align: middle;
+  margin-right: .5rem;
+}
+
+.grid__column--header h3 {
+  vertical-align: middle;
+  letter-spacing: -.025em;
+  display: inline;
 }
 
 .footer__main p {
   text-align: center;
   margin-top: 2rem;
   width: 60%;
+  width: calc(100% - 2.5rem);
+  max-width: 768px;
 }
 
 .footer__main--paragraph {
@@ -189,4 +279,10 @@ body {
   margin-top: 0;
   margin-bottom: 1rem;
   overflow: auto;
+}
+
+@media (min-width: 768px) {
+  .grid__column {
+    width: calc(100% / 3);
+  }
 }
