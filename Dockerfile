@@ -5,6 +5,11 @@ ARG PIPENV_ARGS
 ENV LANG C.UTF-8
 ENV PYTHONUNBUFFERED 1
 
+# Add dependencies for i18n
+RUN apt-get update && apt-get install -y \
+  gettext \
+  && rm -rf /var/lib/apt/lists/*
+
 # Add app user
 RUN adduser --disabled-login app
 

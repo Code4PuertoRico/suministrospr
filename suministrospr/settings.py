@@ -49,6 +49,7 @@ class Common(Configuration):
         "django.middleware.security.SecurityMiddleware",
         "whitenoise.middleware.WhiteNoiseMiddleware",
         "django.contrib.sessions.middleware.SessionMiddleware",
+        "django.middleware.locale.LocaleMiddleware",
         "django.middleware.common.CommonMiddleware",
         "django.middleware.csrf.CsrfViewMiddleware",
         "django.contrib.auth.middleware.AuthenticationMiddleware",
@@ -96,11 +97,16 @@ class Common(Configuration):
 
     # Internationalization
     # https://docs.djangoproject.com/en/3.0/topics/i18n/
-    LANGUAGE_CODE = "en-us"
-
+    LANGUAGE_CODE = "es"
+    LANGUAGES = (
+        ("es", "Español"),
+        ("en", "English"),
+    )
     TIME_ZONE = "UTC"
 
     USE_I18N = True
+
+    LOCALE_PATHS = ("", os.path.join(BASE_DIR, "suministrospr", "locale"))
 
     USE_L10N = True
 

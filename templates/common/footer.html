@@ -1,3 +1,4 @@
+{% load i18n %}
 <footer>
   <div class="container">
       <a
@@ -7,7 +8,13 @@
         >Cómo ayudar al proyecto de Suministros PR </a
       >
     <p>
-      Una humilde aportación de
+     {% get_current_language as language_code %}
+     {% if language_code == 'es' %}
+     Una humilde aportación de
+     {% endif %}
+     {% if language_code == 'en' %}
+     Una humilde aportación de
+     {% endif %}
       <a
         href="https://twitter.com/jwvelez"
         target="_blank"
@@ -33,8 +40,31 @@
         rel="noopener noreferrer"
         >Giovanni Collazo</a
       >.
+      {% get_current_language as language_code %}
+      {% if language_code == 'es' %}
       Esta página es un esfuerzo ciudadano y no tiene ninguna relación con el
       gobierno de Puerto Rico ni el de EEUU.
+      {% endif %}
+      {% if language_code == 'en' %}
+      Esta página es un esfuerzo ciudadano y no tiene ninguna relación con el
+      gobierno de Puerto Rico ni el de EEUU.
+      {% endif %}
     </p>
   </div>
 </footer>
+<div class="flex justify-center">
+  <form action="{% url 'set_language' %}" method="post">{% csrf_token %}
+    <input name="next" type="hidden" value="{{ redirect_to }}">
+      <select name="language">
+            {% get_current_language as LANGUAGE_CODE %}
+            {% get_available_languages as LANGUAGES %}
+            {% get_language_info_list for LANGUAGES as languages %}
+            {% for language in languages %}
+            <option value="{{ language.code }}"{% if language.code == LANGUAGE_CODE %} selected{% endif %}>
+                {{ language.name_local }} ({{ language.code }})
+            </option>
+            {% endfor %}
+      </select>
+    <input type="submit" value="Go">
+  </form>
+</div>

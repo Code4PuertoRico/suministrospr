@@ -1,0 +1,65 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-01-19 15:12+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: suministrospr/suministros/templates/suministros/search.html:18
+msgid "Resultados para categoría"
+msgstr "Results for category"
+
+#: suministrospr/suministros/templates/suministros/suministro_detail.html:40
+msgid "Actualizado"
+msgstr "Last Modified"
+
+#: suministrospr/suministros/templates/suministros/suministro_detail.html:51
+#: suministrospr/suministros/templates/suministros/suministro_form.html:56
+msgid "Categorías"
+msgstr "Categories"
+
+#: suministrospr/suministros/templates/suministros/suministro_detail.html:68
+msgid "Editar texto"
+msgstr "Edit text"
+
+#: suministrospr/suministros/templates/suministros/suministro_form.html:27
+msgid "Nombre de sector o refugio"
+msgstr "Name of sector or refuge"
+
+#: suministrospr/suministros/templates/suministros/suministro_form.html:37
+msgid "Municipio"
+msgstr "Municipality"
+
+#: suministrospr/suministros/templates/suministros/suministro_form.html:65
+msgid "Necesidades e información de contacto"
+msgstr "Contact information and necessities"
+
+#: suministrospr/suministros/templates/suministros/suministro_form.html:72
+msgid "Guardar y publicar"
+msgstr "Save and Publish"
+
+#: suministrospr/suministros/templates/suministros/suministro_form.html:76
+msgid "Cancelar"
+msgstr "Cancel"
+
+#: suministrospr/suministros/templates/suministros/suministro_list.html:31
+#: suministrospr/suministros/templates/suministros/suministro_municipio_list.html:15
+msgid "Añadir sector o refugio"
+msgstr "Add Sector or Refuge"
+
+#: suministrospr/suministros/templates/suministros/suministro_list.html:39
+msgid "Filtrar por categoría"
+msgstr "Filter by category"

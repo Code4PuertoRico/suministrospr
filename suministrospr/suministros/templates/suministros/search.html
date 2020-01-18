@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 
 {% load static %}
+{% load i18n %}
 {% load suministro_extras %}
 
 {% block head_title %}Entérate, Ayuda, Informa - {% endblock %}
@@ -15,7 +16,7 @@
             <div class="search__header--container">
 
               <label for="inline-full-name">
-                Resultados para categoría
+                {% trans 'Resultados para categoría' %}
               </label>
 
               <div class="relative">
@@ -27,13 +28,20 @@
                 <div class="svg">
                   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
                 </div>
-            </div>
+           </div>
           </div>
         </div>
       </form>
 
+      {% get_current_language as language_code %}
+      {% if language_code == 'es' %}
       <p>Se encontró <strong>{{ results_total }}</strong> resultado{{ results_total|pluralize:"s" }} en <strong>{{ results_municipalities }}</strong> municipio{{ results_municipalities|pluralize:"s" }}.</p>
-  
+      <p class="text-gray-500">Se encontró <strong>{{ results_total }}</strong> resultado{{ results_total|pluralize:"s" }} en <strong>{{ results_municipalities }}</strong> municipio{{ results_municipalities|pluralize:"s" }}.</p>
+      {% endif %}
+      {% if language_code == 'en' %}
+      <p>Found <strong>{{ results_total }}</strong> result{{ results_total|pluralize:"s" }} {{ results_total|pluralize:"in,across" }} <strong>{{ results_municipalities }}</strong> municipalit{{ results_municipalities|pluralize:"y,ies" }}.</p>
+      {% endif %}
+    </div>
   </div>
 </div>
 
