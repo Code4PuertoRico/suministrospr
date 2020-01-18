@@ -17,6 +17,49 @@ body {
   -ms-text-size-adjust: 100%;
 }
 
+.header,
+.footer {
+  display: flex;
+  justify-content: center;
+}
+
+.header__logo {
+  width: 80%;
+  padding: 1rem;
+  border-bottom: 1px solid #edf2f7;
+}
+
+.header__logo img {
+  width: 14rem;
+}
+
+.main {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.main__about p {
+  text-align: center;
+  margin-top: 2rem;
+  width: 60%;
+}
+
+.main__about p:nth-child(2) {
+  font-weight: 600;
+}
+
+.main__about--paragraph {
+  display: flex;
+  justify-content: center;
+}
+
+.footer_main {
+  text-align: center;
+  margin-top: 2rem;
+  width: 60%;
+}
+
 .django-ckeditor-widget {
   width: 100%;
 }

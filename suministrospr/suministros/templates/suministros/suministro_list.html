@@ -6,18 +6,20 @@
 {% block head_title %}Entérate, Ayuda, Informa - {% endblock %}
 
 {% block content %}
-<div class = "flex flex-col mt-8">
-  <div class = "flex justify-center">
-    <p class = "w-4/5 text-sm lg:text-base lg:w-3/5 text-center font-thin">
+
+<div class="main__about">
+  <div class="main__about main__about--paragraph">
+    <p>
       La donación de suministros a las áreas más afectadas del país por el terremoto ha sido un éxito. Esta página pretende ser un vehículo de distribución equitativa para estos suministros, administrada por la misma gente que dona, y que recibe. Para que la ayuda no falte donde se necesita, ni sobre donde ya la tengan.
     </p>
   </div>
-  <div class = 'flex justify-center mt-5'>
-    <p class = "w-4/5 text-sm lg:text-base lg:w-3/5 text-center font-semibold">
+  <div class="main__about main__about--paragraph">
+    <p>
       Revisa los sectores en el listado de abajo. Entra, mira y añade necesidades de ser necesario. Si el sector o refugio que buscas no aparece, añádelo. Verifica si ya existe antes de añadirlo para así evitar la duplicación de información. 🙂
     </p>
   </div>
 </div>
+
 <div class = "flex flex-col mt-10">
   <div class = "flex justify-center">
     <a href="{% url 'suministro-add' %}" class="w-4/5 md:w-auto bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded inline-flex items-center">
