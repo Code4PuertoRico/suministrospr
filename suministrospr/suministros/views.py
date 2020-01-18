@@ -7,7 +7,7 @@ from reversion.views import RevisionMixin
 from ..utils.mixins import CacheMixin
 from .constants import MUNICIPALITIES
 from .forms import SuministroModelForm
-from .models import Municipality, Suministro
+from .models import Municipality, Suministro, Tag
 
 
 class SuministroList(CacheMixin, ListView):
@@ -41,6 +41,8 @@ class SuministroList(CacheMixin, ListView):
             }
             for municipality in municipalities_with_suministros
         ]
+
+        data["tags"] = Tag.objects.all().order_by("name")
 
         return data
 
