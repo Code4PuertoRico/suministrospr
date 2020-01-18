@@ -17,8 +17,7 @@ body {
   -ms-text-size-adjust: 100%;
 }
 
-.header,
-.footer {
+.header {
   display: flex;
   justify-content: center;
 }
@@ -33,7 +32,8 @@ body {
   width: 14rem;
 }
 
-.main {
+.main,
+.footer {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -54,10 +54,32 @@ body {
   justify-content: center;
 }
 
-.footer_main {
+.main__about--button {
+  display: grid;
+  justify-content: center;
+  margin: 2.5rem;
+}
+
+.main__about--button a {
+  color: #fff;
+  font-weight: 700;
+  align-items: center;
+  display: inline-flex;
+  width: fit-content;
+  border-radius: .25rem;
+  background-color: #f56565;
+  padding: 1rem .5rem;
+}
+
+.footer__main p {
   text-align: center;
   margin-top: 2rem;
   width: 60%;
+}
+
+.footer__main--paragraph {
+  display: flex;
+  justify-content: center;
 }
 
 .django-ckeditor-widget {
