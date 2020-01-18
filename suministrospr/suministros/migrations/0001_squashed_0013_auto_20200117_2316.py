@@ -40,22 +40,6 @@ def copy_municipality_data_to_new_column(apps, schema_editor):
 
 class Migration(migrations.Migration):
 
-    replaces = [
-        ("suministros", "0001_initial"),
-        ("suministros", "0002_auto_20200113_2247"),
-        ("suministros", "0003_auto_20200113_2325"),
-        ("suministros", "0004_suministro_slug"),
-        ("suministros", "0005_auto_20200115_2301"),
-        ("suministros", "0006_auto_20200117_1500"),
-        ("suministros", "0007_auto_20200117_2309"),
-        ("suministros", "0008_auto_20200117_2312"),
-        ("suministros", "0009_auto_20200117_2313"),
-        ("suministros", "0010_suministro_municipality_fk"),
-        ("suministros", "0011_auto_20200117_2315"),
-        ("suministros", "0012_remove_suministro_municipality"),
-        ("suministros", "0013_auto_20200117_2316"),
-    ]
-
     initial = True
 
     dependencies = []
