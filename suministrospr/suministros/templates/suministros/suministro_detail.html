@@ -7,9 +7,9 @@
 {% block head_title %}{{ object.title }} - {% endblock %}
 
 {% block content %}
-<div class="flex justify-center mt-10">
-  <div class="flex w-3/5">
-    <p class="text-5xl font-bold text-blue-500 leading-tight tracking-tight">
+<div class="flex justify-center text-center mt-8 md:mt-10">
+  <div class="w-full sm:w-3/4 lg:w-3/5">
+    <p class="text-2xl md:text-5xl px-3 font-bold text-blue-500 leading-tight tracking-tight">
       {{ object.title }}
     </p>
   </div>
@@ -26,13 +26,13 @@
    </div>
   </div>
 </div>
-<div class="flex justify-center mt-10">
-  <div class="flex  w-3/5">
+<div class="flex justify-center mt-10 mx-5">
+  <div class="flex w-full mx-3 text-sm sm:w-3/4 lg:w-3/5">
     <div id="generated-content">
       {{ object.content|safe }}
       <div class="flex flex-row text-sm text-gray-600">
         <div>
-          Actualizado:
+          <strong>Actualizado</strong><br>
           {% language 'es' %}{{ object.modified_at|timezone:"America/Puerto_Rico"|date:"j \d\e F \d\e Y \a \l\a\s  P"|lower }}{% endlanguage %}
         </div>
       </div>
@@ -40,9 +40,9 @@
   </div>
 </div>
 
-<div class="flex justify-center mb-10">
+<div class="flex justify-center mt-5 mb-10 mx-3">
   <a href="{% url 'suministro-edit' object.slug %}"
-    class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded inline-flex items-center">
+    class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded inline-flex items-center w-full md:w-auto">
     <svg class="fill-current w-4 h-4 mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24"
       height="24">
       <path class="heroicon-ui"
