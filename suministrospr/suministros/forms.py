@@ -2,16 +2,13 @@ import bleach
 from django import forms
 from django.utils.text import slugify
 from django_select2.conf import settings as select2_settings
-from django_select2.forms import ModelSelect2TagWidget
+from django_select2.forms import Select2TagWidget
 
 from .constants import ALLOWED_TAGS
 from .models import Suministro, Tag
 
 
-class TagsWidget(ModelSelect2TagWidget):
-    model = Tag
-    queryset = Tag.objects.all()
-    search_fields = ["name__icontains"]
+class TagsWidget(Select2TagWidget):
     empty_label = ""
     media = forms.Media(
         js=(select2_settings.SELECT2_JS,)
@@ -23,6 +20,7 @@ class TagsWidget(ModelSelect2TagWidget):
     def build_attrs(self, base_attrs, extra_attrs=None):
         attrs = super().build_attrs(base_attrs, extra_attrs)
         attrs["data-language"] = "es"
+        attrs["data-minimum-input-length"] = 0
         return attrs
 
     def value_from_datadict(self, data, files, name):
@@ -33,7 +31,7 @@ class TagsWidget(ModelSelect2TagWidget):
 
         # Numeric values are probably existing ids
         numeric_values = [int(value) for value in values if value.isdigit()]
-        pks = self.queryset.filter(**{"pk__in": numeric_values}).values_list(
+        pks = Tag.objects.filter(**{"pk__in": numeric_values}).values_list(
             "pk", flat=True
         )
 
@@ -44,17 +42,20 @@ class TagsWidget(ModelSelect2TagWidget):
         tag_ids = list(pks)
 
         for val in other_values:
-            tag, _ = self.queryset.get_or_create(name=slugify(val))
+            tag, _ = Tag.objects.get_or_create(name=slugify(val))
             tag_ids.append(tag.pk)
 
         return tag_ids
 
 
 class SuministroModelForm(forms.ModelForm):
+    tags = forms.ModelMultipleChoiceField(
+        queryset=Tag.objects.all().order_by("name"), widget=TagsWidget
+    )
+
     class Meta:
         model = Suministro
         fields = ["title", "municipality", "content", "tags"]
-        widgets = {"tags": TagsWidget}
 
     def clean_content(self):
         content = self.cleaned_data["content"]
