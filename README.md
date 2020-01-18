@@ -14,9 +14,13 @@ $ pipenv install --dev
 # Install pre-commit hooks
 $ pipenv run pre-commit install
 
+# Copy example environment variables to proper file
 $ cp example.env .env
-$ pipenv install --dev
+
+# Run Django database migrations
 $ pipenv run python manage.py migrate
+
+# Run local server
 $ pipenv run python manage.py runserver_plus
 ```
 
