@@ -15,7 +15,6 @@ class Tag(BaseModel):
         return self.name
 
 
-class Suministro(BaseModel):
 class Municipality(BaseModel):
     MUNICIPALITY_CHOICES = [(value, label) for value, label in MUNICIPALITIES.items()]
 
@@ -35,7 +34,6 @@ class Suministro(BaseModel):
     slug = AutoSlugField(
         populate_from=["title", "municipality"], overwrite_on_add=False, max_length=255
     )
-
     municipality = models.ForeignKey(
         Municipality,
         null=True,
@@ -44,9 +42,7 @@ class Suministro(BaseModel):
         related_name="suministros",
         related_query_name="suministro",
     )
-
     tags = models.ManyToManyField(Tag, blank=True)
-
     content = RichTextField()
 
     class Meta:
