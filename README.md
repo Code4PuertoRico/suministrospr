@@ -32,6 +32,18 @@ $ docker-compose up --build
 
 2. Run the import_data command:
 
-  ```bash
-  $ docker-compose exec web python manage.py import_data ./data/scraped
-  ```
+```bash
+$ docker-compose exec web python manage.py import_data ./data/scraped
+```
+
+### Deployment
+
+```bash
+git push heroku master
+```
+
+#### Clearing cache
+
+```bash
+heroku run python manage.py clear_cache
+```
