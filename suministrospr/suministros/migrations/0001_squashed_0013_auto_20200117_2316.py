@@ -11,20 +11,6 @@ import suministrospr.utils.fields
 from ..constants import MUNICIPALITIES
 
 
-def migrate_taggit_items(apps, schema_editor):
-    Taggit = apps.get_model("taggit", "Tag")
-    TaggedItem = apps.get_model("taggit", "TaggedItem")
-    Tag = apps.get_model("suministros", "Tag")
-    Suministro = apps.get_model("suministros", "Suministro")
-
-    for tag in Taggit.objects.all():
-        created_tag = Tag.objects.create(name=tag.name)
-
-        for item in TaggedItem.objects.filter(tag=tag):
-            suministro = Suministro.objects.get(pk=item.object_id)
-            suministro.tags.add(created_tag)
-
-
 def create_municipalities(apps, schema_editor):
     Municipality = apps.get_model("suministros", "Municipality")
 
@@ -72,9 +58,7 @@ class Migration(migrations.Migration):
 
     initial = True
 
-    dependencies = [
-        ("taggit", "0003_taggeditem_add_unique_index"),
-    ]
+    dependencies = []
 
     operations = [
         migrations.CreateModel(
@@ -247,7 +231,6 @@ class Migration(migrations.Migration):
                 "abstract": False,
             },
         ),
-        migrations.RunPython(migrate_taggit_items),
         migrations.CreateModel(
             name="Municipality",
             fields=[
