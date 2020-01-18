@@ -1,2 +1,4 @@
 [tool.black]
 line-length = 88
+target-version = ['py37']
+exclude = '(\.eggs|\.git|\.mypy_cache|\.venv|_build|build|dist|.*\/migrations\/.*)'
