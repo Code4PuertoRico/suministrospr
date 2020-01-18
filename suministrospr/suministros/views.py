@@ -28,6 +28,7 @@ class SuministroList(CacheMixin, TemplateView):
 
         data["sorted_results"] = [
             {
+                "count": municipality.suministro_count,
                 "municipality": municipality.name,
                 "suministros": municipality.suministros.all(),
             }
@@ -127,6 +128,7 @@ class SuministroSearch(TemplateView):
             data["results_municipalities"] += 1
             data["results"].append(
                 {
+                    "count": municipality.suministro_count,
                     "municipality": municipality.name,
                     "suministros": municipality.suministros.all(),
                 }
