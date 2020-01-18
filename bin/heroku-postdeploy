@@ -1,0 +1,9 @@
+#!/bin/bash
+
+set -e
+
+pg_dump -Fc --no-acl --no-owner $DATABASE_URL_TO_COPY | \
+  pg_restore --verbose --clean --no-acl --no-owner -d $DATABASE_URL
+
+python manage.py migrate
+python manage.py createinitialrevisions
