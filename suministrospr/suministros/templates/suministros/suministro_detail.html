@@ -40,12 +40,14 @@
       <strong>Actualizado</strong><br>
       {% language 'es' %}{{ object.modified_at|timezone:"America/Puerto_Rico"|date:"j \d\e F \d\e Y \a \l\a\s  P"|lower }}{% endlanguage %}
     </div>
-    <div class="mb-2">
-      <strong>Categorías</strong><br>
-      {% for tag in object.tags.all %}
-        <a href="{% url 'suministro-search' %}?tag={{ tag.slug }}" class="text-red-500 hover:underline mr-1">{{ tag.name }}</a>
-      {% endfor %}
-    </div>
+    {% if object.tags.all %}
+      <div class="mb-2">
+        <strong>Categorías</strong><br>
+        {% for tag in object.tags.all %}
+          <a href="{% url 'suministro-search' %}?tag={{ tag.slug }}" class="text-red-500 hover:underline mr-1">{{ tag.name }}</a>
+        {% endfor %}
+      </div>
+    {% endif %}
   </div>
 </div>
 
