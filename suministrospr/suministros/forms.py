@@ -50,7 +50,7 @@ class TagsWidget(Select2TagWidget):
 
 class SuministroModelForm(forms.ModelForm):
     tags = forms.ModelMultipleChoiceField(
-        queryset=Tag.objects.all().order_by("name"), widget=TagsWidget
+        queryset=Tag.objects.all().order_by("name"), widget=TagsWidget, required=False
     )
 
     class Meta:
