@@ -202,5 +202,5 @@ class Production(Common):
 
 class Testing(Common):
     PASSWORD_HASHERS = ["django.contrib.auth.hashers.MD5PasswordHasher"]
-
     SECRET_KEY = "dont-tell-eve"
+    STATICFILES_STORAGE = "django.contrib.staticfiles.storage.StaticFilesStorage"
