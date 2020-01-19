@@ -89,8 +89,18 @@ class SuministroUpdate(RevisionMixin, UpdateView):
         return reverse("suministro-detail", args=[self.object.slug])
 
 
-class SuministroSearch(TemplateView):
+class SuministroSearch(CacheMixin, TemplateView):
     template_name = "suministros/search.html"
+    cache_key = "suministro-search"
+
+    def get_cache_key(self):
+        cache_key = self.cache_key
+        tag = self.request.GET.get("tag")
+
+        if tag:
+            cache_key = f"{cache_key}:{tag}"
+
+        return cache_key
 
     def get_context_data(self):
         data = super().get_context_data()
