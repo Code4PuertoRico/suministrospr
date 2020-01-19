@@ -119,7 +119,9 @@ class SuministroSearch(TemplateView):
                 .prefetch_related(Prefetch("suministros", queryset=suministros))
                 .annotate(
                     suministro_count=Count(
-                        "suministro", filter=Q(suministro__tags__slug=tag_slug),
+                        "suministro",
+                        filter=Q(suministro__tags__slug=tag_slug),
+                        distinct=True,
                     )
                 )
                 .filter(suministro_count__gt=0, suministro__tags__slug=tag_slug)
