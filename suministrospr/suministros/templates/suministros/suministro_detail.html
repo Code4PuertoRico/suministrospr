@@ -30,12 +30,21 @@
   <div class="flex w-full mx-3 text-sm sm:w-3/4 lg:w-3/5">
     <div id="generated-content">
       {{ object.content|safe }}
-      <div class="flex flex-row text-sm text-gray-600">
-        <div>
-          <strong>Actualizado</strong><br>
-          {% language 'es' %}{{ object.modified_at|timezone:"America/Puerto_Rico"|date:"j \d\e F \d\e Y \a \l\a\s  P"|lower }}{% endlanguage %}
-        </div>
-      </div>
+    </div>
+  </div>
+</div>
+
+<div class="flex justify-center mx-3">
+  <div class="flex flex-col w-full mx-3 text-sm sm:w-3/4 lg:w-3/5 text-sm text-gray-600">
+    <div class="mb-2">
+      <strong>Actualizado</strong><br>
+      {% language 'es' %}{{ object.modified_at|timezone:"America/Puerto_Rico"|date:"j \d\e F \d\e Y \a \l\a\s  P"|lower }}{% endlanguage %}
+    </div>
+    <div class="mb-2">
+      <strong>Categorías</strong><br>
+      {% for tag in object.tags.all %}
+        <a href="{% url 'suministro-search' %}?tag={{ tag.slug }}" class="text-red-500 hover:underline mr-1">{{ tag.name }}</a>
+      {% endfor %}
     </div>
   </div>
 </div>

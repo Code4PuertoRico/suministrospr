@@ -65,6 +65,9 @@ class SuministroByMunicipalityList(CacheMixin, ListView):
 class SuministroDetail(CacheMixin, DetailView):
     model = Suministro
     cache_key = "suministro-detail"
+    queryset = (
+        Suministro.objects.select_related("municipality").prefetch_related("tags").all()
+    )
 
     def get_cache_key(self):
         return f"{self.cache_key}:{self.kwargs['slug']}"
