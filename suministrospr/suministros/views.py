@@ -1,33 +1,26 @@
-from django.db.models import Count, Prefetch
+from django.db.models import Count, Prefetch, Q
 from django.urls import reverse
-from django.views.generic import DetailView, ListView
+from django.views.generic import DetailView, ListView, TemplateView
 from django.views.generic.edit import CreateView, UpdateView
 from reversion.views import RevisionMixin
 
 from ..utils.mixins import CacheMixin
 from .constants import MUNICIPALITIES
-from .forms import SuministroModelForm
+from .forms import FilterForm, SuministroModelForm
 from .models import Municipality, Suministro
 
 
-class SuministroList(CacheMixin, ListView):
-    model = Suministro
+class SuministroList(CacheMixin, TemplateView):
     cache_key = "suministro-list"
-
-    def get_queryset(self):
-        return Suministro.objects.all().defer("content").order_by("title")
+    template_name = "suministros/suministro_list.html"
 
     def get_context_data(self):
         data = super().get_context_data()
+        suministros = Suministro.objects.defer("content").order_by("title")
 
         municipalities_with_suministros = (
             Municipality.objects.all()
-            .prefetch_related(
-                Prefetch(
-                    "suministros",
-                    queryset=Suministro.objects.defer("content").order_by("title"),
-                )
-            )
+            .prefetch_related(Prefetch("suministros", queryset=suministros,))
             .annotate(suministro_count=Count("suministro"))
             .filter(suministro_count__gt=0)
             .order_by("-suministro_count")
@@ -41,6 +34,8 @@ class SuministroList(CacheMixin, ListView):
             }
             for municipality in municipalities_with_suministros
         ]
+
+        data["filter_form"] = FilterForm()
 
         return data
 
@@ -70,6 +65,9 @@ class SuministroByMunicipalityList(CacheMixin, ListView):
 class SuministroDetail(CacheMixin, DetailView):
     model = Suministro
     cache_key = "suministro-detail"
+    queryset = (
+        Suministro.objects.select_related("municipality").prefetch_related("tags").all()
+    )
 
     def get_cache_key(self):
         return f"{self.cache_key}:{self.kwargs['slug']}"
@@ -89,3 +87,56 @@ class SuministroUpdate(RevisionMixin, UpdateView):
 
     def get_success_url(self):
         return reverse("suministro-detail", args=[self.object.slug])
+
+
+class SuministroSearch(TemplateView):
+    template_name = "suministros/search.html"
+
+    def get_context_data(self):
+        data = super().get_context_data()
+        data["results_total"] = 0
+        data["results_municipalities"] = 0
+        data["results"] = []
+
+        filter_form = FilterForm(self.request.GET)
+
+        suministros = Suministro.objects.all().defer("content").order_by("title")
+
+        municipalities_with_suministros = (
+            Municipality.objects.all()
+            .prefetch_related(Prefetch("suministros", queryset=suministros))
+            .annotate(suministro_count=Count("suministro",))
+            .filter(suministro_count__gt=0)
+            .order_by("-suministro_count")
+        )
+
+        if filter_form.is_valid():
+            tag_slug = filter_form.cleaned_data["tag"]
+            suministros = suministros.filter(tags__slug=tag_slug)
+
+            municipalities_with_suministros = (
+                Municipality.objects.all()
+                .prefetch_related(Prefetch("suministros", queryset=suministros))
+                .annotate(
+                    suministro_count=Count(
+                        "suministro", filter=Q(suministro__tags__slug=tag_slug),
+                    )
+                )
+                .filter(suministro_count__gt=0, suministro__tags__slug=tag_slug)
+                .order_by("-suministro_count")
+            )
+
+        for municipality in municipalities_with_suministros:
+            data["results_total"] += municipality.suministro_count
+            data["results_municipalities"] += 1
+            data["results"].append(
+                {
+                    "count": municipality.suministro_count,
+                    "municipality": municipality.name,
+                    "suministros": municipality.suministros.all(),
+                }
+            )
+
+        data["filter_form"] = filter_form
+
+        return data
