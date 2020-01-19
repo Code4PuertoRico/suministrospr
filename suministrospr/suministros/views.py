@@ -5,6 +5,7 @@ from django.views.generic.edit import CreateView, UpdateView
 from reversion.views import RevisionMixin
 
 from ..utils.mixins import CacheMixin
+from ..utils.search import search
 from .constants import MUNICIPALITIES
 from .forms import SuministroModelForm
 from .models import Municipality, Suministro
@@ -89,3 +90,16 @@ class SuministroUpdate(RevisionMixin, UpdateView):
 
     def get_success_url(self):
         return reverse("suministro-detail", args=[self.object.slug])
+
+
+class SearchList(CacheMixin, ListView):
+    paginate_by = 25
+    model = Suministro
+    cache_key = "suministro-search-list"
+    template_name = "suministros/suministros_search_list.html"
+
+    def get_queryset(self):
+        query = self.kwargs.get("q")
+        object_list = search(query)
+
+        return object_list

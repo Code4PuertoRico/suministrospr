@@ -1,6 +1,7 @@
 from django.urls import path
 
 from .views import (
+    SearchList,
     SuministroByMunicipalityList,
     SuministroCreate,
     SuministroDetail,
@@ -20,4 +21,5 @@ urlpatterns = [
     path(
         "sectores/<slug:slug>/edit", SuministroUpdate.as_view(), name="suministro-edit",
     ),
+    path("search/", SearchList.as_view(), name="search-list"),
 ]
