@@ -1,5 +1,4 @@
-from collections import defaultdict
-
+from django.db.models import Count, Prefetch
 from django.urls import reverse
 from django.views.generic import DetailView, ListView
 from django.views.generic.edit import CreateView, UpdateView
@@ -8,7 +7,7 @@ from reversion.views import RevisionMixin
 from ..utils.mixins import CacheMixin
 from .constants import MUNICIPALITIES
 from .forms import SuministroModelForm
-from .models import Suministro
+from .models import Municipality, Suministro
 
 
 class SuministroList(CacheMixin, ListView):
@@ -20,28 +19,28 @@ class SuministroList(CacheMixin, ListView):
 
     def get_context_data(self):
         data = super().get_context_data()
-        items_by_municipality = defaultdict(lambda: {"count": 0, "items": []})
 
-        # Group by `municipality`
-        for suministro in data["object_list"]:
-            key = suministro.get_municipality_display()
-            items_by_municipality[key]["count"] += 1
-            items_by_municipality[key]["items"].append(suministro)
-
-        results = []
-
-        # Convert to `dict` to `list` for sorting by count
-        for municipality, result in items_by_municipality.items():
-            results.append(
-                {
-                    "count": result["count"],
-                    "suministros": result["items"],
-                    "municipality": municipality,
-                }
+        municipalities_with_suministros = (
+            Municipality.objects.all()
+            .prefetch_related(
+                Prefetch(
+                    "suministros",
+                    queryset=Suministro.objects.defer("content").order_by("title"),
+                )
             )
+            .annotate(suministro_count=Count("suministro"))
+            .filter(suministro_count__gt=0)
+            .order_by("-suministro_count")
+        )
 
-        # Sort by municipalities with most items first.
-        data["sorted_results"] = sorted(results, key=lambda k: k["count"], reverse=True)
+        data["sorted_results"] = [
+            {
+                "count": municipality.suministro_count,
+                "municipality": municipality.name,
+                "suministros": municipality.suministros.all(),
+            }
+            for municipality in municipalities_with_suministros
+        ]
 
         return data
 
@@ -56,9 +55,10 @@ class SuministroByMunicipalityList(CacheMixin, ListView):
 
     def get_queryset(self):
         return (
-            Suministro.objects.filter(municipality=self.kwargs["municipality"])
+            Suministro.objects.select_related("municipality")
+            .filter(municipality__slug=self.kwargs["municipality"])
             .defer("content")
-            .order_by("municipality", "title")
+            .order_by("title")
         )
 
     def get_context_data(self):

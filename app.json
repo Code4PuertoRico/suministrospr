@@ -1,0 +1,35 @@
+{
+  "name": "suministrospr",
+  "website": "https://suministrospr.com",
+  "repository": "https://github.com/code4puertorico/suministrospr",
+  "success_url": "/",
+  "scripts": {
+    "postdeploy": "./bin/heroku-postdeploy"
+  },
+  "env": {
+    "DJANGO_SECRET_KEY": {
+      "description": "A secret key used to provide cryptographic signing.",
+      "generator": "secret"
+    },
+    "DJANGO_ALLOWED_HOSTS": {
+      "description": "Comma-separated list of the host/domain names that this site can serve.",
+      "value": "*"
+    },
+    "ENVIRONMENT": {
+      "description": "Which Django Configuration to use.",
+      "value": "production"
+    },
+    "CACHE_MIXIN_TIMEOUT": {
+      "description": "Custom full response cache timeout in seconds.",
+      "value": "86400"
+    }
+  },
+  "addons": [
+    {
+      "plan": "heroku-redis"
+    },
+    {
+      "plan": "heroku-postgresql"
+    }
+  ]
+}
