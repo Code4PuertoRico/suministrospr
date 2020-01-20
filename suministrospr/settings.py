@@ -175,12 +175,7 @@ class Development(Common):
 
     INTERNAL_IPS = ["127.0.0.1"]
 
-    CACHES = {
-        "default": {"BACKEND": "django.core.cache.backends.dummy.DummyCache"},
-        "select2": {"BACKEND": "django.core.cache.backends.locmem.LocMemCache"},
-    }
-
-    SELECT2_CACHE_BACKEND = "select2"
+    CACHES = {"default": {"BACKEND": "django.core.cache.backends.dummy.DummyCache"}}
 
 
 class Production(Common):
