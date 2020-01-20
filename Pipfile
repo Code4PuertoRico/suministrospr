@@ -28,8 +28,6 @@ django-reversion = "==3.0.5"
 sentry-sdk = "==0.14.0"
 django-select2 = "==7.2.0"
 django-progressive-web-app = "*"
-pyopenssl = "*"
-docker-compose = "*"
 
 [pipenv]
 allow_prereleases = true
