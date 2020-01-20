@@ -5,11 +5,13 @@ from .views import (
     SuministroCreate,
     SuministroDetail,
     SuministroList,
+    SuministroSearch,
     SuministroUpdate,
 )
 
 urlpatterns = [
     path("", SuministroList.as_view(), name="suministro-list"),
+    path("buscar/", SuministroSearch.as_view(), name="suministro-search"),
     path("sectores/add/", SuministroCreate.as_view(), name="suministro-add"),
     path(
         "municipios/<slug:municipality>/",

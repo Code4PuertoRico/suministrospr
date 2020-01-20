@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+
+{% load static %}
+{% load suministro_extras %}
+
+{% block head_title %}Entérate, Ayuda, Informa - {% endblock %}
+
+{% block content %}
+<div class="flex justify-center text-center mt-8 md:mt-10">
+  <div class="flex w-4/5 p-4 justify-center border-b border-gray-200">
+
+    <div class="flex flex-col items-center w-full">
+      <form class="w-full max-w-lg" action="{% url 'suministro-search' %}" method="GET">
+        <div class="md:flex md:items-center mb-6">
+          <div class="md:w-1/2">
+            <label class="block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4" for="inline-full-name">
+              Resultados para categoría
+            </label>
+          </div>
+          <div class="md:w-1/2">
+            <div class="relative">
+              <select class="block appearance-none w-full bg-white border border-gray-500 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:border-gray-900" name="tag" onchange="this.form.submit()">
+                {% for value, label in filter_form.fields.tag.choices %}
+                  <option value="{{ value }}" {% if filter_form.tag.value == value %}selected{% endif %}>{{ label }}</option>
+                {% endfor %}
+              </select>
+              <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+                <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+
+      <p class="text-gray-500">Se encontró <strong>{{ results_total }}</strong> resultado{{ results_total|pluralize:"s" }} en <strong>{{ results_municipalities }}</strong> municipio{{ results_municipalities|pluralize:"s" }}.</p>
+    </div>
+  </div>
+</div>
+
+<div class="flex flex-col mt-8">
+  <div class="flex justify-center">
+    <div class="container mx-auto mt-4 w-4/5">
+      <div class="flex flex-wrap -mx-2">
+        {% for group in results %}
+          <div class="w-full mb-2">
+            <div class="border-b text-xl font-semibold py-2 max-w-lg">
+              <img class="inline align-middle mr-2" src="{% escudo_static group.municipality %}" alt="{{ group.municipality }}" style="max-height: 40px;">
+              <h3 class="inline align-middle tracking-tight">
+                <a href="{% url 'suministro-municipio-list' group.municipality|slugify %}">{{ group.municipality }}</a>
+              </h3>
+            </div>
+
+            <ul class="py-4">
+              {% for suministro in group.suministros %}
+                <li class="mb-2 truncate max-w-lg">
+                  <a class="text-blue-500" href="{% url 'suministro-detail' suministro.slug %}">
+                    {{ suministro.title }}
+                  </a>
+                </li>
+              {% endfor %}
+            </ul>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

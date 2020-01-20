@@ -20,19 +20,40 @@
       <li><strong>Añade el sector o refugio</strong> si el que buscas no aparece!</li>
     </ol>
   </div>
-  </div>
-  <div class="main__about main__about--button">
-    <a href="{% url 'suministro-add' %}">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 21 21"><path class="heroicon-ui" d="M5 3h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5c0-1.1.9-2 2-2zm0 2v14h14V5H5zm8 6h2a1 1 0 0 1 0 2h-2v2a1 1 0 0 1-2 0v-2H9a1 1 0 0 1 0-2h2V9a1 1 0 0 1 2 0v2z"/></svg>
-      <span>Añadir sector o refugio</span>
-    </a>
-  </div>
 </div>
+<div class="flex flex-col mt-8">
+  <div class="flex justify-center">
+    <div class="container mx-auto">
+      <div class="flex flex-wrap justify-center -mx-2">
+        <a href="{% url 'suministro-add' %}" class="w-4/5 md:w-auto sm:w-1/2 bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded inline-flex items-center">
+          <svg class="fill-current w-4 h-4 mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 21 21"><path class="heroicon-ui" d="M5 3h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5c0-1.1.9-2 2-2zm0 2v14h14V5H5zm8 6h2a1 1 0 0 1 0 2h-2v2a1 1 0 0 1-2 0v-2H9a1 1 0 0 1 0-2h2V9a1 1 0 0 1 2 0v2z"/></svg>
+          <span>Añadir sector o refugio</span>
+        </a>
 
-<div class="main__munilist">
+        <form class="w-4/5 md:w-auto sm:w-1/2 border-0 md:border-l mt-2 md:mt-0 md:pl-2 md:ml-2" action="{% url 'suministro-search' %}" method="GET">
+          <div class="flex flex-wrap -mx-3">
+            <div class="w-full px-3">
+              <div class="relative">
+                <select class="block appearance-none w-full bg-white border border-gray-500 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:border-gray-900" name="tag" onchange="this.form.submit()">
+                  <option value="">Filtrar por categoría</option>
+                  {% for value, label in filter_form.fields.tag.choices %}
+                    <option value="{{ value }}">{{ label }}</option>
+                  {% endfor %}
+                </select>
+                <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+                  <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
 
-    <div class="main__munilist main__munilist--container">
-      <div class="main__munilist grid">
+  <div class="flex justify-center">
+    <div class="container mx-auto mt-4 p-4">
+      <div class="flex flex-wrap -mx-2">
         {% for group in sorted_results %}
           <div class="main__munilist grid__column">
             <div class="grid__column--cell">
@@ -57,8 +78,6 @@
         {% endfor %}
       </div>
     </div>
-
-
   </div>
 </div>
 {% endblock %}

@@ -50,7 +50,7 @@ class TagsWidget(Select2TagWidget):
 
 class SuministroModelForm(forms.ModelForm):
     tags = forms.ModelMultipleChoiceField(
-        queryset=Tag.objects.all().order_by("name"), widget=TagsWidget
+        queryset=Tag.objects.all().order_by("name"), widget=TagsWidget, required=False
     )
 
     class Meta:
@@ -60,3 +60,9 @@ class SuministroModelForm(forms.ModelForm):
     def clean_content(self):
         content = self.cleaned_data["content"]
         return bleach.clean(content, tags=ALLOWED_TAGS, strip=True)
+
+
+class FilterForm(forms.Form):
+    tag = forms.ModelChoiceField(
+        queryset=Tag.objects.all().order_by("name"), to_field_name="slug"
+    )
