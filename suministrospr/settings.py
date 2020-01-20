@@ -18,6 +18,8 @@ class Common(Configuration):
     # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
     BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
+    PWA_SERVICE_WORKER_PATH = os.path.join(BASE_DIR, "static/js", "serviceworker.js")
+
     # SECURITY WARNING: keep the secret key used in production secret!
     SECRET_KEY = values.SecretValue()
 
@@ -38,6 +40,7 @@ class Common(Configuration):
         "django_extensions",
         "debug_toolbar",
         "ckeditor",
+        "pwa",
         "reversion",
         "django_select2",
         "suministrospr.users",

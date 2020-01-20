@@ -1,4 +1,5 @@
 from django.db.models import Count, Prefetch, Q
+from django.shortcuts import render
 from django.urls import reverse
 from django.views.generic import DetailView, ListView, TemplateView
 from django.views.generic.edit import CreateView, UpdateView
@@ -8,6 +9,11 @@ from ..utils.mixins import CacheMixin
 from .constants import MUNICIPALITIES
 from .forms import FilterForm, SuministroModelForm
 from .models import Municipality, Suministro
+
+
+def base_layout(request):
+    template = "base.html"
+    return render(request, template)
 
 
 class SuministroList(CacheMixin, TemplateView):
