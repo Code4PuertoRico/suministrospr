@@ -18,6 +18,8 @@ body {
   -ms-text-size-adjust: 100%;
 }
 
+/* base */
+
 .header {
   display: flex;
   justify-content: center;
@@ -37,6 +39,21 @@ body {
 .footer {
   display: flex;
   flex-direction: column;
+  justify-content: center;
+}
+
+.footer__main p {
+  text-align: center;
+  margin-top: 2rem;
+  width: 60%;
+  width: calc(100% - 2.5rem);
+  max-width: 768px;
+}
+
+/* suministro_municipio_list.html */
+
+.footer__main--paragraph {
+  display: flex;
   justify-content: center;
 }
 
@@ -273,25 +290,49 @@ body {
   color: #4299e1;
 }
 
-.footer__main p {
+/* suministro_detail.html */
+
+.main__detail {
+  margin: 2rem 1rem 0;
+}
+
+.main__detail h3 {
   text-align: center;
-  margin-top: 2rem;
+  font-size: 3rem;
+  color: #4299e1;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.main__detail--breadcrumb {
+  display: inline-flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.main__detail--breadcrumb a::before {
+  content: ">";
+  margin: 0 .5rem;
+  color: #718096;
+}
+
+.main__detail--breadcrumb a:first-child::before {
+  content: "";
+  margin: 0 0;
+}
+
+.main__detail--content,
+.main__detail--catdate {
+  display: flex;
+  justify-content: center;
+  margin: 2.5rem auto 0;
   width: 60%;
   width: calc(100% - 2.5rem);
   max-width: 768px;
 }
 
-.footer__main--paragraph {
-  display: flex;
-  justify-content: center;
-}
-
-.django-ckeditor-widget {
-  width: 100%;
-}
-
 #generated-content ol {
-  list-style: decimal;
+  list-style: decimal inside;
   margin-top: 0;
   margin-bottom: 1rem;
 }
@@ -393,6 +434,58 @@ body {
   margin-top: 0;
   margin-bottom: 1rem;
   overflow: auto;
+}
+
+.main__detail--catdate {
+  display: grid;
+  justify-content: start;
+  margin: 0 auto;
+}
+
+.main__detail--catdate .date,
+.main__detail--catdate .categories {
+  flex-direction: column;
+  color: #718096;
+  font-size: .875rem;
+  margin-bottom: .5rem;
+  width: 100%;
+}
+
+.main__detail--button {
+  display: grid;
+  justify-content: center;
+  width: fit-content;
+  border-radius: .25rem;
+  background-color: #f56565;
+  margin: 1rem auto;
+}
+
+.main__detail--button :hover {
+  background-color: #c53030;
+}
+
+.main__detail--button svg {
+  width: 1rem;
+  fill: currentColor;
+  margin-right: .5rem;
+  height: 1rem;
+}
+
+.main__detail--button a {
+  color: #fff;
+  font-weight: 700;
+  padding: .5rem 1rem;
+  align-items: center;
+  display: inline-flex;
+  width: fit-content;
+}
+
+
+
+/* legacy */
+
+.django-ckeditor-widget {
+  width: 100%;
 }
 
 @media (min-width: 768px) {
