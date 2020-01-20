@@ -56,6 +56,7 @@ Si encuentras alguna sugerencia parecida pero consideras que es lo suficientemen
 - Screenshot(s) / Sketches de ser necesario. 
 
 ## Personas Contacto
-
-## Otros recursos 
-
+- [Javier W. Vélez](https://twitter.com/jwvelez)
+- [Juan Pablo Díaz](https://twitter.com/juanpipr)
+- [Orlando Vélez](https://twitter.com/oajvelez)
+- [Giovanni Collazo](https://twitter.com/gcollazo)
