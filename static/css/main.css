@@ -396,9 +396,6 @@ body {
 }
 
 @media (min-width: 768px) {
-  .main__munilist--button a {
-    width: auto;
-  }
   
   .main__about--actions form {
     border-left: 1px solid #e2e8f0;
@@ -410,16 +407,6 @@ body {
 
   .grid__column {
     width: calc(100% / 3);
-  }
-}
-
-@media (min-width: 768px) {
-  .main__munilist--button a {
-    width: 50%;
-  }
-
-  .main__about--actions form {
-    width: 50%;
   }
 }
 
