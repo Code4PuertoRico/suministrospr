@@ -46,10 +46,6 @@ body {
   max-width: 768px;
 }
 
-.main__about p:nth-child(2) {
-  font-weight: 600;
-}
-
 .main__about--paragraph {
   display: flex;
   justify-content: center;
@@ -70,14 +66,26 @@ body {
   margin-bottom: .5rem;
 }
 
+.main__about--actions {
+  display: flex;
+  justify-content: center;
+  margin: 2rem auto;
+}
+
+.main__about--actions form {
+  border-left: none;
+}
+
 .main__about--button {
   display: grid;
   justify-content: center;
   width: fit-content;
-  margin: 2rem auto;
   border-radius: .25rem;
   background-color: #f56565;
-  padding: .75rem .5rem;
+}
+
+.main__about--button :hover {
+  background-color: #c53030;
 }
 
 .main__about--button svg {
@@ -90,18 +98,25 @@ body {
 .main__about--button a {
   color: #fff;
   font-weight: 700;
+  padding: .5rem 1rem;
   align-items: center;
   display: inline-flex;
   width: fit-content;
 }
 
-.main__munilist {
+.main__about--form {
+  margin: auto -0.75rem;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.main__munigrid {
   width: 100%;
   margin: 0 auto;
   max-width: 1280px;
 }
 
-.main__munilist--container {
+.main__munigrid--container {
   padding: 1rem;
   margin: 1rem auto 0;
 }
@@ -157,6 +172,62 @@ body {
   vertical-align: middle;
   letter-spacing: -.025em;
   display: inline;
+}
+
+/* suministro_municipio_list.html */
+
+.main__munilist {
+  margin: 2rem auto;
+}
+
+.main__munilist h3 {
+  text-align: center;
+  font-size: 3rem;
+  color: #4299e1;
+  font-weight: 700;
+}
+
+.main__munilist--button {
+  margin: 0 auto;
+  display: grid;
+  justify-content: center;
+  width: fit-content;
+  border-radius: .25rem;
+  background-color: #f56565;
+}
+
+.main__munilist--button :hover {
+  background-color: #c53030;
+}
+
+.main__munilist--button svg {
+  width: 1rem;
+  fill: currentColor;
+  margin-right: .5rem;
+  height: 1rem;
+}
+
+.main__munilist--button a {
+  color: #fff;
+  font-weight: 700;
+  padding: .5rem 1rem;
+  align-items: center;
+  display: inline-flex;
+  width: fit-content;
+}
+
+.main__munilist--list {
+  display: flex;
+  justify-content: center;
+  margin: 3rem 1rem;
+}
+
+.main__munilist--list li {
+  margin-bottom: 1rem;
+}
+
+.main__munilist--list li a {
+  color: #4299e1;
 }
 
 .footer__main p {
@@ -282,6 +353,14 @@ body {
 }
 
 @media (min-width: 768px) {
+  .main__about--actions form {
+    border-left: 1px solid #e2e8f0;
+    margin-top: 0;
+    margin-left: .5rem;
+    padding-left: .5rem;
+    width: auto;
+  }
+
   .grid__column {
     width: calc(100% / 3);
   }
