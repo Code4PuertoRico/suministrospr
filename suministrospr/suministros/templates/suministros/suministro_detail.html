@@ -17,7 +17,7 @@
 <div class="flex justify-center">
   <div class="flex flex-row text-sm text-gray-600">
     <div class="ml-2">
-      <a href="{% url 'suministro-municipio-list' object.municipality|slugify %}">{{ object.get_municipality_display }}</a>
+      <a href="{% url 'suministro-municipio-list' object.municipality.slug %}">{{ object.municipality.name }}</a>
     </div>
     <div class="ml-2">></div>
     <div class="ml-2">

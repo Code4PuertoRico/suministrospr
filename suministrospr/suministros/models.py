@@ -1,5 +1,4 @@
 from ckeditor.fields import RichTextField
-from django.core.cache import cache
 from django.db import models
 from django_extensions.db.fields import AutoSlugField
 
@@ -52,16 +51,3 @@ class Suministro(BaseModel):
 
     def __str__(self):
         return self.title
-
-    def save(self, *args, **kwargs):
-        super().save(*args, **kwargs)
-        self.invalidate_cache()
-
-    def invalidate_cache(self):
-        cache.delete_many(
-            [
-                "suministro-list",
-                f"suministro-municipio-list:{self.municipality}",
-                f"suministro-detail:{self.slug}",
-            ]
-        )
