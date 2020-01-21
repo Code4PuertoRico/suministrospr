@@ -1,5 +1,6 @@
 from django.conf import settings
 from django.core.cache import cache
+from django.utils.translation import get_language
 
 
 class CacheMixin:
@@ -7,7 +8,8 @@ class CacheMixin:
     cache_key = None
 
     def get_cache_key(self):
-        return self.cache_key
+        language_code = get_language()
+        return f"{self.cache_key}:{language_code}"
 
     def _cache_rendered_response(self, response):
         cache_key = self.get_cache_key()
