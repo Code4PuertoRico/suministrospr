@@ -50,6 +50,34 @@ body {
   max-width: 768px;
 }
 
+footer {
+  margin: .5rem 0 1.5rem;
+  padding: .75rem 0;
+  justify-content: center;
+  display: flex;
+  border-top: 1px solid #edf2f7;
+  text-align: center;
+  font-weight: 200;
+}
+
+footer p {
+  padding: .75rem 0 0;
+}
+
+footer a {
+  color: #f56565;
+}
+
+footer a:hover {
+  text-decoration: underline;
+}
+
+footer .container {
+  width: 100%;
+  margin: 0 1.25rem;
+  font-size: 1rem;
+}
+
 /* suministro_municipio_list.html */
 
 .footer__main--paragraph {
@@ -718,6 +746,10 @@ body {
 
   .grid__column {
     width: calc(100% / 3);
+  }
+
+  footer .container {
+    width: 60%;
   }
   
 }
