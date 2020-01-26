@@ -1,7 +1,7 @@
-/*
-This project uses tailwind.css please ask before adding styles here
-*/
+@import url('normalize.min.css');
+@import url('https://fonts.googleapis.com/css?family=Montserrat:200,400,600,700&display=swap');
 
+html,
 body {
   font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;
 
@@ -17,12 +17,439 @@ body {
   -ms-text-size-adjust: 100%;
 }
 
-.django-ckeditor-widget {
+*,
+*::before,
+*::after {
+  border-width: 0;
+  border-style: solid;
+  border-color: #e2e8f0;
+}
+
+hr {
+  border-top-width: 1px;
+}
+
+img {
+  border-style: solid;
+}
+
+textarea {
+  resize: vertical;
+}
+
+input:-ms-input-placeholder, textarea:-ms-input-placeholder {
+  color: #a0aec0;
+}
+
+input::-ms-input-placeholder, textarea::-ms-input-placeholder {
+  color: #a0aec0;
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: #a0aec0;
+}
+
+button,
+[role="button"] {
+  cursor: pointer;
+}
+
+table {
+  border-collapse: collapse;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-size: inherit;
+  font-weight: inherit;
+}
+
+a {
+  color: inherit;
+  text-decoration: inherit;
+}
+
+button,
+input,
+optgroup,
+select,
+textarea {
+  padding: 0;
+  line-height: inherit;
+  color: inherit;
+}
+
+pre,
+code,
+kbd,
+samp {
+  font-family: Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+}
+
+img,
+svg,
+video,
+canvas,
+audio,
+iframe,
+embed,
+object {
+  display: block;
+  vertical-align: middle;
+}
+
+img,
+video {
+  max-width: 100%;
+  height: auto;
+}
+
+.header {
+  display: flex;
+  justify-content: center;
+}
+
+.header__logo {
+  width: 80%;
+  padding: 1rem;
+  border-bottom: 1px solid #edf2f7;
+}
+
+.header__logo img {
+  width: 14rem;
+}
+
+.main,
+.footer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.footer__main p {
+  text-align: center;
+  margin-top: 2rem;
+  width: 60%;
+  width: calc(100% - 2.5rem);
+  max-width: 768px;
+}
+
+footer {
+  margin: .5rem 0 1.5rem;
+  padding: .75rem 0;
+  justify-content: center;
+  display: flex;
+  border-top: 1px solid #edf2f7;
+  text-align: center;
+  font-weight: 200;
+}
+
+footer p {
+  padding: .75rem 0 0;
+}
+
+footer a {
+  color: #f56565;
+}
+
+footer a:hover {
+  text-decoration: underline;
+}
+
+footer .container {
+  width: 100%;
+  margin: 0 1.25rem;
+  font-size: 1rem;
+}
+
+/* suministro_municipio_list.html */
+
+.footer__main--paragraph {
+  display: flex;
+  justify-content: center;
+}
+
+.main__about p {
+  width: 60%;
+  width: calc(100% - 2.5rem);
+  max-width: 768px;
+}
+
+.main__about--paragraph {
+  display: flex;
+  justify-content: center;
+  margin-top: 2rem;
+}
+
+.main__about--card {
+  display: inline-block;
+  padding: 1.25rem;
+  list-style-type: decimal;
+  list-style-position: inside;
+  border: 1px solid #4299e1;
+  border-radius: .5rem;
+  margin: 0 .5rem;
+}
+
+.main__about--card li {
+  margin-bottom: .5rem;
+}
+
+.main__about--actions {
+  display: flex;
+  justify-content: center;
+  margin: 2rem auto;
+}
+
+.main__about--actions form {
+  border-left: none;
+  width: 80%;
+}
+
+.main__actions--form select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  width: 100%;
+  color: #4a5568;
+  padding: .75rem 1rem .75rem 2rem;
+  line-height: 1.25;
+  border-width: 1px;
+  display: block;
+  border-radius: .25rem;
+  border-color: #a0aec0;
+  background-color: #fff;
+}
+
+.main__actions--form .svg {
+  color: #4a5568;
+  position: absolute;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  pointer-events: none;
+  align-items: center;
+  padding: 0 .5rem;
+  display: flex;
+}
+
+.main__actions--form svg {
+  fill: currentColor;
+  width: 1rem;
+  height: 1rem;
+}
+
+.main__about--button {
+  display: grid;
+  justify-content: center;
+  width: fit-content;
+  border-radius: .25rem;
+  background-color: #f56565;
+}
+
+.main__about--button :hover {
+  background-color: #c53030;
+}
+
+.main__about--button svg {
+  width: 1rem;
+  fill: currentColor;
+  margin-right: .5rem;
+  height: 1rem;
+}
+
+.main__about--button a {
+  color: #fff;
+  font-weight: 700;
+  padding: .5rem 1rem;
+  align-items: center;
+  display: inline-flex;
+  width: fit-content;
+}
+
+.main__actions--form {
+  margin: auto -0.75rem;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.actions__form--container {
+  width: 100%;
+  padding: 0 .75rem;
+}
+
+.relative {
+  position: relative;
+}
+
+.main__munigrid {
+  width: 100%;
+  margin: 0 auto;
+  max-width: 1280px;
+}
+
+.main__munigrid--container {
+  padding: 1rem;
+  margin: 1rem auto 0;
+}
+
+.grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.grid__column {
+  padding: 0 .5rem;
+  margin: 0 0 .5rem 0;
   width: 100%;
 }
 
+.grid__column--cell {
+  border: 2px solid #edf2f7;
+}
+
+.grid__column--cell ul {
+  padding: 1rem;
+}
+
+.grid__column--cell li {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 20rem;
+  margin-bottom: .5rem;
+}
+
+.grid__column--cell li a {
+  color: #4299e1;
+}
+
+.grid__column--header {
+  font-size: 1.25rem;
+  padding: .5rem;
+  margin: 0 1rem;
+  font-weight: 600;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.grid__column--header img {
+  display: inline;
+  max-height: 40px;
+  vertical-align: middle;
+  margin-right: .5rem;
+}
+
+.grid__column--header h3 {
+  vertical-align: middle;
+  letter-spacing: -.025em;
+  display: inline;
+}
+
+/* suministro_municipio_list.html */
+
+.main__munilist {
+  margin: 2rem auto;
+}
+
+.main__munilist h3 {
+  text-align: center;
+  font-size: 3rem;
+  color: #4299e1;
+  font-weight: 700;
+}
+
+.main__munilist--button {
+  margin: 0 auto;
+  display: grid;
+  justify-content: center;
+  width: fit-content;
+  border-radius: .25rem;
+  background-color: #f56565;
+}
+
+.main__munilist--button :hover {
+  background-color: #c53030;
+}
+
+.main__munilist--button svg {
+  width: 1rem;
+  fill: currentColor;
+  margin-right: .5rem;
+  height: 1rem;
+}
+
+.main__munilist--button a {
+  color: #fff;
+  font-weight: 700;
+  padding: .5rem 1rem;
+  align-items: center;
+  display: inline-flex;
+  width: fit-content;
+}
+
+.main__munilist--list {
+  display: flex;
+  justify-content: center;
+  margin: 3rem 1rem;
+}
+
+.main__munilist--list li {
+  margin-bottom: 1rem;
+}
+
+.main__munilist--list li a {
+  color: #4299e1;
+}
+
+/* suministro_detail.html */
+
+.main__detail {
+  margin: 2rem 1rem 0;
+}
+
+.main__detail h3 {
+  text-align: center;
+  font-size: 3rem;
+  color: #4299e1;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.main__detail--breadcrumb {
+  display: inline-flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.main__detail--breadcrumb a::before {
+  content: ">";
+  margin: 0 .5rem;
+  color: #718096;
+}
+
+.main__detail--breadcrumb a:first-child::before {
+  content: "";
+  margin: 0 0;
+}
+
+.main__detail--content,
+.main__detail--catdate {
+  display: flex;
+  justify-content: center;
+  margin: 2.5rem auto 0;
+  width: 60%;
+  width: calc(100% - 2.5rem);
+  max-width: 768px;
+}
+
 #generated-content ol {
-  list-style: decimal;
+  list-style: decimal inside;
   margin-top: 0;
   margin-bottom: 1rem;
 }
@@ -124,4 +551,309 @@ body {
   margin-top: 0;
   margin-bottom: 1rem;
   overflow: auto;
+}
+
+.main__detail--catdate {
+  display: grid;
+  justify-content: start;
+  margin: 0 auto;
+}
+
+.main__detail--catdate .date,
+.main__detail--catdate .categories {
+  flex-direction: column;
+  color: #718096;
+  font-size: .875rem;
+  margin-bottom: .5rem;
+  width: 100%;
+}
+
+.main__detail--button {
+  display: grid;
+  justify-content: center;
+  width: fit-content;
+  border-radius: .25rem;
+  background-color: #f56565;
+  margin: 1rem auto;
+}
+
+.main__detail--button :hover {
+  background-color: #c53030;
+}
+
+.main__detail--button svg {
+  width: 1rem;
+  fill: currentColor;
+  margin-right: .5rem;
+  height: 1rem;
+}
+
+.main__detail--button a {
+  color: #fff;
+  font-weight: 700;
+  padding: .5rem 1rem;
+  align-items: center;
+  display: inline-flex;
+  width: fit-content;
+}
+
+/* search.html */
+
+.main__search {
+  width: 100%;
+  margin: 0 auto;
+  max-width: 1280px;
+}
+
+.main__search--header {
+  margin: 1.5rem auto 0;
+  padding: 0 0 1.5rem;
+  text-align: center;
+  width: 80%;
+  border-bottom: 1px solid #edf2f7;
+}
+
+.main__search--header p {
+  color: #a0aec0;
+}
+
+.search__header--container {
+  padding: 0 .75rem;
+  display: inline-flex;
+  margin: 1.5rem auto;
+}
+
+.search__header--container label {
+  font-weight: 700;
+  display: flex;
+  padding-right: 1rem;
+  color: #a0aec0;
+  margin-bottom: 0;
+  text-align: right;
+  align-items: center;
+}
+
+.results__content--content {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin: 2rem auto;
+  width: 60%;
+  width: calc(100% - 2.5rem);
+  max-width: 768px;
+}
+
+.results__content--cell {
+  width: 100%;
+  margin: 0 0 .5rem;
+}
+
+.results__content--cell header {
+  font-size: 1.25rem;
+  max-width: 768px;
+  padding: .5rem 0;
+  font-weight: 600;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.results__content--cell img {
+  max-height: 40px;
+  vertical-align: middle;
+  max-width: 100%;
+  height: auto;
+  display: inline;
+  margin: auto .5rem;
+}
+
+.results__content--cell h4 {
+  vertical-align: middle;
+  display: inline;
+}
+
+.results__content--cell ul {
+  padding: 1rem 0;
+}
+
+.results__content--cell li {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 32rem;
+  margin-bottom: .5rem;
+}
+
+.results__content--cell li a {
+  color: #4299e1;
+}
+
+
+/* suministro_form.html */
+
+.main__form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 1.25rem auto;
+  width: 100%;
+}
+
+.main__form form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  max-width: 32rem;
+  margin: 0 auto;
+}
+
+.input__container {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0 -.75rem 1.5rem;
+  padding: 0 .75rem;
+}
+
+.input__container label {
+  width: 100%;
+  letter-spacing: .025em;
+  text-transform: uppercase;
+  font-size: .75rem;
+  color: #4a5568;
+  margin: 0 0 .5rem;
+  display: block;
+  font-weight: 700;
+}
+
+.input__container input {
+  width: 100%;
+  color: #4a5568;
+  padding: .75rem 1rem;
+  margin: 0 0 .75rem;
+  line-height: 1.25;
+  display: block;
+  border: 1px solid #a0aec0;
+  border-radius: .25rem;
+  background-color: #fff;
+}
+
+.input__container input:focus,
+.input__container select:focus {
+  outline: 0;
+  border-color: #1a202c;
+}
+
+.input__container .relative {
+  position: relative;
+  width: 100%;
+  margin-bottom: .75rem;
+}
+
+.input__container select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  width: 100%;
+  color: #4a5568;
+  padding: .75rem 1rem .75rem 2rem;
+  line-height: 1.25;
+  border-width: 1px;
+  display: block;
+  border-radius: .25rem;
+  border-color: #a0aec0;
+  background-color: #fff;
+}
+
+.input__container .svg {
+  color: #4a5568;
+  position: absolute;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  pointer-events: none;
+  align-items: center;
+  padding: 0 .5rem;
+  display: flex;
+}
+
+.input__container svg {
+  fill: currentColor;
+  width: 1rem;
+  height: 1rem;
+}
+
+.django-ckeditor-widget {
+  width: 100%;
+}
+
+.input__container p {
+  color: #c53030;
+  font-style: italic;
+  font-size: .75rem;
+}
+
+.main__search--button {
+  margin: 1rem auto;
+  display: grid;
+  justify-content: center;
+  width: fit-content;
+}
+
+.main__search--button button {
+  color: #fff;
+  background-color: #f56565;
+  border-radius: .25rem;
+  font-weight: 700;
+  padding: .5rem 1rem;
+  align-items: center;
+  display: inline-flex;
+  width: fit-content;
+}
+
+.main__search--button button:hover {
+  background-color: #c53030;
+  border-radius: inherit;
+}
+
+.main__search--button a {
+  color: #f56565;
+}
+
+.main__search--button a:hover {
+  text-decoration: underline;
+}
+
+
+
+@media (min-width: 768px) {
+  
+  .main__about--actions form {
+    border-left: 1px solid #e2e8f0;
+    margin-top: 0;
+    margin-left: .5rem;
+    padding-left: .5rem;
+    width: auto;
+  }
+
+  .grid__column {
+    width: calc(100% / 3);
+  }
+
+  footer .container {
+    width: 60%;
+  }
+  
+}
+
+@media (max-width: 768px) {
+  .main__about--button {
+    margin: 0 0 2rem;
+  }
+
+  .main__about--actions {
+    flex-wrap: wrap;
+  }
+
+  .main__form form {
+    margin: 1.25rem .75rem;
+    width: auto;
+  }
 }
