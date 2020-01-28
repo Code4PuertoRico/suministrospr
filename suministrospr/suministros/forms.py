@@ -66,3 +66,7 @@ class FilterForm(forms.Form):
     tag = forms.ModelChoiceField(
         queryset=Tag.objects.all().order_by("name"), to_field_name="slug"
     )
+
+
+class SearchForm(forms.Form):
+    q = forms.CharField(label="Busqueda")
