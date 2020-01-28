@@ -153,7 +153,6 @@ class SuministroSearch(CacheMixin, TemplateView):
 
         return data
 class SearchList(CacheMixin, ListView):
-    paginate_by = 25
     model = Suministro
     cache_key = "suministro-search-list"
     template_name = "suministros/suministros_search_list.html"
