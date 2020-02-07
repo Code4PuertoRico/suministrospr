@@ -1,7 +1,5 @@
 from django.contrib.postgres.search import SearchQuery, SearchRank, SearchVector
 
-from ..suministros.models import Suministro
-
 suministros_search_vector = (
     SearchVector("title", weight="B")
     + SearchVector("content", weight="A")
@@ -13,12 +11,20 @@ municipality_search_vector = SearchVector("name")
 tags_search_vector = SearchVector("name")
 
 
-def search(query):
-    keyword_search_query = SearchQuery(query)
-    phrase_search_query = SearchQuery(query, search_type="phrase")
-    final_search_query = keyword_search_query | phrase_search_query
-    search_rank = SearchRank(suministros_search_vector, final_search_query)
+def search(query, tag_slug, suministros):
+    if tag_slug:
+        suministros = suministros.filter(tags__slug=tag_slug)
 
-    suministros = Suministro.objects.annotate(rank=search_rank).order_by("-rank")
+    if query:
+        keyword_search_query = SearchQuery(query)
+        phrase_search_query = SearchQuery(query, search_type="phrase")
+        final_search_query = keyword_search_query | phrase_search_query
+        search_rank = SearchRank(suministros_search_vector, final_search_query)
 
-    return suministros
+        suministros = (
+            suministros.annotate(search=suministros_search_vector, rank=search_rank)
+            .filter(search=final_search_query)
+            .order_by("-rank")
+        )
+
+    return suministros.distinct()
