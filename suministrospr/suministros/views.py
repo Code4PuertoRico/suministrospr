@@ -161,15 +161,3 @@ class SuministroSearch(CacheMixin, TemplateView):
         data["filter_form"] = form
 
         return data
-
-
-class SearchList(CacheMixin, ListView):
-    model = Suministro
-    cache_key = "suministro-search-list"
-    template_name = "suministros/suministros_search_list.html"
-
-    def get_queryset(self):
-        query = self.kwargs.get("q")
-        object_list = search(query)
-
-        return object_list
