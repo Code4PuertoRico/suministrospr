@@ -89,6 +89,7 @@ class SuministroUpdate(RevisionMixin, UpdateView):
     def get_success_url(self):
         return reverse("suministro-detail", args=[self.object.slug])
 
+
 class SuministroSearch(CacheMixin, TemplateView):
     template_name = "suministros/search.html"
     cache_key = "suministro-search"
@@ -96,9 +97,12 @@ class SuministroSearch(CacheMixin, TemplateView):
     def get_cache_key(self):
         cache_key = self.cache_key
         tag = self.request.GET.get("tag")
+        query = self.request.GET.get("q")
 
         if tag:
             cache_key = f"{cache_key}:{tag}"
+        if query:
+            cache_key = f"{cache_key}:{query}"
 
         return cache_key
 
@@ -108,8 +112,7 @@ class SuministroSearch(CacheMixin, TemplateView):
         data["results_municipalities"] = 0
         data["results"] = []
 
-        filter_form = FilterForm(self.request.GET)
-
+        form = FilterForm(self.request.GET)
         suministros = Suministro.objects.all().defer("content").order_by("title")
 
         municipalities_with_suministros = (
@@ -119,10 +122,16 @@ class SuministroSearch(CacheMixin, TemplateView):
             .filter(suministro_count__gt=0)
             .order_by("-suministro_count")
         )
+        if form.is_valid():
+            query = None
+            tag_slug = None
 
-        if filter_form.is_valid():
-            tag_slug = filter_form.cleaned_data["tag"]
-            suministros = suministros.filter(tags__slug=tag_slug)
+            if "q" in self.request.GET:
+                query = form.cleaned_data["q"]
+            if "tag" in self.request.GET:
+                tag_slug = form.cleaned_data["tag"]
+
+            suministros = search(query, tag_slug, suministros)
 
             municipalities_with_suministros = (
                 Municipality.objects.all()
@@ -130,11 +139,11 @@ class SuministroSearch(CacheMixin, TemplateView):
                 .annotate(
                     suministro_count=Count(
                         "suministro",
-                        filter=Q(suministro__tags__slug=tag_slug),
+                        filter=Q(suministro__in=suministros),
                         distinct=True,
                     )
                 )
-                .filter(suministro_count__gt=0, suministro__tags__slug=tag_slug)
+                .filter(suministro_count__gt=0, suministro__in=suministros)
                 .order_by("-suministro_count")
             )
 
@@ -149,9 +158,11 @@ class SuministroSearch(CacheMixin, TemplateView):
                 }
             )
 
-        data["filter_form"] = filter_form
+        data["filter_form"] = form
 
         return data
+
+
 class SearchList(CacheMixin, ListView):
     model = Suministro
     cache_key = "suministro-search-list"
