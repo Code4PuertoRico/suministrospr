@@ -63,10 +63,9 @@ class SuministroModelForm(forms.ModelForm):
 
 
 class FilterForm(forms.Form):
+    q = forms.CharField(label="Busqueda", required=False)
     tag = forms.ModelChoiceField(
-        queryset=Tag.objects.all().order_by("name"), to_field_name="slug"
+        queryset=Tag.objects.all().order_by("name"),
+        to_field_name="slug",
+        required=False,
     )
-
-
-class SearchForm(forms.Form):
-    q = forms.CharField(label="Busqueda")
