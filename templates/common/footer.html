@@ -1,70 +1,62 @@
 {% load i18n %}
+{% get_current_language as language_code %}
 <footer>
   <div class="container">
-      <a
-        href="https://github.com/Code4PuertoRico/suministrospr/blob/master/CONTRIBUTING.md"
-        target="_blank"
-        rel="noopener noreferrer"
-        >Cómo ayudar al proyecto de Suministros PR </a
-      >
+    <a
+      href="https://github.com/Code4PuertoRico/suministrospr/blob/master/CONTRIBUTING.md"
+      target="_blank"
+      rel="noopener noreferrer"
+    >{% if language_code == 'es' %}Cómo ayudar al proyecto de Suministros PR{% endif %}{% if language_code == 'en' %}Contribute to Suministros PR{% endif %}</a >
     <p>
-     {% get_current_language as language_code %}
-     {% if language_code == 'es' %}
-     Una humilde aportación de
-     {% endif %}
-     {% if language_code == 'en' %}
-     Una humilde aportación de
-     {% endif %}
+      {% if language_code == 'es' %}
+      Una humilde aportación de
+      {% endif %}
+      {% if language_code == 'en' %}
+      A humble effort from
+      {% endif %}
       <a
         href="https://twitter.com/jwvelez"
         target="_blank"
         rel="noopener noreferrer"
-        >Javier W. Vélez</a
-      >,
+      >Javier W. Vélez</a>,
       <a
         href="https://twitter.com/juanpipr"
         target="_blank"
         rel="noopener noreferrer"
-        >Juan Pablo Díaz</a
-      >,
+      >Juan Pablo Díaz</a>,
       <a
         href="https://twitter.com/oajvelez"
         target="_blank"
         rel="noopener noreferrer"
-        >Orlando Vélez</a
-      >
+      >Orlando Vélez</a>
       &
       <a
         href="https://twitter.com/gcollazo"
         target="_blank"
         rel="noopener noreferrer"
-        >Giovanni Collazo</a
-      >.
-      {% get_current_language as language_code %}
+      >Giovanni Collazo</a>.
       {% if language_code == 'es' %}
       Esta página es un esfuerzo ciudadano y no tiene ninguna relación con el
       gobierno de Puerto Rico ni el de EEUU.
       {% endif %}
       {% if language_code == 'en' %}
-      Esta página es un esfuerzo ciudadano y no tiene ninguna relación con el
-      gobierno de Puerto Rico ni el de EEUU.
+      This site is effort driven by citizens and has no relation with the goverment of Puerto Rico or USA.
       {% endif %}
     </p>
+    <br/>
+    <form action="{% url 'set_language' %}" method="post">{% csrf_token %}
+      <input name="next" type="hidden" value="{{ redirect_to }}">
+      <select name="language">
+        {% get_current_language as LANGUAGE_CODE %}
+        {% get_available_languages as LANGUAGES %}
+        {% get_language_info_list for LANGUAGES as languages %}
+        {% for language in languages %}
+        <option value="{{ language.code }}"{% if language.code == LANGUAGE_CODE %} selected{% endif %}>
+          {{ language.name_local }} ({{ language.code }})
+        </option>
+        {% endfor %}
+      </select>
+      <input type="submit" value="Go">
+    </form>
   </div>
 </footer>
-<div class="flex justify-center">
-  <form action="{% url 'set_language' %}" method="post">{% csrf_token %}
-    <input name="next" type="hidden" value="{{ redirect_to }}">
-      <select name="language">
-            {% get_current_language as LANGUAGE_CODE %}
-            {% get_available_languages as LANGUAGES %}
-            {% get_language_info_list for LANGUAGES as languages %}
-            {% for language in languages %}
-            <option value="{{ language.code }}"{% if language.code == LANGUAGE_CODE %} selected{% endif %}>
-                {{ language.name_local }} ({{ language.code }})
-            </option>
-            {% endfor %}
-      </select>
-    <input type="submit" value="Go">
-  </form>
-</div>

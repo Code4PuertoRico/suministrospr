@@ -16,6 +16,7 @@
     <a href="{% url 'suministro-detail' object.slug %}">{{ object.title }}</a>
   </div>
 </div>
+
 <div class="main__detail--content">
   <div id="generated-content">
     {{ object.content|safe }}
@@ -23,32 +24,32 @@
 </div>
 
 <div class="main__detail--catdate">
-    <div class="date">
-     <strong>{% trans 'Actualizado' %}</strong><br>
-      {% get_current_language as language_code %}
-      {% if language_code == 'es' %}
-      {% language 'es' %}{{ object.modified_at|timezone:"America/Puerto_Rico"|date:"j \d\e F \d\e Y \a \l\a\s  P"|lower }}{% endlanguage %}
-      {% endif %}
-      {% if language_code == 'en' %}
-      {% language 'en' %}{{ object.modified_at|timezone:"America/Puerto_Rico"|date:"F j Y \a\t P" }}{% endlanguage %}
-      {% endif %}
-    </div>
-    {% if object.tags.all %}
-    <div class="categories">
-      <strong>{% trans 'Categorías' %}</strong><br>
-       {% for tag in object.tags.all %}
-          <a href="{% url 'suministro-search' %}?tag={{ tag.slug }}" class="text-red-500 hover:underline mr-1">{{ tag.name }}</a>
-        {% endfor %}
-    </div>
+  <div class="date">
+    <strong>{% trans 'Actualizado' %}</strong><br>
+    {% get_current_language as language_code %}
+    {% if language_code == 'es' %}
+    {% language 'es' %}{{ object.modified_at|timezone:"America/Puerto_Rico"|date:"j \d\e F \d\e Y \a \l\a\s  P"|lower }}{% endlanguage %}
     {% endif %}
+    {% if language_code == 'en' %}
+    {% language 'en' %}{{ object.modified_at|timezone:"America/Puerto_Rico"|date:"F j Y \a\t P" }}{% endlanguage %}
+    {% endif %}
+  </div>
+  {% if object.tags.all %}
+  <div class="categories">
+    <strong>{% trans 'Categorías' %}</strong><br>
+    {% for tag in object.tags.all %}
+    <a href="{% url 'suministro-search' %}?tag={{ tag.slug }}" class="text-red-500 hover:underline mr-1">{{ tag.name }}</a>
+    {% endfor %}
+  </div>
+  {% endif %}
 </div>
 
 <div class="main__detail--button">
   <a href="{% url 'suministro-edit' object.slug %}" >
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24"
-      height="24">
+         height="24">
       <path class="heroicon-ui"
-        d="M6.3 12.3l10-10a1 1 0 0 1 1.4 0l4 4a1 1 0 0 1 0 1.4l-10 10a1 1 0 0 1-.7.3H7a1 1 0 0 1-1-1v-4a1 1 0 0 1 .3-.7zM8 16h2.59l9-9L17 4.41l-9 9V16zm10-2a1 1 0 0 1 2 0v6a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6c0-1.1.9-2 2-2h6a1 1 0 0 1 0 2H4v14h14v-6z" />
+            d="M6.3 12.3l10-10a1 1 0 0 1 1.4 0l4 4a1 1 0 0 1 0 1.4l-10 10a1 1 0 0 1-.7.3H7a1 1 0 0 1-1-1v-4a1 1 0 0 1 .3-.7zM8 16h2.59l9-9L17 4.41l-9 9V16zm10-2a1 1 0 0 1 2 0v6a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6c0-1.1.9-2 2-2h6a1 1 0 0 1 0 2H4v14h14v-6z" />
     </svg>
     <span>{% trans 'Editar texto' %}</span>
   </a>

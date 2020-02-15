@@ -57,7 +57,7 @@ heroku run python manage.py clear_cache
 1.  Extract i18n strings with:
 
 ```bash
-$ docker-compose exec web django-admin makemessages -l en-us
+$ docker-compose exec web django-admin makemessages -l en
 ```
 
 2. Update local strings with the translated text on the files located at `suministrospr/locale`

@@ -9,63 +9,56 @@
 {% block content %}
 <div class="main__search">
   <div class="main__search--header">
-
-      <form action="{% url 'suministro-search' %}" method="GET">
-
-          <div class="main__actions--form">
-            <div class="search__header--container">
-
-              <label for="inline-full-name">
-                {% trans 'Resultados para categoría' %}
-              </label>
-
-              <div class="relative">
-                <select name="tag" onchange="this.form.submit()">
-                  {% for value, label in filter_form.fields.tag.choices %}
-                    <option value="{{ value }}" {% if filter_form.tag.value == value %}selected{% endif %}>{{ label }}</option>
-                  {% endfor %}
-                </select>
-                <div class="svg">
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
-                </div>
-           </div>
+    <form action="{% url 'suministro-search' %}" method="GET">
+      <div class="main__actions--form">
+        <div class="search__header--container">
+          <label for="inline-full-name">
+            {% trans 'Resultados para categoría' %}
+          </label>
+          <div class="relative">
+            <select name="tag" onchange="this.form.submit()">
+              {% for value, label in filter_form.fields.tag.choices %}
+              <option value="{{ value }}" {% if filter_form.tag.value == value %}selected{% endif %}>{{ label }}</option>
+              {% endfor %}
+            </select>
+            <div class="svg">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
+            </div>
           </div>
         </div>
-      </form>
-
-      {% get_current_language as language_code %}
-      {% if language_code == 'es' %}
-      <p>Se encontró <strong>{{ results_total }}</strong> resultado{{ results_total|pluralize:"s" }} en <strong>{{ results_municipalities }}</strong> municipio{{ results_municipalities|pluralize:"s" }}.</p>
-      <p class="text-gray-500">Se encontró <strong>{{ results_total }}</strong> resultado{{ results_total|pluralize:"s" }} en <strong>{{ results_municipalities }}</strong> municipio{{ results_municipalities|pluralize:"s" }}.</p>
-      {% endif %}
-      {% if language_code == 'en' %}
-      <p>Found <strong>{{ results_total }}</strong> result{{ results_total|pluralize:"s" }} {{ results_total|pluralize:"in,across" }} <strong>{{ results_municipalities }}</strong> municipalit{{ results_municipalities|pluralize:"y,ies" }}.</p>
-      {% endif %}
-    </div>
+      </div>
+    </form>
+    {% get_current_language as language_code %}
+    {% if language_code == 'es' %}
+    <p>Se encontró <strong>{{ results_total }}</strong> resultado{{ results_total|pluralize:"s" }} en <strong>{{ results_municipalities }}</strong> municipio{{ results_municipalities|pluralize:"s" }}.</p>
+    <p class="text-gray-500">Se encontró <strong>{{ results_total }}</strong> resultado{{ results_total|pluralize:"s" }} en <strong>{{ results_municipalities }}</strong> municipio{{ results_municipalities|pluralize:"s" }}.</p>
+    {% endif %}
+    {% if language_code == 'en' %}
+    <p>Found <strong>{{ results_total }}</strong> result{{ results_total|pluralize:"s" }} {{ results_total|pluralize:"in,across" }} <strong>{{ results_municipalities }}</strong> municipalit{{ results_municipalities|pluralize:"y,ies" }}.</p>
+    {% endif %}
   </div>
 </div>
 
+<div class="results__content--content">
+  {% for group in results %}
+  <div class="results__content--cell">
+    <header>
+      <img src="{% escudo_static group.municipality %}" alt="{{ group.municipality }}">
+      <h4>
+        <a href="{% url 'suministro-municipio-list' group.municipality|slugify %}">{{ group.municipality }}</a>
+      </h4>
+    </header>
 
-    <div class="results__content--content">
-        {% for group in results %}
-          <div class="results__content--cell">
-            <header>
-              <img src="{% escudo_static group.municipality %}" alt="{{ group.municipality }}">
-              <h4>
-                <a href="{% url 'suministro-municipio-list' group.municipality|slugify %}">{{ group.municipality }}</a>
-              </h4>
-            </header>
-
-            <ul>
-              {% for suministro in group.suministros %}
-                <li>
-                  <a href="{% url 'suministro-detail' suministro.slug %}">
-                    {{ suministro.title }}
-                  </a>
-                </li>
-              {% endfor %}
-            </ul>
-          </div>
-        {% endfor %}
-      </div>
+    <ul>
+      {% for suministro in group.suministros %}
+      <li>
+        <a href="{% url 'suministro-detail' suministro.slug %}">
+          {{ suministro.title }}
+        </a>
+      </li>
+      {% endfor %}
+    </ul>
+  </div>
+  {% endfor %}
+</div>
 {% endblock %}

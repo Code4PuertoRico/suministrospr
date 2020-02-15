@@ -8,10 +8,10 @@
 
 {% block content %}
 
+{% get_current_language as language_code %}
 <div class="main__about">
   <div class="main__about main__about--paragraph">
     <p>
-     {% get_current_language as language_code %}
      {% if language_code == 'es' %}
       La donación de suministros a las áreas más afectadas del país por el terremoto ha sido un éxito. Esta plataforma, administrada por los mismos donantes y recipientes, busca ser un vehículo de distribución equitativa de estos suministros. De esta manera, la ayuda llega a donde se necesita.
       {% endif %}
@@ -22,16 +22,15 @@
   </div>
   <div class="main__about main__about--paragraph">
     <ol class="main__about--card">
-      {% get_current_language as language_code %}
       {% if language_code == 'es' %}
       <li><strong>Revisa</strong> los sectores en el listado de abajo.</li>
       <li><strong>Entra, lee y añade</strong> necesidades de ser necesario.</li>
       <li><strong>Añade el sector o refugio</strong> si el que buscas no aparece!</li>
       {% endif %}
       {% if language_code == 'en' %}
-      <li><strong>Revisa</strong> los sectores en el listado de abajo.</li>
-      <li><strong>Entra, lee y añade</strong> necesidades de ser necesario.</li>
-      <li><strong>Añade el sector o refugio</strong> si el que buscas no aparece!</li>
+      <li><strong>Verify</strong> the refuges listed below.</li>
+      <li><strong>Search and add</strong> necesities where needed.</li>
+      <li><strong>Add Sector or refuge</strong>, if you can't find it add it!</li>
       {% endif %}
    </ol>
   </div>

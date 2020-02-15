@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-01-19 15:12+0000\n"
+"POT-Creation-Date: 2020-02-15 15:41+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,20 +18,20 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: suministrospr/suministros/templates/suministros/search.html:18
+#: suministrospr/suministros/templates/suministros/search.html:16
 msgid "Resultados para categoría"
 msgstr "Results for category"
 
-#: suministrospr/suministros/templates/suministros/suministro_detail.html:40
+#: suministrospr/suministros/templates/suministros/suministro_detail.html:28
 msgid "Actualizado"
 msgstr "Last Modified"
 
-#: suministrospr/suministros/templates/suministros/suministro_detail.html:51
-#: suministrospr/suministros/templates/suministros/suministro_form.html:56
+#: suministrospr/suministros/templates/suministros/suministro_detail.html:39
+#: suministrospr/suministros/templates/suministros/suministro_form.html:53
 msgid "Categorías"
 msgstr "Categories"
 
-#: suministrospr/suministros/templates/suministros/suministro_detail.html:68
+#: suministrospr/suministros/templates/suministros/suministro_detail.html:54
 msgid "Editar texto"
 msgstr "Edit text"
 
@@ -39,27 +39,27 @@ msgstr "Edit text"
 msgid "Nombre de sector o refugio"
 msgstr "Name of sector or refuge"
 
-#: suministrospr/suministros/templates/suministros/suministro_form.html:37
+#: suministrospr/suministros/templates/suministros/suministro_form.html:35
 msgid "Municipio"
 msgstr "Municipality"
 
-#: suministrospr/suministros/templates/suministros/suministro_form.html:65
+#: suministrospr/suministros/templates/suministros/suministro_form.html:61
 msgid "Necesidades e información de contacto"
 msgstr "Contact information and necessities"
 
-#: suministrospr/suministros/templates/suministros/suministro_form.html:72
+#: suministrospr/suministros/templates/suministros/suministro_form.html:68
 msgid "Guardar y publicar"
 msgstr "Save and Publish"
 
-#: suministrospr/suministros/templates/suministros/suministro_form.html:76
+#: suministrospr/suministros/templates/suministros/suministro_form.html:72
 msgid "Cancelar"
 msgstr "Cancel"
 
-#: suministrospr/suministros/templates/suministros/suministro_list.html:31
+#: suministrospr/suministros/templates/suministros/suministro_list.html:43
 #: suministrospr/suministros/templates/suministros/suministro_municipio_list.html:15
 msgid "Añadir sector o refugio"
 msgstr "Add Sector or Refuge"
 
-#: suministrospr/suministros/templates/suministros/suministro_list.html:39
+#: suministrospr/suministros/templates/suministros/suministro_list.html:52
 msgid "Filtrar por categoría"
 msgstr "Filter by category"

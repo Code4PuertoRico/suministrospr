@@ -27,11 +27,11 @@
   </head>
   <body>
     {% block body %}
-      {% include "common/header.html" %}
-      <div class="main">
-        {% block content %}{% endblock %}
-      </div>
-      {% include "common/footer.html" %}
+    {% include "common/header.html" %}
+    <div class="main">
+      {% block content %}{% endblock %}
+    </div>
+    {% include "common/footer.html" %}
     {% endblock %}
 
     {% include "common/analytics.html" %}
