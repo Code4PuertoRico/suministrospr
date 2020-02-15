@@ -23,6 +23,7 @@
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="Entérate, Ayuda, Informa - Suministros Puerto Rico" />
     <link href="{% static 'css/main.css' %}" rel="stylesheet">
+    <script src="{% static 'js/offline_listener.js' %}"></script>
     {% block extra_head %}{% endblock %}
   </head>
   <body>
@@ -36,6 +37,7 @@
 
     {% include "common/analytics.html" %}
     {% include "common/service-worker.html" %}
+    {% include "common/offline_header.html" %}
     {% block extra_body %}{% endblock %}
   </body>
 </html>

@@ -906,3 +906,11 @@ footer .container {
     width: auto;
   }
 }
+
+/* offline_header.html */
+
+.offline-header {
+  padding: 10px;
+  background-color: #f44336;
+  color: white;
+}

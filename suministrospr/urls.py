@@ -1,6 +1,7 @@
 import debug_toolbar
 from django.contrib import admin
 from django.urls import include, path
+from django.views.decorators.cache import never_cache
 from django.views.generic.base import TemplateView
 
 urlpatterns = [
@@ -16,5 +17,8 @@ urlpatterns = [
         ),
         name="service-worker",
     ),
-    path("offline/", TemplateView.as_view(template_name="common/offline.html",)),
+    path(
+        "offline/",
+        never_cache(TemplateView.as_view(template_name="common/offline.html",)),
+    ),
 ]
