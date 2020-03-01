@@ -1,4 +1,4 @@
-const version = "0.1.0";
+const version = "{{ app_version }}";
 const cacheName = `suministrospr-cache-${version}`;
 // For now only root and offline since it will dynamically add the other urls
 let filesToCache = ["/", "/offline/"];

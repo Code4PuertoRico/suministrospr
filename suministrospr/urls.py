@@ -10,14 +10,6 @@ urlpatterns = [
     path("i18n/", include("django.conf.urls.i18n")),
     path("", include("suministrospr.suministros.urls")),
     path(
-        "service-worker.js",
-        TemplateView.as_view(
-            template_name="common/service-worker.js",
-            content_type="application/javascript",
-        ),
-        name="service-worker",
-    ),
-    path(
         "offline/",
         never_cache(TemplateView.as_view(template_name="common/offline.html",)),
     ),
