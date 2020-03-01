@@ -1,28 +1,29 @@
 {% extends "base.html" %}
 
 {% load static %}
+{% load i18n %}
 
 {% block head_title %}Sectores o refugios en {{ municipality }} - {% endblock %}
 
 {% block content %}
-  <div class="main__munilist">
-    <h3>{{ municipality }}</h3>
-  </div>
-  <div class="main__munilist--button">
-    <a href="{% url 'suministro-add' %}">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 21 21"><path class="heroicon-ui" d="M5 3h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5c0-1.1.9-2 2-2zm0 2v14h14V5H5zm8 6h2a1 1 0 0 1 0 2h-2v2a1 1 0 0 1-2 0v-2H9a1 1 0 0 1 0-2h2V9a1 1 0 0 1 2 0v2z"/></svg>
-      <span>Añadir sector o refugio</span>
-    </a>
-  </div>
-  <div class="main__munilist--list">
-    <ul>
-      {% for suministro in object_list %}
-        <li>
-          <a href="{% url 'suministro-detail' suministro.slug %}">
-            {{ suministro.title }}
-          </a>
-        </li>
-      {% endfor %}
-    </ul>
-  </div>
+<div class="main__munilist">
+  <h3>{{ municipality }}</h3>
+</div>
+<div class="main__munilist--button">
+  <a href="{% url 'suministro-add' %}">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 21 21"><path class="heroicon-ui" d="M5 3h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5c0-1.1.9-2 2-2zm0 2v14h14V5H5zm8 6h2a1 1 0 0 1 0 2h-2v2a1 1 0 0 1-2 0v-2H9a1 1 0 0 1 0-2h2V9a1 1 0 0 1 2 0v2z"/></svg>
+    <span>{% trans 'Añadir sector o refugio' %}</span>
+  </a>
+</div>
+<div class="main__munilist--list">
+  <ul>
+    {% for suministro in object_list %}
+    <li>
+      <a href="{% url 'suministro-detail' suministro.slug %}">
+        {{ suministro.title }}
+      </a>
+    </li>
+    {% endfor %}
+  </ul>
+</div>
 {% endblock %}

@@ -51,3 +51,25 @@ git push heroku master
 ```bash
 heroku run python manage.py clear_cache
 ```
+
+#### Update i18n locale strings
+
+1.  Extract i18n strings with:
+
+```bash
+$ docker-compose exec web django-admin makemessages -l en
+```
+
+2. Update local strings with the translated text on the files located at `suministrospr/locale`
+
+For example:
+```text
+#: suministrospr/suministros/templates/suministros/suministro_form.html:36
+msgid "Municipio"
+msgstr "Municipality""
+```
+3. Compile strings and generate `.mo` files with:
+
+```bash
+docker-compose exec web django-admin compilemessages
+```

@@ -1,16 +1,17 @@
 {% extends "base.html" %}
 
 {% load static %}
+{% load i18n %}
 
 {% block head_title %}{{ object|yesno:'Editar,Añadir' }} sector o refugio - {% endblock %}
 
 {% block extra_head %}
-  {{ form.media.css }}
-  <style type="text/css">
-    select#id_tags {
-      width: 100%;
-    }
-  </style>
+{{ form.media.css }}
+<style type="text/css">
+  select#id_tags {
+    width: 100%;
+  }
+</style>
 {% endblock %}
 
 {% block content %}
@@ -22,53 +23,53 @@
     {{ form.non_field_errors }}
 
     <div class="input__container">
-        <label for="grid-first-name">
-          Nombre de sector o refugio
-        </label>
-        <input type="text" name="title" value="{{ form.title.value|default_if_none:'' }}">
-        {% if form.title.errors %}<p>{{ form.title.errors.0 }}</p>{% endif %}
+      <label for="grid-first-name">
+        {% trans 'Nombre de sector o refugio' %}
+      </label>
+      <input type="text" name="title" value="{{ form.title.value|default_if_none:'' }}">
+      {% if form.title.errors %}<p>{{ form.title.errors.0 }}</p>{% endif %}
     </div>
 
     <div class="input__container">
-        <label for="grid-state">
-          Municipio
-        </label>
-        <div class="relative">
-          <select name="municipality">
-            {% for value, label in form.fields.municipality.choices %}
-              <option value="{{ value }}" {% if form.municipality.value == value %}selected{% endif %}>{{ label }}</option>
-            {% endfor %}
-          </select>
-          <div class="svg">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
-          </div>
+      <label for="grid-state">
+        {% trans 'Municipio' %}
+      </label>
+      <div class="relative">
+        <select name="municipality">
+          {% for value, label in form.fields.municipality.choices %}
+          <option value="{{ value }}" {% if form.municipality.value == value %}selected{% endif %}>{{ label }}</option>
+          {% endfor %}
+        </select>
+        <div class="svg">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
         </div>
-      
-        {% if form.municipality.errors %}<p>{{ form.municipality.errors.0 }}</p>{% endif %}
+      </div>
+
+      {% if form.municipality.errors %}<p>{{ form.municipality.errors.0 }}</p>{% endif %}
     </div>
 
     <div class="input__container">
-        <label for="grid-first-name">
-          Categorías
-        </label>
-        {{form.tags}}
-        {% if form.tags.errors %}<p>{{ form.tags.errors.0 }}</p>{% endif %}
+      <label for="grid-first-name">
+        {% trans 'Categorías' %}
+      </label>
+      {{form.tags}}
+      {% if form.tags.errors %}<p>{{ form.tags.errors.0 }}</p>{% endif %}
     </div>
 
     <div class="input__container">
       <label>
-        Necesidades e información de contacto
+        {% trans 'Necesidades e información de contacto' %}
       </label>
       {{form.content}}
     </div>
 
     <div class="main__search--button">
       <button type="submit">
-        Guardar y publicar
+        {% trans 'Guardar y publicar' %}
       </button>
     </div>
     <div class="main__search--button">
-      <a href="{% if object %}{% url 'suministro-detail' object.slug %}{% else %}{% url 'suministro-list' %}{% endif %}">Cancelar</a>
+      <a href="{% if object %}{% url 'suministro-detail' object.slug %}{% else %}{% url 'suministro-list' %}{% endif %}">{% trans 'Cancelar' %}</a>
     </div>
   </form>
 

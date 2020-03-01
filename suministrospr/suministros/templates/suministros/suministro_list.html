@@ -1,24 +1,38 @@
 {% extends "base.html" %}
 
 {% load static %}
+{% load i18n %}
 {% load suministro_extras %}
 
 {% block head_title %}Entérate, Ayuda, Informa - {% endblock %}
 
 {% block content %}
 
+{% get_current_language as language_code %}
 <div class="main__about">
   <div class="main__about main__about--paragraph">
     <p>
+     {% if language_code == 'es' %}
       La donación de suministros a las áreas más afectadas del país por el terremoto ha sido un éxito. Esta plataforma, administrada por los mismos donantes y recipientes, busca ser un vehículo de distribución equitativa de estos suministros. De esta manera, la ayuda llega a donde se necesita.
+      {% endif %}
+      {% if language_code == 'en' %}
+      The donation of supplies to the areas affected by the Puerto Rico earthquakes has been a success. This platform, that is administrated by the same donors and recipients, tries to be a fair distribution method for these supplies. This way, supplies arrive where they are most needed.
+      {% endif %}
     </p>
   </div>
   <div class="main__about main__about--paragraph">
     <ol class="main__about--card">
+      {% if language_code == 'es' %}
       <li><strong>Revisa</strong> los sectores en el listado de abajo.</li>
       <li><strong>Entra, lee y añade</strong> necesidades de ser necesario.</li>
       <li><strong>Añade el sector o refugio</strong> si el que buscas no aparece!</li>
-    </ol>
+      {% endif %}
+      {% if language_code == 'en' %}
+      <li><strong>Verify</strong> the refuges listed below.</li>
+      <li><strong>Search and add</strong> necesities where needed.</li>
+      <li><strong>Add Sector or refuge</strong>, if you can't find it add it!</li>
+      {% endif %}
+   </ol>
   </div>
 </div>
 <div class="main__about main__about--actions">
@@ -26,7 +40,7 @@
   <div class="main__about--button">
     <a href="{% url 'suministro-add' %}">
     <svg class="fill-current w-4 h-4 mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 21 21"><path class="heroicon-ui" d="M5 3h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5c0-1.1.9-2 2-2zm0 2v14h14V5H5zm8 6h2a1 1 0 0 1 0 2h-2v2a1 1 0 0 1-2 0v-2H9a1 1 0 0 1 0-2h2V9a1 1 0 0 1 2 0v2z"/></svg>
-    <span>Añadir sector o refugio</span>
+    <span>{% trans 'Añadir sector o refugio' %}</span>
     </a>
   </div>
 
@@ -35,14 +49,14 @@
       <div class="actions__form--container">
         <div class="relative">
           <select name="tag" onchange="this.form.submit()">
-          <option value="">Filtrar por categoría</option>
+          <option value="">{% trans 'Filtrar por categoría' %}</option>
           {% for value, label in filter_form.fields.tag.choices %}
           <option value="{{ value }}">{{ label }}</option>
           {% endfor %}
           </select>
           <div class="svg">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
-          </div>
+         </div>
         </div>
       </div>
     </div>
