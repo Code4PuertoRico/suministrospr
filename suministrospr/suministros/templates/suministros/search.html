@@ -11,24 +11,25 @@
 
       <form action="{% url 'suministro-search' %}" method="GET">
 
-          <div class="main__actions--form">
-            <div class="search__header--container">
-
-              <label for="inline-full-name">
-                Resultados para categoría
-              </label>
-
+        <div class="main__actions--form">
+          <div class="search__header--container">
+            <div class="input__container">
+              <label>Busqueda</label>
+              <input type="text" name="q" value=""/>
               <div class="relative">
-                <input type="text" name="q" placeholder="Busqueda" />
                 <select name="tag">
+                  <option value="">Filtrar por categoría</option>
                   {% for value, label in filter_form.fields.tag.choices %}
-                    <option value="{{ value }}" {% if filter_form.tag.value == value %}selected{% endif %}>{{ label }}</option>
+                  <option value="{{ value }}">{{ label }}</option>
                   {% endfor %}
                 </select>
                 <div class="svg">
                   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
                 </div>
-                <button type="submit">Search</button>
+              </div>
+              <div class="main__search--button">
+                <button type="submit">Buscar</button>
+              </div>
             </div>
           </div>
         </div>
