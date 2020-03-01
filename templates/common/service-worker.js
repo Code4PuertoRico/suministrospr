@@ -42,9 +42,15 @@ const fetchAndCache = request => {
 /**
  * Check if response is valid
  * @param {Response} response
+ * @param {Request} request
  */
-const isValidResponse = response => {
-  return response && (response.ok || response.type === "opaque");
+const isValidResponse = (response, request) => {
+  return (
+    response &&
+    (response.ok ||
+      response.type === "opaque" ||
+      (response.status === 404 && request.mode === "navigate"))
+  );
 };
 
 /**
@@ -57,9 +63,12 @@ self.addEventListener("activate", event => {
 
 self.addEventListener("install", event => {
   return event.waitUntil(
-    caches.open(cacheName).then(cache => {
-      return cache.addAll(filesToCache);
-    }).then(skipWaiting())
+    caches
+      .open(cacheName)
+      .then(cache => {
+        return cache.addAll(filesToCache);
+      })
+      .then(skipWaiting())
   );
 });
 
@@ -69,7 +78,7 @@ self.addEventListener("fetch", event => {
     return event.respondWith(
       fetchAndCache(request)
         .then(response =>
-          isValidResponse(response) ? response : caches.match(request)
+          isValidResponse(response, request) ? response : caches.match(request)
         )
         .then(response => (response ? response : caches.match("/offline/")))
     );
