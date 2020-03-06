@@ -909,6 +909,25 @@ footer .container {
 
 /* offline_header.html */
 
+.main__offline {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 25px;
+}
+
+.main__offline h3 {
+  font-size: 1.3rem;
+  font-weight: 700;
+}
+
+@media (min-width: 768px) {
+  .main__offline--content {
+    width: 60%;
+  }  
+}
+
 .offline-header {
   padding: 10px;
   background-color: #f44336;

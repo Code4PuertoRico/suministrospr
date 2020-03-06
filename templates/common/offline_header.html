@@ -1,5 +1,16 @@
+{% load i18n %}
+{% get_current_language as language_code %}
+
 <template id="offline-header-template">
 <div id="offline-header" class="offline-header">
-    <span>Currently offline text WIP</span>
+    <span class="offline-message">
+        {% if language_code == 'es' %}
+            Parece estar desconectado. Las funcionalidades del app van a estar limitadas
+        {% endif %}
+        {% if language_code == 'en' %}
+            You appear to be offline. 
+            App features will be limited
+        {% endif %}
+    </span>
 </div>
 </template>
