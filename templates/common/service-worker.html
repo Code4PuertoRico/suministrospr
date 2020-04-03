@@ -1,3 +1,4 @@
+{% if not debug %}
 <script>
     if ('serviceWorker' in navigator) {
         navigator.serviceWorker
@@ -5,3 +6,4 @@
             .then(function (reg) { console.log("Service Worker Registered", reg.scope); });
     }
 </script>
+{% endif %}
