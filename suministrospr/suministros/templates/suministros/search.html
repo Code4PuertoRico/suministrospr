@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 
 {% load static %}
+{% load i18n %}
 {% load suministro_extras %}
 
 {% block head_title %}Entérate, Ayuda, Informa - {% endblock %}
@@ -8,17 +9,15 @@
 {% block content %}
 <div class="main__search">
   <div class="main__search--header">
-
       <form action="{% url 'suministro-search' %}" method="GET">
-
         <div class="main__actions--form">
           <div class="search__header--container">
             <div class="input__container">
-              <label>Busqueda</label>
+              <label>{% trans Busqueda %}</label>
               <input type="text" name="q" value=""/>
               <div class="relative">
                 <select name="tag">
-                  <option value="">Filtrar por categoría</option>
+                  <option value="">{% trans Filtrar por categoría %}</option>
                   {% for value, label in filter_form.fields.tag.choices %}
                   <option value="{{ value }}">{{ label }}</option>
                   {% endfor %}
@@ -33,34 +32,39 @@
             </div>
           </div>
         </div>
-      </form>
-
-      <p>Se encontró <strong>{{ results_total }}</strong> resultado{{ results_total|pluralize:"s" }} en <strong>{{ results_municipalities }}</strong> municipio{{ results_municipalities|pluralize:"s" }}.</p>
-  
+      </div>
+    </form>
+    {% get_current_language as language_code %}
+    {% if language_code == 'es' %}
+    <p>Se encontró <strong>{{ results_total }}</strong> resultado{{ results_total|pluralize:"s" }} en <strong>{{ results_municipalities }}</strong> municipio{{ results_municipalities|pluralize:"s" }}.</p>
+    <p class="text-gray-500">Se encontró <strong>{{ results_total }}</strong> resultado{{ results_total|pluralize:"s" }} en <strong>{{ results_municipalities }}</strong> municipio{{ results_municipalities|pluralize:"s" }}.</p>
+    {% endif %}
+    {% if language_code == 'en' %}
+    <p>Found <strong>{{ results_total }}</strong> result{{ results_total|pluralize:"s" }} {{ results_total|pluralize:"in,across" }} <strong>{{ results_municipalities }}</strong> municipalit{{ results_municipalities|pluralize:"y,ies" }}.</p>
+    {% endif %}
   </div>
 </div>
 
+<div class="results__content--content">
+  {% for group in results %}
+  <div class="results__content--cell">
+    <header>
+      <img src="{% escudo_static group.municipality %}" alt="{{ group.municipality }}">
+      <h4>
+        <a href="{% url 'suministro-municipio-list' group.municipality|slugify %}">{{ group.municipality }}</a>
+      </h4>
+    </header>
 
-    <div class="results__content--content">
-        {% for group in results %}
-          <div class="results__content--cell">
-            <header>
-              <img src="{% escudo_static group.municipality %}" alt="{{ group.municipality }}">
-              <h4>
-                <a href="{% url 'suministro-municipio-list' group.municipality|slugify %}">{{ group.municipality }}</a>
-              </h4>
-            </header>
-
-            <ul>
-              {% for suministro in group.suministros %}
-                <li>
-                  <a href="{% url 'suministro-detail' suministro.slug %}">
-                    {{ suministro.title }}
-                  </a>
-                </li>
-              {% endfor %}
-            </ul>
-          </div>
-        {% endfor %}
-      </div>
+    <ul>
+      {% for suministro in group.suministros %}
+      <li>
+        <a href="{% url 'suministro-detail' suministro.slug %}">
+          {{ suministro.title }}
+        </a>
+      </li>
+      {% endfor %}
+    </ul>
+  </div>
+  {% endfor %}
+</div>
 {% endblock %}

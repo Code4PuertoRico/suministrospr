@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% load i18n %}
+
+{% block content %}
+{% get_current_language as language_code %}
+<div class="main__offline">
+    <div class="main__offline--content">
+        <h3>
+            {% if language_code == 'es' %}
+                Tu dispositivo parece estar desconectado
+            {% endif %}
+            {% if language_code == 'en' %}
+                Your device appears to be offline
+            {% endif %}
+        </h3>
+        <br>
+        <p>
+            {% if language_code == 'es' %}
+                Vas a poder navegar las páginas vistas previo a estar desconectado.
+                Para ver el contenido actualizado verifica que esté conectado y refresque la página
+            {% endif %}
+            {% if language_code == 'en' %}
+                You will be able to navigate previously seen pages through the app.
+                To see new content make sure your device is connected to the Internet and refresh the page.
+            {% endif %}            
+        </p>
+    </div>
+</div>
+{% endblock %}

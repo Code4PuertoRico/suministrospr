@@ -1,24 +1,38 @@
 {% extends "base.html" %}
 
 {% load static %}
+{% load i18n %}
 {% load suministro_extras %}
 
 {% block head_title %}Entérate, Ayuda, Informa - {% endblock %}
 
 {% block content %}
 
+{% get_current_language as language_code %}
 <div class="main__about">
   <div class="main__about main__about--paragraph">
     <p>
+     {% if language_code == 'es' %}
       La donación de suministros a las áreas más afectadas del país por el terremoto ha sido un éxito. Esta plataforma, administrada por los mismos donantes y recipientes, busca ser un vehículo de distribución equitativa de estos suministros. De esta manera, la ayuda llega a donde se necesita.
+      {% endif %}
+      {% if language_code == 'en' %}
+      The donation of supplies to the areas affected by the Puerto Rico earthquakes has been a success. This platform, that is administrated by the same donors and recipients, tries to be a fair distribution method for these supplies. This way, supplies arrive where they are most needed.
+      {% endif %}
     </p>
   </div>
   <div class="main__about main__about--paragraph">
     <ol class="main__about--card">
+      {% if language_code == 'es' %}
       <li><strong>Revisa</strong> los sectores en el listado de abajo.</li>
       <li><strong>Entra, lee y añade</strong> necesidades de ser necesario.</li>
       <li><strong>Añade el sector o refugio</strong> si el que buscas no aparece!</li>
-    </ol>
+      {% endif %}
+      {% if language_code == 'en' %}
+      <li><strong>Verify</strong> the refuges listed below.</li>
+      <li><strong>Search and add</strong> necesities where needed.</li>
+      <li><strong>Add Sector or refuge</strong>, if you can't find it add it!</li>
+      {% endif %}
+   </ol>
   </div>
 </div>
 <div class="main__about main__about--actions">
@@ -26,11 +40,11 @@
     <div class="main__actions--form">
       <div class="actions__form--container">
         <div class="input__container">
-          <label>Busqueda</label>
+          <label>{% Busqueda %}</label>
           <input type="text" name="q" value=""/>
           <div class="relative">
             <select name="tag">
-              <option value="">Filtrar por categoría</option>
+              <option value="">{% trans Filtrar por categoría %}</option>
               {% for value, label in filter_form.fields.tag.choices %}
               <option value="{{ value }}">{{ label }}</option>
               {% endfor %}
@@ -62,7 +76,13 @@
         {% for group in sorted_results %}
           <div class="main__munigrid grid__column">
             <div class="grid__column--cell">
+              <input type="checkbox" id="toggle-{{ group.municipality|slugify }}" class="grid__column--toggle" />
               <div class="grid__column--header">
+                <label for="toggle-{{ group.municipality|slugify }}" class="grid__column--toggle">
+                  <div class="svg">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
+                  </div>
+                </label>
                 <img src="{% escudo_static group.municipality %}" alt="{{ group.municipality }}" >
                 <h3>
                   <a href="{% url 'suministro-municipio-list' group.municipality|slugify %}">{{ group.municipality }}</a>

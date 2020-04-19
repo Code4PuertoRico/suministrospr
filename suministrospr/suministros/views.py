@@ -1,3 +1,5 @@
+import os
+
 from django.db.models import Count, Prefetch, Q
 from django.urls import reverse
 from django.views.generic import DetailView, ListView, TemplateView
@@ -160,4 +162,14 @@ class SuministroSearch(CacheMixin, TemplateView):
 
         data["filter_form"] = form
 
+        return data
+
+
+class SuministroServiceWorker(TemplateView):
+    template_name = "common/service-worker.js"
+    content_type = "application/javascript"
+
+    def get_context_data(self):
+        data = super().get_context_data()
+        data["app_version"] = os.getenv("HEROKU_RELEASE_VERSION", "0.1.0")
         return data

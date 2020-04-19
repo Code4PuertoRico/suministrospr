@@ -167,6 +167,55 @@ footer .container {
   font-size: 1rem;
 }
 
+.grid__column--toggle {
+  display: none;
+}
+
+@media (max-width: 767px) {
+  .grid__column--cell {
+    position: relative;
+  }
+
+  .grid__column--header {
+    padding-right: 1.5rem;
+  }
+
+  .grid__column--cell ul {
+    display: none;
+  }
+
+  label.grid__column--toggle {
+    cursor: pointer;
+    display: block;
+    position: absolute;
+    right: 0;
+    top: 0;
+    height: 1.5rem;
+    width: 1.5rem;
+    padding: 1rem 0.5rem;
+    box-sizing: content-box;
+  }
+
+  label.grid__column--toggle .svg {
+    color: #4a5568;
+    height: 100%;
+    transition: transform 0.2s;
+  }
+
+  input.grid__column--toggle:not(:checked) ~ .grid__column--header {
+    border-bottom: none;
+  }
+
+  input.grid__column--toggle:checked ~ .grid__column--header label.grid__column--toggle .svg {
+    transform: rotate(180deg);
+  }
+
+  input.grid__column--toggle:checked ~ ul {
+    display: block;
+  }
+}
+
+
 /* suministro_municipio_list.html */
 
 .footer__main--paragraph {
@@ -856,4 +905,31 @@ footer .container {
     margin: 1.25rem .75rem;
     width: auto;
   }
+}
+
+/* offline_header.html */
+
+.main__offline {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 25px;
+}
+
+.main__offline h3 {
+  font-size: 1.3rem;
+  font-weight: 700;
+}
+
+@media (min-width: 768px) {
+  .main__offline--content {
+    width: 60%;
+  }  
+}
+
+.offline-header {
+  padding: 10px;
+  background-color: #f44336;
+  color: white;
 }
