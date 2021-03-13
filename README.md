@@ -2,6 +2,12 @@
 
 https://suministrospr.com
 
+## Updates
+
+We are archiving this project. 
+
+While the project itself is still available in it's URL, there is no Code for Puerto Rico team maintaining it. If there is interest in working on this project please let the Code for PR core team know by [creating an discussion here](https://github.com/Code4PuertoRico/Code4PR/discussions/new) and joining our [hack nights](https://www.meetup.com/code-for-puerto-rico/).
+
 ## Development
 
 ```bash
