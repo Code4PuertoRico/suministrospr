@@ -4,7 +4,7 @@ from django.db.models.signals import m2m_changed, post_delete, post_save
 from .models import Municipality, Suministro, Tag
 
 
-def suministro_invalidate_cache(sender, instance, created, **kwargs):
+def suministro_invalidate_cache(sender, instance, created=None, **kwargs):
     cache.delete_many(
         [
             "suministro-list",
