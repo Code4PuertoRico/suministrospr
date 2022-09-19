@@ -8,7 +8,7 @@ Werkzeug = "==0.16.0"
 black = "==19.10b0"
 isort = "==4.3.21"
 "flake8" = "==3.7.9"
-pre-commit = "==1.21.0"
+pre-commit = "==2.9.2"
 seed-isort-config = "==1.9.4"
 pytest-django = "==3.8.0"
 

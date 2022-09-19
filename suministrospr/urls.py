@@ -11,6 +11,10 @@ urlpatterns = [
     path("", include("suministrospr.suministros.urls")),
     path(
         "offline/",
-        never_cache(TemplateView.as_view(template_name="common/offline.html",)),
+        never_cache(
+            TemplateView.as_view(
+                template_name="common/offline.html",
+            )
+        ),
     ),
 ]

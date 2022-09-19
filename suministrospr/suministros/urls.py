@@ -21,9 +21,13 @@ urlpatterns = [
     ),
     path("sectores/<slug:slug>/", SuministroDetail.as_view(), name="suministro-detail"),
     path(
-        "sectores/<slug:slug>/edit", SuministroUpdate.as_view(), name="suministro-edit",
+        "sectores/<slug:slug>/edit",
+        SuministroUpdate.as_view(),
+        name="suministro-edit",
     ),
     path(
-        "service-worker.js", SuministroServiceWorker.as_view(), name="service-worker",
+        "service-worker.js",
+        SuministroServiceWorker.as_view(),
+        name="service-worker",
     ),
 ]

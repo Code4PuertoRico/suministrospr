@@ -22,7 +22,12 @@ class SuministroList(CacheMixin, TemplateView):
 
         municipalities_with_suministros = (
             Municipality.objects.all()
-            .prefetch_related(Prefetch("suministros", queryset=suministros,))
+            .prefetch_related(
+                Prefetch(
+                    "suministros",
+                    queryset=suministros,
+                )
+            )
             .annotate(suministro_count=Count("suministro"))
             .filter(suministro_count__gt=0)
             .order_by("-suministro_count")
@@ -117,7 +122,11 @@ class SuministroSearch(CacheMixin, TemplateView):
         municipalities_with_suministros = (
             Municipality.objects.all()
             .prefetch_related(Prefetch("suministros", queryset=suministros))
-            .annotate(suministro_count=Count("suministro",))
+            .annotate(
+                suministro_count=Count(
+                    "suministro",
+                )
+            )
             .filter(suministro_count__gt=0)
             .order_by("-suministro_count")
         )
