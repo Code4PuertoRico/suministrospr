@@ -1,43 +1,54 @@
-{% load static %}
-{% load utils_extras %}
+{% load static %} {% load utils_extras %}
 
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <title>{% block head_title %}{% endblock %}Suministros Puerto Rico</title>
-    <link rel="icon" type="image/png" href="{% static 'img/meta/favicon.png' %}" />
-    <meta name="description" content="La donación de suministros a las áreas más afectadas del país por el terremoto ha sido un éxito. Esta página pretende ser un vehículo de distribución equitativa para estos suministros, administrada por la misma gente que dona, y que recibe."/>
+    <link
+      rel="icon"
+      type="image/png"
+      href="{% static 'img/meta/favicon.png' %}"
+    />
+    <meta
+      name="description"
+      content="La donación de suministros a las áreas más afectadas del país por el huracán ha sido un éxito. Esta página pretende ser un vehículo de distribución equitativa para estos suministros, administrada por la misma gente que dona, y que recibe."
+    />
     <meta property="og:locale" content="es_ES" />
     <meta property="og:type" content="website" />
-    <meta property="og:title" content="Entérate, Ayuda, Informa - Suministros Puerto Rico" />
+    <meta
+      property="og:title"
+      content="Entérate, Ayuda, Informa - Suministros Puerto Rico"
+    />
     <meta property="og:url" content="https://suministrospr.com/" />
     <meta property="og:site_name" content="Suministros Puerto Rico" />
-    <meta property="og:image" content="{% absolute_static 'img/meta/social_banner.png' %}" />
-    <meta property="og:image:secure_url" content="{% absolute_static 'img/meta/social_banner.png' %}" />
+    <meta
+      property="og:image"
+      content="{% absolute_static 'img/meta/social_banner.png' %}"
+    />
+    <meta
+      property="og:image:secure_url"
+      content="{% absolute_static 'img/meta/social_banner.png' %}"
+    />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Entérate, Ayuda, Informa - Suministros Puerto Rico" />
-    <link href="{% static 'css/main.css' %}" rel="stylesheet">
+    <meta
+      name="twitter:title"
+      content="Entérate, Ayuda, Informa - Suministros Puerto Rico"
+    />
+    <link href="{% static 'css/main.css' %}" rel="stylesheet" />
     <script src="{% static 'js/offline_listener.js' %}"></script>
     {% block extra_head %}{% endblock %}
   </head>
   <body>
-    {% block body %}
-    {% include "common/header.html" %}
-    <div class="main">
-      {% block content %}{% endblock %}
-    </div>
-    {% include "common/footer.html" %}
-    {% endblock %}
-
-    {% include "common/analytics.html" %}
-    {% include "common/service-worker.html" %}
-    {% include "common/offline_header.html" %}
-    {% block extra_body %}{% endblock %}
+    {% block body %} {% include "common/header.html" %}
+    <div class="main">{% block content %}{% endblock %}</div>
+    {% include "common/footer.html" %} {% endblock %} {% include
+    "common/analytics.html" %} {% include "common/service-worker.html" %} {%
+    include "common/offline_header.html" %} {% block extra_body %}{% endblock %}
   </body>
 </html>
