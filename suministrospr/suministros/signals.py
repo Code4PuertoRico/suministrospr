@@ -37,7 +37,9 @@ def municipality_invalidate_cache(sender, instance, **kwargs):
 
 
 def tag_invalidate_cache(sender, instance, **kwargs):
-    cache.delete_many(["suministro-list", f"suministro-search:{instance.slug}"])
+    cache.delete_many(
+        ["suministro-list", "forms:filter-tags", f"suministro-search:{instance.slug}"]
+    )
 
 
 post_save.connect(suministro_invalidate_cache, sender=Suministro)

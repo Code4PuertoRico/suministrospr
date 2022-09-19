@@ -1,5 +1,7 @@
 import bleach
 from django import forms
+from django.conf import settings
+from django.core.cache import cache
 from django.utils.text import slugify
 from django_select2.conf import settings as select2_settings
 from django_select2.forms import Select2TagWidget
@@ -63,6 +65,22 @@ class SuministroModelForm(forms.ModelForm):
 
 
 class FilterForm(forms.Form):
-    tag = forms.ModelChoiceField(
-        queryset=Tag.objects.all().order_by("name"), to_field_name="slug"
-    )
+    tag = forms.ChoiceField()
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+        self.fields["tag"].choices = [("", "---------")] + [
+            (tag.slug, tag.name) for tag in cached_tags()
+        ]
+
+
+def cached_tags():
+    cache_key = "forms:filter-tags"
+    tags = cache.get(cache_key)
+    if tags:
+        return tags
+
+    tags = Tag.objects.all().order_by("name")
+    cache.set(cache_key, tags, settings.CACHE_MIXIN_TIMEOUT)
+    return tags

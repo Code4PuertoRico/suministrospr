@@ -56,7 +56,7 @@ class TestSuministroList:
         assert response.status_code == 200
 
     def test_order_by_count(self, rf, django_assert_num_queries):
-        with django_assert_num_queries(2):
+        with django_assert_num_queries(1):
             request = rf.get(self.url)
             response = SuministroList.as_view()(request)
 
@@ -130,13 +130,13 @@ class TestSuministroSearch:
         assert results_municipalities == 2
 
     def test_num_queries_without_filter(self, rf, django_assert_num_queries):
-        with django_assert_num_queries(4):
+        with django_assert_num_queries(3):
             request = rf.get(self.url)
             response = SuministroSearch.as_view()(request)
             assert response.rendered_content
 
     def test_num_queries_with_filter(self, rf, django_assert_num_queries):
-        with django_assert_num_queries(5):
+        with django_assert_num_queries(3):
             request = rf.get(self.url, {"tag": "tag_a"})
             response = SuministroSearch.as_view()(request)
             assert response.rendered_content
