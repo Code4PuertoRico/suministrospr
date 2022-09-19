@@ -154,7 +154,7 @@ footer p {
 }
 
 footer a {
-  color: #f56565;
+  color: #b10102;
 }
 
 footer a:hover {
@@ -299,7 +299,7 @@ footer .container {
   justify-content: center;
   width: fit-content;
   border-radius: .25rem;
-  background-color: #f56565;
+  background-color: #b10102;
 }
 
 .main__about--button :hover {
@@ -420,7 +420,7 @@ footer .container {
   justify-content: center;
   width: fit-content;
   border-radius: .25rem;
-  background-color: #f56565;
+  background-color: #b10102;
 }
 
 .main__munilist--button :hover {
@@ -623,7 +623,7 @@ footer .container {
   justify-content: center;
   width: fit-content;
   border-radius: .25rem;
-  background-color: #f56565;
+  background-color: #b10102;
   margin: 1rem auto;
 }
 
@@ -849,7 +849,7 @@ footer .container {
 
 .main__search--button button {
   color: #fff;
-  background-color: #f56565;
+  background-color: #b10102;
   border-radius: .25rem;
   font-weight: 700;
   padding: .5rem 1rem;
@@ -864,7 +864,7 @@ footer .container {
 }
 
 .main__search--button a {
-  color: #f56565;
+  color: #b10102;
 }
 
 .main__search--button a:hover {
