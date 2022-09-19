@@ -17,12 +17,36 @@ class TestSuministroList:
 
         Suministro.objects.bulk_create(
             [
-                Suministro(title="test A", municipality=guanica, content="test a",),
-                Suministro(title="test B", municipality=guayanilla, content="test b",),
-                Suministro(title="test C", municipality=ponce, content="test c",),
-                Suministro(title="test D", municipality=guayanilla, content="test d",),
-                Suministro(title="test E", municipality=guanica, content="test e",),
-                Suministro(title="test F", municipality=guanica, content="test f",),
+                Suministro(
+                    title="test A",
+                    municipality=guanica,
+                    content="test a",
+                ),
+                Suministro(
+                    title="test B",
+                    municipality=guayanilla,
+                    content="test b",
+                ),
+                Suministro(
+                    title="test C",
+                    municipality=ponce,
+                    content="test c",
+                ),
+                Suministro(
+                    title="test D",
+                    municipality=guayanilla,
+                    content="test d",
+                ),
+                Suministro(
+                    title="test E",
+                    municipality=guanica,
+                    content="test e",
+                ),
+                Suministro(
+                    title="test F",
+                    municipality=guanica,
+                    content="test f",
+                ),
             ]
         )
 
