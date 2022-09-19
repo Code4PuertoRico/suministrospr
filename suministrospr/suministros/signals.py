@@ -7,9 +7,12 @@ from .models import Municipality, Suministro, Tag
 def suministro_invalidate_cache(sender, instance, created=None, **kwargs):
     cache.delete_many(
         [
-            "suministro-list",
-            f"suministro-municipio-list:{instance.municipality.slug}",
-            f"suministro-detail:{instance.slug}",
+            "en:suministro-list",
+            "es:suministro-list",
+            f"en:suministro-municipio-list:{instance.municipality.slug}",
+            f"es:suministro-municipio-list:{instance.municipality.slug}",
+            f"en:suministro-detail:{instance.slug}",
+            f"es:suministro-detail:{instance.slug}",
         ]
     )
 
@@ -18,7 +21,8 @@ def suministro_tags_invalidate_cache(sender, instance, action, **kwargs):
     if action in ["post_save", "post_delete"]:
         pk_set = kwargs.get("pk_set")
         cache_keys = [
-            f"suministro-detail:{instance.slug}",
+            f"en:suministro-detail:{instance.slug}",
+            f"es:suministro-detail:{instance.slug}",
         ]
 
         if pk_set:
@@ -27,18 +31,33 @@ def suministro_tags_invalidate_cache(sender, instance, action, **kwargs):
             )
 
             for slug in tag_slugs_changed:
-                cache_keys.extend([f"suministro-search:{slug}"])
+                cache_keys.extend(
+                    [f"en:suministro-search:{slug}", f"es:suministro-search:{slug}"]
+                )
 
         cache.delete_many(cache_keys)
 
 
 def municipality_invalidate_cache(sender, instance, **kwargs):
-    cache.delete_many(["suministro-list", f"suministro-municipio-list:{instance.slug}"])
+    cache.delete_many(
+        [
+            "en:suministro-list",
+            "es:suministro-list",
+            f"en:suministro-municipio-list:{instance.slug}"
+            f"es:suministro-municipio-list:{instance.slug}",
+        ]
+    )
 
 
 def tag_invalidate_cache(sender, instance, **kwargs):
     cache.delete_many(
-        ["suministro-list", "forms:filter-tags", f"suministro-search:{instance.slug}"]
+        [
+            "en:suministro-list",
+            "es:suministro-list",
+            f"en:suministro-search:{instance.slug}"
+            f"es:suministro-search:{instance.slug}"
+            "forms:filter-tags",
+        ]
     )
 
 
