@@ -12,7 +12,7 @@ body {
   -ms-font-kerning: normal;
   -o-font-kerning: normal;
   font-kerning: normal;
-  
+
   -webkit-text-size-adjust: 100%;
   -ms-text-size-adjust: 100%;
 }
@@ -233,6 +233,7 @@ footer .container {
   display: flex;
   justify-content: center;
   margin-top: 2rem;
+  line-height: 1.45rem;
 }
 
 .main__about--card {
@@ -873,7 +874,7 @@ footer .container {
 
 
 @media (min-width: 768px) {
-  
+
   .main__about--actions form {
     border-left: 1px solid #e2e8f0;
     margin-top: 0;
@@ -889,7 +890,7 @@ footer .container {
   footer .container {
     width: 60%;
   }
-  
+
 }
 
 @media (max-width: 768px) {
@@ -925,7 +926,7 @@ footer .container {
 @media (min-width: 768px) {
   .main__offline--content {
     width: 60%;
-  }  
+  }
 }
 
 .offline-header {
