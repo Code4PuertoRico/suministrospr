@@ -13,11 +13,20 @@ from .models import Municipality, Suministro
 
 
 class SuministroList(CacheMixin, TemplateView):
-    cache_key = None
+    cache_key = "suministro-list"
+    cache_dispatch = False
     template_name = "suministros/suministro_list.html"
 
     def get_context_data(self):
         data = super().get_context_data()
+        data["filter_form"] = FilterForm()
+
+        cached_data = self.get_cache_data()
+
+        if cached_data:
+            data.update(cached_data)
+            return data
+
         suministros = Suministro.objects.defer("content").order_by("title")
 
         municipalities_with_suministros = (
@@ -42,7 +51,7 @@ class SuministroList(CacheMixin, TemplateView):
             for municipality in municipalities_with_suministros
         ]
 
-        data["filter_form"] = FilterForm()
+        self.set_cache_data({"sorted_results": data["sorted_results"]})
 
         return data
 
