@@ -13,7 +13,7 @@ from .models import Municipality, Suministro
 
 
 class SuministroList(CacheMixin, TemplateView):
-    cache_key = "suministro-list"
+    cache_key = None
     template_name = "suministros/suministro_list.html"
 
     def get_context_data(self):
