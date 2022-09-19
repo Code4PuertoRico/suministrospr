@@ -62,7 +62,8 @@ class SuministroByMunicipalityList(CacheMixin, ListView):
     cache_key = "suministro-municipio-list"
 
     def get_cache_key(self):
-        return f"{self.cache_key}:{self.kwargs['municipality']}"
+        cache_key = super().get_cache_key()
+        return f"{cache_key}:{self.kwargs['municipality']}"
 
     def get_queryset(self):
         return (
@@ -86,7 +87,8 @@ class SuministroDetail(CacheMixin, DetailView):
     )
 
     def get_cache_key(self):
-        return f"{self.cache_key}:{self.kwargs['slug']}"
+        cache_key = super().get_cache_key()
+        return f"{cache_key}:{self.kwargs['slug']}"
 
 
 class SuministroCreate(RevisionMixin, CreateView):
@@ -110,7 +112,7 @@ class SuministroSearch(CacheMixin, TemplateView):
     cache_key = "suministro-search"
 
     def get_cache_key(self):
-        cache_key = self.cache_key
+        cache_key = super().get_cache_key()
         tag = self.request.GET.get("tag")
 
         if tag:

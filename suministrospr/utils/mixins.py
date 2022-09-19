@@ -10,7 +10,7 @@ class CacheMixin:
 
     def get_cache_key(self):
         language_code = get_language()
-        return f"{self.cache_key}:{language_code}"
+        return f"{language_code}:{self.cache_key}"
 
     def get_cache_data(self):
         cache_key = self.get_cache_key()
