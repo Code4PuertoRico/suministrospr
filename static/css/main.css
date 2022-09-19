@@ -894,6 +894,10 @@ footer .container {
 }
 
 @media (max-width: 768px) {
+  h3 {
+    font-size: 1rem;
+  }
+
   .main__about--button {
     margin: 0 0 2rem;
   }
