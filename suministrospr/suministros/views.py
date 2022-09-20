@@ -4,6 +4,7 @@ import os
 from django.db.models import Count, Prefetch, Q
 from django.http import HttpResponse
 from django.urls import reverse
+from django.views.decorators.cache import cache_page
 from django.views.generic import DetailView, ListView, TemplateView
 from django.views.generic.edit import CreateView, UpdateView
 from reversion.views import RevisionMixin
@@ -13,7 +14,10 @@ from .constants import MUNICIPALITIES
 from .forms import FilterForm, SuministroModelForm
 from .models import Municipality, Suministro
 
+TEN_MINUTES_IN_SECONDS = 60 * 10
 
+
+@cache_page(TEN_MINUTES_IN_SECONDS)
 def export_csv(request):
     # Create the HttpResponse object with the appropriate CSV header.
     response = HttpResponse(content_type="text/csv")
