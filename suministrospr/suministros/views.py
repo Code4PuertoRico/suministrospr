@@ -1,6 +1,8 @@
+import csv
 import os
 
 from django.db.models import Count, Prefetch, Q
+from django.http import HttpResponse
 from django.urls import reverse
 from django.views.generic import DetailView, ListView, TemplateView
 from django.views.generic.edit import CreateView, UpdateView
@@ -10,6 +12,58 @@ from ..utils.mixins import CacheMixin
 from .constants import MUNICIPALITIES
 from .forms import FilterForm, SuministroModelForm
 from .models import Municipality, Suministro
+
+
+def export_csv(request):
+    # Create the HttpResponse object with the appropriate CSV header.
+    response = HttpResponse(content_type="text/csv")
+    response["Content-Disposition"] = 'attachment; filename="suministrospr.csv"'
+
+    suministros = Suministro.objects.all()
+
+    writer = csv.writer(response)
+    writer.writerow(
+        [
+            "id",
+            "municipality",
+            "title",
+            "content_html",
+            "tags",
+            "url",
+            "created_at",
+            "modified_at",
+        ]
+    )
+
+    for entry in suministros:
+        url = request.build_absolute_uri(
+            reverse("suministro-detail", args=[entry.slug])
+        )
+
+        tags = []
+
+        for t in entry.tags.all():
+            tags.append(t.name)
+
+        if len(tags) > 0:
+            tags = ", ".join(tags)
+        else:
+            tags = ""
+
+        writer.writerow(
+            [
+                entry.id,
+                entry.municipality,
+                entry.title,
+                entry.content,
+                tags,
+                url,
+                entry.created_at,
+                entry.modified_at,
+            ]
+        )
+
+    return response
 
 
 class SuministroList(CacheMixin, TemplateView):

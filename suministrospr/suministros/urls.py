@@ -8,6 +8,7 @@ from .views import (
     SuministroSearch,
     SuministroServiceWorker,
     SuministroUpdate,
+    export_csv,
 )
 
 urlpatterns = [
@@ -30,4 +31,5 @@ urlpatterns = [
         SuministroServiceWorker.as_view(),
         name="service-worker",
     ),
+    path("export.csv", export_csv, name="export-csv"),
 ]
