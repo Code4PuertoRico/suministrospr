@@ -16,7 +16,6 @@
 
 {% block content %}
 <div class = 'main__form'>
-
   <form method="POST">
     {% csrf_token %}
 
@@ -61,6 +60,10 @@
         {% trans 'Necesidades e información de contacto' %}
       </label>
       {{form.content}}
+    </div>
+
+    <div class="alert-danger">
+      <p><strong>IMPORTANTE</strong> Recuerda dejar tu información de contacto: nombre, teléfono y/o correo electrónico. Si no, no podrás ser contactado para coordinar la ayuda.</p>
     </div>
 
     <div class="main__search--button">
