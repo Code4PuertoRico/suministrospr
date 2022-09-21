@@ -55,21 +55,18 @@ class TestSuministroList:
         response = SuministroList.as_view()(request)
         assert response.status_code == 200
 
-    def test_order_by_count(self, rf, django_assert_num_queries):
+    def test_order_by_municipality_name(self, rf, django_assert_num_queries):
         with django_assert_num_queries(3):
             request = rf.get(self.url)
             response = SuministroList.as_view()(request)
 
         results = response.context_data["sorted_results"]
 
-        assert results[0]["municipality"] == "Guánica"
-        assert results[0]["count"] == 3
+        print(results)
 
-        assert results[1]["municipality"] == "Guayanilla"
-        assert results[1]["count"] == 2
-
+        assert results[0]["municipality"] == "Guayanilla"
+        assert results[1]["municipality"] == "Guánica"
         assert results[2]["municipality"] == "Ponce"
-        assert results[2]["count"] == 1
 
 
 @pytest.mark.django_db
