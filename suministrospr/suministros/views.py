@@ -97,7 +97,7 @@ class SuministroList(CacheMixin, TemplateView):
             )
             .annotate(suministro_count=Count("suministro"))
             .filter(suministro_count__gt=0)
-            .order_by("-suministro_count")
+            .order_by("name")
         )
 
         data["sorted_results"] = [
