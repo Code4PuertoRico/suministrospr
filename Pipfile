@@ -4,7 +4,7 @@ verify_ssl = true
 name = "pypi"
 
 [dev-packages]
-Werkzeug = "==0.16.0"
+Werkzeug = "==2.2.3"
 black = "==19.10b0"
 isort = "==4.3.21"
 "flake8" = "==3.7.9"
